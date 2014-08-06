@@ -1,3 +1,11 @@
+---
+layout: post
+title:  "Markdown入门"
+date:   2014-08-07 00:35:04
+categories: liuqianchao update
+---
+
+
 #Markdown入门
 ---
 >**标题**
