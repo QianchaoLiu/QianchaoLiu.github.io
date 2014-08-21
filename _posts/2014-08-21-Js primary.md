@@ -1,39 +1,52 @@
 ---
 layout: post
-title:  "Markdown入门"
+title:  "Js Primary"
 date:   2014-08-21 15:49:04
 categories: liuqianchao update
 ---
 JavaScript
 ----------
 导入js
-```JavaScript
-<script type="text/javascript">
+
+
+
+```
+\<script type="text/javascript">
 </script>
 or
-<script src="">
+\<script src="">
 </script>
 js代码的存放位置：可以放在html的任何位置，好的习惯是放在head或body
-```
+```  
+
+ 
+
 注释
-```javascript
+
+```
 /*
 多行注释
 */
 
 //单行注释
 ```
+
+
 变量
-```js
-var 变量名区分大小写
+
+```var 变量名区分大小写```
+
+
+
+逻辑判断  
+
 ```
-逻辑判断
-```js
-if(条件)｛｝
+if(条件)｛｝  
 else{}
 ```
 函数
-```js
+
+```
 function 函数名()
 {
 
@@ -43,8 +56,10 @@ function 函数名()
 <input type="button" onclick="函数名()">
 </input>
 ```
+
 几个常用的js函数
-```js
+
+```
 document.write();//直接向html输出文本
 alter();//警告，出现弹框，包含一个确定按钮
 confirm();//confirm消息对话框，有一个返回值为true 或 false
@@ -52,8 +67,10 @@ prompt();//包含确定、取消、文本输入框，返回值为string
 window.open(url,<窗口名称>,<参数字符串>)//返回一个窗口对象
 window.close();或窗口对象.close();//关闭当前窗口，
 ```
+
 DOM
-```js
+
+```
 //获取元素：
 Object=document.getElementById("ID")//通过id获取元素
 //获取或替换html元素的内容
