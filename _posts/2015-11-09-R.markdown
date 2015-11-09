@@ -8,8 +8,7 @@ categories: liuqianchao update
 As one of the hottest programming languages, R has attracted lots of attention from people who are interested in data analysis. Although python, an advanced and high-level programming language, has satisfied most of needs for data processing, R still has some special advantages. In this short article, I will give a brief intro to R.  
 
 ### The advantages  
-1.As we known, python is good at the process of acquiring and handling data, but the ability of data visualization is relatively weak. In general, we use **matplotlib** and other libraries to draw figures in Python. The matpoltlib is one of high quality libraies, howerver, the number of high quality libraries to draw figures are much smaller than that of R.  
-Here in R, one of the most widely known package to draw beatiful plots is **ggplot2**.
+As we known, python is good at the process of acquiring and handling data, but the ability of data visualization is relatively weak. In general, we use **matplotlib** and other libraries to draw figures in Python. The matpoltlib is one of high quality libraies, howerver, the number of high quality libraries to draw figures are much smaller than that of R. Here in R, one of the most widely known package to draw beatiful plots is **ggplot2**.
  
 
 ### Some interesting libs in R  
