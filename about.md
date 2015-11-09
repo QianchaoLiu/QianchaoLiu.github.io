@@ -9,4 +9,9 @@ Liu Qianchao is an undergraduate student, majored in Information Management and 
 Take a look at my Linkedin profile at [linkedin.com/in/liuqianchao](http://www.linkedin.com/in/liuqianchao).
 
 You can also find the source codes written by me at [github.com/qianchaoliu](https://github.com/qianchaoliu).
-<center> Education Background</center>
+<br>
+<br>
+<center><h3> <bold>Education Background</bold></h3></center>
+<center><bold>2012.9-2016.7 Tianjin University</bold></center>
+<center>Bachelor's degree in MIS</center>
+<center>GPA ranking 1-st in the department of Management Science and Engineering</center>
