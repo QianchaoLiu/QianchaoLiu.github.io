@@ -10,10 +10,9 @@ Take a look at my Linkedin profile at [linkedin.com/in/liuqianchao](http://www.l
 
 You can also find the source codes written by me at [github.com/qianchaoliu](https://github.com/qianchaoliu).
 <hr>
-<hr>
+
 <center><h3> <bold>Education Background</bold></h3></center>
 　　　　　　　Tianjin University　　　　　　　　　　　　　　　　　　　　　2012.9-2016.7<br>
-　　　　　　　Bachelor's degree in MIS<br>
+　　　　　　　Bachelor's degree in Information Management and Information System<br>
 　　　　　　　GPA ranking 1-st in the department of Management Science and Engineering
-<hr>
 <hr>
