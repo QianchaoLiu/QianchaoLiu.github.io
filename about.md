@@ -4,8 +4,8 @@ title: About
 permalink: /about/
 ---
 
-Liu Qianchao is an undergraduate student, major in Information Management and Information System, My interests are on NLP&Data mining&Machine learing
+Liu Qianchao is an undergraduate student, majored in Information Management and Information System, his interests are on NLP,Data mining&Machine learing.
 
-Take a look at my Linkedin profile at [linkedin.com/in/liuqianchao](http://www.linkedin.com/in/liuqianchao)
+Take a look at my Linkedin profile at [linkedin.com/in/liuqianchao](http://www.linkedin.com/in/liuqianchao).
 
-You an find the source code written by me at [github.com/qianchaoliu](https://github.com/qianchaoliu)
+You can also find the source codes written by me at [github.com/qianchaoliu](https://github.com/qianchaoliu).
