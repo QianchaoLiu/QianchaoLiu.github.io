@@ -4,8 +4,8 @@ title: About
 permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](http://jekyllrb.com/)
+Liu Qianchao is an undergraduate student, major in Information Management and Information System, My interests are on NLP&Data mining&Machine learing [jekyllrb.com](http://jekyllrb.com/)
 
-You can find the source code for the Jekyll new theme at: [github.com/jglovier/jekyll-new](https://github.com/jglovier/jekyll-new)
+Take a look at my Linkedin profile at [linkedin.com/in/liuqianchao](http://www.linkedin.com/in/liuqianchao)
 
-You can find the source code for Jekyll at [github.com/jekyll/jekyll](https://github.com/jekyll/jekyll)
+You an find the source code written by me at [github.com/qianchaoliu](https://github.com/qianchaoliu)
