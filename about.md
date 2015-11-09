@@ -12,6 +12,6 @@ You can also find the source codes written by me at [github.com/qianchaoliu](htt
 <br>
 <br>
 <center><h3> <bold>Education Background</bold></h3></center>
-<center><bold>2012.9-2016.7 Tianjin University</bold></center>
-<center>Bachelor's degree in MIS</center>
-<center>GPA ranking 1-st in the department of Management Science and Engineering</center>
+<bold>Tianjin University                                    2012.9-2016.7</bold>
+Bachelor's degree in MIS
+GPA ranking 1-st in the department of Management Science and Engineering
