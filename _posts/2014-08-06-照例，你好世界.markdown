@@ -1,8 +1,0 @@
----
-layout: post
-title:  "照例，你好世界"
-date:   2014-08-06 00:02:04
-categories: liuqianchao update
----
-
-你好，世界
