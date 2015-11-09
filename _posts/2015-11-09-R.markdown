@@ -6,10 +6,12 @@ categories: liuqianchao update
 ---
 
 As one of the hottest programming languages, R has attracted lots of attention from people who are interested in data analysis. Although python, a advanced and high-level programming, has satisfied most of needs for data processing, R still has some special advantages. In this short passage, I will give a brief intro to R.  
+
 ### The advantages  
 1.  
 2.  
 3.  
+
 ### Some interesting libs in R  
 
 ### Can we use R in a more familiar way?  
