@@ -13,7 +13,8 @@ In this short article, I will give a brief introduction to the grammar of LaTeX.
 - Font Size:10pt/11pt/12pt etc.   
 - Papar Size:leterpaper/a4paper etc.   
 - Use two columns:twocolumn.   
-- Set margins for two-sided:twoside.   
+- Set margins for two-sided:twoside.  
+ 
 and `class` can be:   
 
 - book/report/article/letter/slides   
