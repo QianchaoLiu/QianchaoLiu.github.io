@@ -5,14 +5,17 @@ date:   2014-09-21 22:35:04
 categories: liuqianchao update
 ---
 
-In this short article, I will give a brief introduction to the grammar of LaTeX.      
+In this short article, I will give a brief introduction to the grammar of LaTeX.   
+
 ###Structure of .tex file    
-```\documentclass[opt,opt]{class}.``` uesd at the very beginning of a document. where `opt` can be:   
+```\documentclass[opt,opt]{class}.``` uesd at the very beginning of a document. where `opt` can be:  
+
 - Font Size:10pt/11pt/12pt etc.   
 - Papar Size:leterpaper/a4paper etc.   
 - Use two columns:twocolumn.   
 - Set margins for two-sided:twoside.   
 and `class` can be:   
+
 - book/report/article/letter/slides   
    
 ```\input{inputfile.tex}``` used to include the file specifying ducument layout, which is optional.   
