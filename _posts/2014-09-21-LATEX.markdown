@@ -5,10 +5,11 @@ date:   2014-09-21 22:35:04
 categories: liuqianchao update
 ---
 
+
 In this short article, I will give a brief introduction to the grammar of LaTeX.   
 
 ###Structure of .tex file    
-```\documentclass[opt,opt]{class}.``` uesd at the very beginning of a document. where `opt` can be:  
+```\documentclass[opt,opt]{class}.``` uesd at the very beginning of a document. where `opt` can be:   
 
 - Font Size:10pt/11pt/12pt etc.   
 - Papar Size:leterpaper/a4paper etc.   
@@ -24,6 +25,8 @@ and `class` can be:
 ```\begin{document}``` and ```\end{document}``` uesd to start contents and end the document   
    
 ###Some other important things you should also know:
-The test environment in this passage is [MacTex](http://tug.org/mactex/morepackages.html).   
-To use LateX in [Sublime Text](www.sublimetext.com/), you can find steps of configuration at [here](http://economistry.com/2013/01/installing-and-using-latex-for-mac/).   
-To use Chinese characters in your LaTeX, you can use **xelatex** Engine. Adding ```%!TEX program = xelatex``` at the beginning of your LaTeX code.
+- The test environment in this passage is [MacTex](http://tug.org/mactex/morepackages.html).   
+- To use LateX in [Sublime Text](www.sublimetext.com/), you can find steps of configuration at [here](http://economistry.com/2013/01/installing-and-using-latex-for-mac/).   
+- To use Chinese characters in your LaTeX, you can use **xelatex** Engine. Adding ```%!TEX program = xelatex``` at the beginning of your LaTeX code.
+
+![图片](/_site/jekyll/update/image/testimage.png)
