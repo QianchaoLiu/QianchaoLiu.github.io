@@ -1,36 +1,309 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Your awesome title</title>
-    <description>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</description>
-    <link>http://yourdomain.com/</link>
-    <atom:link href="http://yourdomain.com/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Tue, 05 Aug 2014 22:29:28 +0800</pubDate>
-    <lastBuildDate>Tue, 05 Aug 2014 22:29:28 +0800</lastBuildDate>
-    <generator>Jekyll v2.2.0</generator>
+    <title>Q.Liu</title>
+    <description>Welcome to Q.Liu&#39;s Homepage. Here you can find something about my research interests.</description>
+    <link>http://qianchaoliu.github.io//</link>
+    <atom:link href="http://qianchaoliu.github.io//feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Fri, 27 Nov 2015 21:37:55 +0800</pubDate>
+    <lastBuildDate>Fri, 27 Nov 2015 21:37:55 +0800</lastBuildDate>
+    <generator>Jekyll v3.0.1</generator>
     
       <item>
-        <title>Welcome to Jekyll!</title>
-        <description>&lt;p&gt;You’ll find this post in your &lt;code&gt;_posts&lt;/code&gt; directory - edit this post and re-build (or run with the &lt;code&gt;-w&lt;/code&gt; switch) to see your changes!
-To add new posts, simply add a file in the &lt;code&gt;_posts&lt;/code&gt; directory that follows the convention: YYYY-MM-DD-name-of-post.ext.&lt;/p&gt;
+        <title>Why R?</title>
+        <description>&lt;p&gt;As one of the hottest programming languages, R has attracted lots of attention from people who are interested in data analysis. Although python, an advanced and high-level programming language, has satisfied most of needs for data processing, R still has some special advantages. In this short article, I will give a brief intro to R.  &lt;/p&gt;
 
-&lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
+&lt;h3 id=&quot;the-advantages&quot;&gt;The advantages&lt;/h3&gt;
+&lt;p&gt;More professional packages that are ralated with data analytics have been created, there are more than 5000 &lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Tom&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints &amp;#39;Hi, Tom&amp;#39; to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&quot;some-interesting-packages-in-r&quot;&gt;Some interesting packages in R&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;http://ggplot2.org/&quot;&gt;&lt;strong&gt;ggplot2&lt;/strong&gt;&lt;/a&gt; &lt;br /&gt;
+python is good at the process of acquiring and handling data, but the ability of data visualization is 
+“relatively weak”. In general, we use &lt;strong&gt;matplotlib&lt;/strong&gt; and other libraries to draw figures in Python. The matpoltlib is one of high quality libraies, however, the number of high quality libraries to draw figures are much smaller than that of R. Here in R, one of the most widely known packages to draw beautiful plots is &lt;strong&gt;ggplot2&lt;/strong&gt;.   &lt;/p&gt;
 
-&lt;p&gt;Check out the &lt;a href=&quot;http://jekyllrb.com&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://jliblog.com/app/rweibo&quot;&gt;&lt;strong&gt;Rweibo&lt;/strong&gt;&lt;/a&gt; &lt;br /&gt;
+Rweibo is a package based on official API of Sina Weibo. Although there are serious limits of offcial API, such as the maximum quantity of comments allowed for acquiring is 2000 for each Weibo post, the official API can satisfy a smale-scale applicaiton. &lt;br /&gt;
+&lt;strong&gt;rMaps&lt;/strong&gt;&lt;/p&gt;
 
+&lt;h3 id=&quot;can-we-use-r-in-a-more-familiar-way&quot;&gt;Can we use R in a more familiar way?&lt;/h3&gt;
+&lt;p&gt;Actually, We can use &lt;strong&gt;rpy2&lt;/strong&gt;, which is an interface to R running embedded in Python. With the help of this interface, we can take advantage of R in the code of Python. &lt;br /&gt;
+To install the package of rpy2 (via pip in your terminal): &lt;br /&gt;
+ &lt;code&gt;pip install pip&lt;/code&gt;   &lt;/p&gt;
+
+&lt;p&gt;Find documentation of rpy2 at &lt;a href=&quot;http://rpy.sourceforge.net/&quot;&gt;rpy.sourceforge.net/&lt;/a&gt; &lt;br /&gt;
+In this way, we can complete our daily tasks in codes of Python. &lt;/p&gt;
 </description>
-        <pubDate>Wed, 06 Aug 2014 06:29:04 +0800</pubDate>
-        <link>http://yourdomain.com/jekyll/update/2014/08/06/welcome-to-jekyll/</link>
-        <guid isPermaLink="true">http://yourdomain.com/jekyll/update/2014/08/06/welcome-to-jekyll/</guid>
+        <pubDate>Tue, 10 Nov 2015 06:35:04 +0800</pubDate>
+        <link>http://qianchaoliu.github.io//liuqianchao/update/2015/11/10/R/</link>
+        <guid isPermaLink="true">http://qianchaoliu.github.io//liuqianchao/update/2015/11/10/R/</guid>
         
         
-        <category>jekyll</category>
+        <category>liuqianchao</category>
+        
+        <category>update</category>
+        
+      </item>
+    
+      <item>
+        <title>Brief into to LaTeX</title>
+        <description>&lt;p&gt;In this short article, I will give a brief introduction to the grammar of LaTeX.   &lt;/p&gt;
+
+&lt;h3 id=&quot;structure-of-tex-file&quot;&gt;1.  Structure of .tex file&lt;/h3&gt;
+
+&lt;h4 id=&quot;basic-elements&quot;&gt;1.1  Basic elements&lt;/h4&gt;
+
+&lt;hr /&gt;
+&lt;p&gt;&lt;code&gt;\documentclass[opt,opt]{class}.&lt;/code&gt; uesd at the very beginning of a document. where &lt;code&gt;opt&lt;/code&gt; can be:   &lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Font Size:10pt/11pt/12pt etc.   &lt;/li&gt;
+  &lt;li&gt;Papar Size:leterpaper/a4paper etc.   &lt;/li&gt;
+  &lt;li&gt;Use two columns:twocolumn.   &lt;/li&gt;
+  &lt;li&gt;Set margins for two-sided:twoside.  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;and &lt;code&gt;class&lt;/code&gt; can be:   &lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;book/report/article/letter/slides   &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;code&gt;\input{inputfile.tex}&lt;/code&gt; used to include the file specifying ducument layout, which is optional.   &lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;\author{text}&lt;/code&gt;, &lt;code&gt;\title{text}&lt;/code&gt;, &lt;code&gt;\date{text}&lt;/code&gt; are used to declare proprieties of this file. &lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;\begin{document}&lt;/code&gt; and &lt;code&gt;\end{document}&lt;/code&gt; used to start contents and end the document  &lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;\section{text}&lt;/code&gt; used to begin a new section. And &lt;code&gt;\subsection{text}&lt;/code&gt; to create sub-section.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;some other strucures:&lt;code&gt;\part{text}&lt;/code&gt;,&lt;code&gt;\chapter{text}&lt;/code&gt;   &lt;/li&gt;
+  &lt;li&gt;in &lt;code&gt;\section*{title}&lt;/code&gt;, to not number a particular item—these items will also not appear in the table of contents.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;key-elements&quot;&gt;1.2  key elements&lt;/h4&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;code&gt;\begin{tabbing}&lt;/code&gt; and  &lt;code&gt;\end{tabbing}&lt;/code&gt; used to start tabbing and end the tabbing   &lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code&gt;\hspace{l}&lt;/code&gt;  Horizontal space of length l (Ex:l=20pt or l=3cm). And &lt;code&gt;\vspace{l}&lt;/code&gt; where v means vertical.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;use &lt;code&gt;\=&lt;/code&gt; to &lt;strong&gt;set&lt;/strong&gt; tab stop, and &lt;code&gt;\kill&lt;/code&gt; at the end of the line.
+    &lt;ul&gt;
+      &lt;li&gt;Ex: &lt;code&gt;\hspace{3cm} \= \hspace{4cm} \= \kill&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;\&amp;gt;&lt;/code&gt; used to &lt;strong&gt;go&lt;/strong&gt; to tab stop (&lt;em&gt;set&lt;/em&gt; once, and &lt;em&gt;go&lt;/em&gt; many times), and &lt;code&gt;\\&lt;/code&gt; is used to separate lines(end this line, and may create a new line).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;code&gt;\begin{tabular}[position]{cols}&lt;/code&gt; and &lt;code&gt;\end{tabular}&lt;/code&gt;   &lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;the &lt;code&gt;cols&lt;/code&gt; is decided by your need, it can be &lt;code&gt;l c r&lt;/code&gt; or &lt;code&gt;l c c c c r &lt;/code&gt;and &lt;code&gt;l | c | r&lt;/code&gt; means that inserts a vertical line between columns.&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;\hline&lt;/code&gt; Horizontal line between rows. &lt;code&gt;\cline{x-y}&lt;/code&gt; means horizontal line across columns x through y. And x and y are numbers.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;text-and-symbols&quot;&gt;2.  Text and symbols&lt;/h3&gt;
+
+&lt;h4 id=&quot;text&quot;&gt;2.1  Text&lt;/h4&gt;
+
+&lt;hr /&gt;
+&lt;p&gt;&lt;code&gt;{\bf text}&lt;/code&gt; or &lt;code&gt;\textbf{text}&lt;/code&gt;bolden the font. &lt;code&gt;{\it text}&lt;/code&gt; to &lt;em&gt;Italic&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;\href{mailto:website}{text}&lt;/code&gt;,use href in you text:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Ex: &lt;code&gt;\href{mailto:https://www.google.com}{google.com}&lt;/code&gt;   &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;code&gt;\hfill&lt;/code&gt; Horizontal space betwwen the &lt;em&gt;two&lt;/em&gt; blocks   &lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;parabox[position]{length}{text}&lt;/code&gt; to put something into the one kind of box.&lt;/p&gt;
+
+&lt;h4 id=&quot;symbols&quot;&gt;2.2  Symbols&lt;/h4&gt;
+
+&lt;hr /&gt;
+&lt;p&gt;For inline math, use&lt;code&gt;\(..\)&lt;/code&gt; or &lt;code&gt;$ $&lt;/code&gt;.  &lt;br /&gt;
+With the limits of the display in website, more details find at  &lt;a href=&quot;http://www.latex-project.org/&quot;&gt;offical document of LaTeX&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;some-other-important-things-you-should-also-know&quot;&gt;3.  Some other important things you should also know:&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;The test environment in this passage is &lt;a href=&quot;http://tug.org/mactex/morepackages.html&quot;&gt;MacTex&lt;/a&gt;.   &lt;/li&gt;
+  &lt;li&gt;To use LateX in &lt;a href=&quot;www.sublimetext.com/&quot;&gt;Sublime Text&lt;/a&gt;, you can find steps of configuration at &lt;a href=&quot;http://economistry.com/2013/01/installing-and-using-latex-for-mac/&quot;&gt;here&lt;/a&gt;.   &lt;/li&gt;
+  &lt;li&gt;To use Chinese characters in your LaTeX, you can use &lt;strong&gt;xelatex&lt;/strong&gt; Engine. Adding &lt;code&gt;%!TEX program = xelatex&lt;/code&gt; at the beginning of your LaTeX code.&lt;/li&gt;
+  &lt;li&gt;To install more available package:&lt;code&gt;tlmgr install &amp;lt;package&amp;gt;&lt;/code&gt; in your terminal&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Mon, 22 Sep 2014 06:35:04 +0800</pubDate>
+        <link>http://qianchaoliu.github.io//liuqianchao/update/2014/09/22/LATEX/</link>
+        <guid isPermaLink="true">http://qianchaoliu.github.io//liuqianchao/update/2014/09/22/LATEX/</guid>
+        
+        
+        <category>liuqianchao</category>
+        
+        <category>update</category>
+        
+      </item>
+    
+      <item>
+        <title>Js Primary</title>
+        <description>&lt;h2 id=&quot;javascript&quot;&gt;JavaScript&lt;/h2&gt;
+&lt;p&gt;导入js&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+\&amp;lt;script type=&quot;text/javascript&quot;&amp;gt;
+&amp;lt;/script&amp;gt;
+or
+\&amp;lt;script src=&quot;&quot;&amp;gt;
+&amp;lt;/script&amp;gt;
+js代码的存放位置：可以放在html的任何位置，好的习惯是放在head或body
+&lt;/code&gt;  &lt;/p&gt;
+
+&lt;p&gt;注释&lt;/p&gt;
+
+&lt;p&gt;```
+/*
+多行注释
+*/&lt;/p&gt;
+
+&lt;p&gt;//单行注释
+```&lt;/p&gt;
+
+&lt;p&gt;变量&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;var 变量名区分大小写&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;逻辑判断  &lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+if(条件)｛｝  
+else{}
+&lt;/code&gt;
+函数&lt;/p&gt;
+
+&lt;p&gt;```
+function 函数名()
+{&lt;/p&gt;
+
+&lt;p&gt;}&lt;/p&gt;
+
+&lt;p&gt;函数的调用
+&lt;input type=&quot;button&quot; onclick=&quot;函数名()&quot; /&gt;
+&amp;lt;/input&amp;gt;
+```&lt;/p&gt;
+
+&lt;p&gt;几个常用的js函数&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+document.write();//直接向html输出文本
+alter();//警告，出现弹框，包含一个确定按钮
+confirm();//confirm消息对话框，有一个返回值为true 或 false
+prompt();//包含确定、取消、文本输入框，返回值为string
+window.open(url,&amp;lt;窗口名称&amp;gt;,&amp;lt;参数字符串&amp;gt;)//返回一个窗口对象
+window.close();或窗口对象.close();//关闭当前窗口，
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;DOM&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+//获取元素：
+Object=document.getElementById(&quot;ID&quot;)//通过id获取元素
+//获取或替换html元素的内容
+Object.innerHTML
+//改变html元素的样式
+Object.style.color;Object.style.backgroundColor;
+Object.style.display=&quot;block&quot;or&quot;none&quot;;
+//为元素改变css样式
+Object.className
+&lt;/code&gt;&lt;/p&gt;
+</description>
+        <pubDate>Thu, 21 Aug 2014 23:49:04 +0800</pubDate>
+        <link>http://qianchaoliu.github.io//liuqianchao/update/2014/08/21/Js-primary/</link>
+        <guid isPermaLink="true">http://qianchaoliu.github.io//liuqianchao/update/2014/08/21/Js-primary/</guid>
+        
+        
+        <category>liuqianchao</category>
+        
+        <category>update</category>
+        
+      </item>
+    
+      <item>
+        <title>Markdown入门</title>
+        <description>&lt;h1 id=&quot;markdown&quot;&gt;Markdown入门&lt;/h1&gt;
+&lt;p&gt;Markdown,作为一种文档结构描述语言，其文本结构仅对应HTML语言的一个子集，其实现原理是通过正则表达式进行HTML标签的替换，其目的是为了更方便地书写审阅纯文本文档。&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;标题&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;使用#代表标题的等级，一个#为一级标题，六个#为六级标题&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;强调&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;使用*文字*，添加&lt;em&gt;斜体文字&lt;/em&gt;&lt;br /&gt;
+  使用**文字**，添加&lt;strong&gt;粗体文字&lt;/strong&gt;&lt;br /&gt;
+  使用---作为一条横线&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;代码&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;使用```（反引号）将代码块括起来&lt;/p&gt;
+
+&lt;p&gt;``` python&lt;br /&gt;
+print “test”
+```  &lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;python
+ print&quot;test&quot;
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;引用超链接或图片&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;！[描述](地址) 作为图片引用&lt;br /&gt;
+[描述](地址) 作为超链接引用  &lt;/p&gt;
+
+&lt;p&gt;[维基百科](wikipedia.org)  &lt;br /&gt;
+&lt;a href=&quot;wikipedia.org&quot;&gt;维基百科&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;其他常用技巧&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;单个反引号作为highlight
+`高亮`
+&lt;code&gt;高亮&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;*(空格)文字 作为无序列表
+ * 列表&lt;/p&gt;
+    &lt;ul&gt;
+      &lt;li&gt;列表&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Thu, 07 Aug 2014 08:35:04 +0800</pubDate>
+        <link>http://qianchaoliu.github.io//liuqianchao/update/2014/08/07/Markdown%E5%85%A5%E9%97%A8/</link>
+        <guid isPermaLink="true">http://qianchaoliu.github.io//liuqianchao/update/2014/08/07/Markdown%E5%85%A5%E9%97%A8/</guid>
+        
+        
+        <category>liuqianchao</category>
         
         <category>update</category>
         

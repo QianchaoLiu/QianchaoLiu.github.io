@@ -6,7 +6,7 @@ baseurl: ""
 url: "http://qianchaoliu.github.io/"
 twitter_username: liuqianchao
 github_username:  qianchaoliu
-
+#({{ site.url }}/assets/
 # Build settings
 markdown: kramdown
 permalink: pretty

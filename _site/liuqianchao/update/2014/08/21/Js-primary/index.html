@@ -4,10 +4,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>About</title>
+    <title>Js Primary</title>
     <meta name="viewport" content="width=device-width">
     <meta name="description" content="Welcome to Q.Liu's Homepage. Here you can find something about my research interests.">
-    <link rel="canonical" href="http://qianchaoliu.github.io//about/">
+    <link rel="canonical" href="http://qianchaoliu.github.io//liuqianchao/update/2014/08/21/Js-primary/">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/main.css">
@@ -65,28 +65,84 @@
       <div class="post">
 
   <header class="post-header">
-    <h1>About</h1>
+    <h1>Js Primary</h1>
+    <p class="meta">Aug 21, 2014</p>
   </header>
 
   <article class="post-content">
-  <p>Liu Qianchao is an undergraduate student, majored in Information Management and Information System, his interests are on NLP,Data mining&amp;Machine learing. And with the help above methods to slove problems in the field of management.</p>
+  <h2 id="javascript">JavaScript</h2>
+<p>导入js</p>
 
-<p>Take a look at my Linkedin profile at <a href="http://www.linkedin.com/in/liuqianchao">linkedin.com/in/liuqianchao</a>.</p>
+<p><code>
+\&lt;script type="text/javascript"&gt;
+&lt;/script&gt;
+or
+\&lt;script src=""&gt;
+&lt;/script&gt;
+js代码的存放位置：可以放在html的任何位置，好的习惯是放在head或body
+</code>  </p>
 
-<p>You can also find the source codes written by me at <a href="https://github.com/qianchaoliu">github.com/qianchaoliu</a>.</p>
-<hr />
+<p>注释</p>
 
-<center><h3> <bold>Education Background</bold></h3></center>
-<p>　　　　　　　Tianjin University　　　　　　　　　　　　　　　　　　　　　2012.9-2016.7<br />
-　　　　　　　Bachelor’s degree in Information Management and Information System<br />
-　　　　　　　GPA ranking 1-st in the department of Management Science and Engineering</p>
-<hr />
+<p>```
+/*
+多行注释
+*/</p>
 
+<p>//单行注释
+```</p>
+
+<p>变量</p>
+
+<p><code>var 变量名区分大小写</code></p>
+
+<p>逻辑判断  </p>
+
+<p><code>
+if(条件)｛｝  
+else{}
+</code>
+函数</p>
+
+<p>```
+function 函数名()
+{</p>
+
+<p>}</p>
+
+<p>函数的调用
+<input type="button" onclick="函数名()" />
+&lt;/input&gt;
+```</p>
+
+<p>几个常用的js函数</p>
+
+<p><code>
+document.write();//直接向html输出文本
+alter();//警告，出现弹框，包含一个确定按钮
+confirm();//confirm消息对话框，有一个返回值为true 或 false
+prompt();//包含确定、取消、文本输入框，返回值为string
+window.open(url,&lt;窗口名称&gt;,&lt;参数字符串&gt;)//返回一个窗口对象
+window.close();或窗口对象.close();//关闭当前窗口，
+</code></p>
+
+<p>DOM</p>
+
+<p><code>
+//获取元素：
+Object=document.getElementById("ID")//通过id获取元素
+//获取或替换html元素的内容
+Object.innerHTML
+//改变html元素的样式
+Object.style.color;Object.style.backgroundColor;
+Object.style.display="block"or"none";
+//为元素改变css样式
+Object.className
+</code></p>
 
   </article>
 
 </div>
-
       </div>
     </div>
 
