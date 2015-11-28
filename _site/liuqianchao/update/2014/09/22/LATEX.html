@@ -4,10 +4,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Why R?</title>
+    <title>Brief into to LaTeX</title>
     <meta name="viewport" content="width=device-width">
     <meta name="description" content="Welcome to Q.Liu's Homepage. Here you can find something about my research interests.">
-    <link rel="canonical" href="http://qianchaoliu.github.io//liuqianchao/update/2015/11/10/R/">
+    <link rel="canonical" href="http://qianchaoliu.github.io//liuqianchao/update/2014/09/22/LATEX.html">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/main.css">
@@ -66,32 +66,101 @@
       <div class="post">
 
   <header class="post-header">
-    <h1>Why R?</h1>
-    <p class="meta">Nov 10, 2015</p>
+    <h1>Brief into to LaTeX</h1>
+    <p class="meta">Sep 22, 2014</p>
   </header>
 
   <article class="post-content">
-  <p>As one of the hottest programming languages, R has attracted lots of attention from people who are interested in data analysis. Although python, an advanced and high-level programming language, has satisfied most of needs for data processing, R still has some special advantages. In this short article, I will give a brief intro to R.  </p>
+  <p>In this short article, I will give a brief introduction to the grammar of LaTeX.   </p>
 
-<h3 id="the-advantages">The advantages</h3>
-<p>More professional packages that are ralated with data analytics have been created, there are more than 5000 </p>
+<h3 id="structure-of-tex-file">1.  Structure of .tex file</h3>
 
-<h3 id="some-interesting-packages-in-r">Some interesting packages in R</h3>
-<p><a href="http://ggplot2.org/"><strong>ggplot2</strong></a> <br />
-python is good at the process of acquiring and handling data, but the ability of data visualization is 
-“relatively weak”. In general, we use <strong>matplotlib</strong> and other libraries to draw figures in Python. The matpoltlib is one of high quality libraies, however, the number of high quality libraries to draw figures are much smaller than that of R. Here in R, one of the most widely known packages to draw beautiful plots is <strong>ggplot2</strong>.   </p>
+<h4 id="basic-elements">1.1  Basic elements</h4>
 
-<p><a href="http://jliblog.com/app/rweibo"><strong>Rweibo</strong></a> <br />
-Rweibo is a package based on official API of Sina Weibo. Although there are serious limits of offcial API, such as the maximum quantity of comments allowed for acquiring is 2000 for each Weibo post, the official API can satisfy a smale-scale applicaiton. <br />
-<strong>rMaps</strong></p>
+<hr />
+<p><code>\documentclass[opt,opt]{class}.</code> uesd at the very beginning of a document. where <code>opt</code> can be:   </p>
 
-<h3 id="can-we-use-r-in-a-more-familiar-way">Can we use R in a more familiar way?</h3>
-<p>Actually, We can use <strong>rpy2</strong>, which is an interface to R running embedded in Python. With the help of this interface, we can take advantage of R in the code of Python. <br />
-To install the package of rpy2 (via pip in your terminal): <br />
- <code>pip install pip</code>   </p>
+<ul>
+  <li>Font Size:10pt/11pt/12pt etc.   </li>
+  <li>Papar Size:leterpaper/a4paper etc.   </li>
+  <li>Use two columns:twocolumn.   </li>
+  <li>Set margins for two-sided:twoside.  </li>
+</ul>
 
-<p>Find documentation of rpy2 at <a href="http://rpy.sourceforge.net/">rpy.sourceforge.net/</a> <br />
-In this way, we can complete our daily tasks in codes of Python. </p>
+<p>and <code>class</code> can be:   </p>
+
+<ul>
+  <li>book/report/article/letter/slides   </li>
+</ul>
+
+<p><code>\input{inputfile.tex}</code> used to include the file specifying ducument layout, which is optional.   </p>
+
+<p><code>\author{text}</code>, <code>\title{text}</code>, <code>\date{text}</code> are used to declare proprieties of this file. </p>
+
+<p><code>\begin{document}</code> and <code>\end{document}</code> used to start contents and end the document  </p>
+
+<p><code>\section{text}</code> used to begin a new section. And <code>\subsection{text}</code> to create sub-section.</p>
+
+<ul>
+  <li>some other strucures:<code>\part{text}</code>,<code>\chapter{text}</code>   </li>
+  <li>in <code>\section*{title}</code>, to not number a particular item—these items will also not appear in the table of contents.</li>
+</ul>
+
+<h4 id="key-elements">1.2  key elements</h4>
+
+<hr />
+
+<p><code>\begin{tabbing}</code> and  <code>\end{tabbing}</code> used to start tabbing and end the tabbing   </p>
+
+<ul>
+  <li>
+    <p><code>\hspace{l}</code>  Horizontal space of length l (Ex:l=20pt or l=3cm). And <code>\vspace{l}</code> where v means vertical.</p>
+  </li>
+  <li>use <code>\=</code> to <strong>set</strong> tab stop, and <code>\kill</code> at the end of the line.
+    <ul>
+      <li>Ex: <code>\hspace{3cm} \= \hspace{4cm} \= \kill</code></li>
+    </ul>
+  </li>
+  <li><code>\&gt;</code> used to <strong>go</strong> to tab stop (<em>set</em> once, and <em>go</em> many times), and <code>\\</code> is used to separate lines(end this line, and may create a new line).</li>
+</ul>
+
+<p><code>\begin{tabular}[position]{cols}</code> and <code>\end{tabular}</code>   </p>
+
+<ul>
+  <li>the <code>cols</code> is decided by your need, it can be <code>l c r</code> or <code>l c c c c r </code>and <code>l | c | r</code> means that inserts a vertical line between columns.</li>
+  <li><code>\hline</code> Horizontal line between rows. <code>\cline{x-y}</code> means horizontal line across columns x through y. And x and y are numbers.</li>
+</ul>
+
+<h3 id="text-and-symbols">2.  Text and symbols</h3>
+
+<h4 id="text">2.1  Text</h4>
+
+<hr />
+<p><code>{\bf text}</code> or <code>\textbf{text}</code>bolden the font. <code>{\it text}</code> to <em>Italic</em>.</p>
+
+<p><code>\href{mailto:website}{text}</code>,use href in you text:</p>
+
+<ul>
+  <li>Ex: <code>\href{mailto:https://www.google.com}{google.com}</code>   </li>
+</ul>
+
+<p><code>\hfill</code> Horizontal space betwwen the <em>two</em> blocks   </p>
+
+<p><code>parabox[position]{length}{text}</code> to put something into the one kind of box.</p>
+
+<h4 id="symbols">2.2  Symbols</h4>
+
+<hr />
+<p>For inline math, use<code>\(..\)</code> or <code>$ $</code>.  <br />
+With the limits of the display in website, more details find at  <a href="http://www.latex-project.org/">offical document of LaTeX</a></p>
+
+<h3 id="some-other-important-things-you-should-also-know">3.  Some other important things you should also know:</h3>
+<ul>
+  <li>The test environment in this passage is <a href="http://tug.org/mactex/morepackages.html">MacTex</a>.   </li>
+  <li>To use LateX in <a href="www.sublimetext.com/">Sublime Text</a>, you can find steps of configuration at <a href="http://economistry.com/2013/01/installing-and-using-latex-for-mac/">here</a>.   </li>
+  <li>To use Chinese characters in your LaTeX, you can use <strong>xelatex</strong> Engine. Adding <code>%!TEX program = xelatex</code> at the beginning of your LaTeX code.</li>
+  <li>To install more available package:<code>tlmgr install &lt;package&gt;</code> in your terminal</li>
+</ul>
 
   </article>
 

@@ -11,3 +11,6 @@ github_username:  qianchaoliu
 markdown: kramdown
 permalink: pretty
 highlighter: pygments
+
+redcarpet:
+    extensions: ["fenced_code_blocks", "autolink", "tables", "strikethrough"]

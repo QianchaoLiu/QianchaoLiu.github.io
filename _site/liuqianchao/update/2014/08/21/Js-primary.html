@@ -4,10 +4,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Why R?</title>
+    <title>Js Primary</title>
     <meta name="viewport" content="width=device-width">
     <meta name="description" content="Welcome to Q.Liu's Homepage. Here you can find something about my research interests.">
-    <link rel="canonical" href="http://qianchaoliu.github.io//liuqianchao/update/2015/11/10/R/">
+    <link rel="canonical" href="http://qianchaoliu.github.io//liuqianchao/update/2014/08/21/Js-primary.html">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/main.css">
@@ -66,32 +66,80 @@
       <div class="post">
 
   <header class="post-header">
-    <h1>Why R?</h1>
-    <p class="meta">Nov 10, 2015</p>
+    <h1>Js Primary</h1>
+    <p class="meta">Aug 21, 2014</p>
   </header>
 
   <article class="post-content">
-  <p>As one of the hottest programming languages, R has attracted lots of attention from people who are interested in data analysis. Although python, an advanced and high-level programming language, has satisfied most of needs for data processing, R still has some special advantages. In this short article, I will give a brief intro to R.  </p>
+  <h2 id="javascript">JavaScript</h2>
+<p>导入js</p>
 
-<h3 id="the-advantages">The advantages</h3>
-<p>More professional packages that are ralated with data analytics have been created, there are more than 5000 </p>
+<p><code>
+\&lt;script type="text/javascript"&gt;
+&lt;/script&gt;
+or
+\&lt;script src=""&gt;
+&lt;/script&gt;
+js代码的存放位置：可以放在html的任何位置，好的习惯是放在head或body
+</code>  </p>
 
-<h3 id="some-interesting-packages-in-r">Some interesting packages in R</h3>
-<p><a href="http://ggplot2.org/"><strong>ggplot2</strong></a> <br />
-python is good at the process of acquiring and handling data, but the ability of data visualization is 
-“relatively weak”. In general, we use <strong>matplotlib</strong> and other libraries to draw figures in Python. The matpoltlib is one of high quality libraies, however, the number of high quality libraries to draw figures are much smaller than that of R. Here in R, one of the most widely known packages to draw beautiful plots is <strong>ggplot2</strong>.   </p>
+<p>注释</p>
 
-<p><a href="http://jliblog.com/app/rweibo"><strong>Rweibo</strong></a> <br />
-Rweibo is a package based on official API of Sina Weibo. Although there are serious limits of offcial API, such as the maximum quantity of comments allowed for acquiring is 2000 for each Weibo post, the official API can satisfy a smale-scale applicaiton. <br />
-<strong>rMaps</strong></p>
+<p>```
+/*
+多行注释
+*/</p>
 
-<h3 id="can-we-use-r-in-a-more-familiar-way">Can we use R in a more familiar way?</h3>
-<p>Actually, We can use <strong>rpy2</strong>, which is an interface to R running embedded in Python. With the help of this interface, we can take advantage of R in the code of Python. <br />
-To install the package of rpy2 (via pip in your terminal): <br />
- <code>pip install pip</code>   </p>
+<p>//单行注释
+```</p>
 
-<p>Find documentation of rpy2 at <a href="http://rpy.sourceforge.net/">rpy.sourceforge.net/</a> <br />
-In this way, we can complete our daily tasks in codes of Python. </p>
+<p>变量</p>
+
+<p><code>var 变量名区分大小写</code></p>
+
+<p>逻辑判断  </p>
+
+<p><code>
+if(条件)｛｝  
+else{}
+</code>
+函数</p>
+
+<p>```
+function 函数名()
+{</p>
+
+<p>}</p>
+
+<p>函数的调用
+<input type="button" onclick="函数名()" />
+&lt;/input&gt;
+```</p>
+
+<p>几个常用的js函数</p>
+
+<p><code>
+document.write();//直接向html输出文本
+alter();//警告，出现弹框，包含一个确定按钮
+confirm();//confirm消息对话框，有一个返回值为true 或 false
+prompt();//包含确定、取消、文本输入框，返回值为string
+window.open(url,&lt;窗口名称&gt;,&lt;参数字符串&gt;)//返回一个窗口对象
+window.close();或窗口对象.close();//关闭当前窗口，
+</code></p>
+
+<p>DOM</p>
+
+<p><code>
+//获取元素：
+Object=document.getElementById("ID")//通过id获取元素
+//获取或替换html元素的内容
+Object.innerHTML
+//改变html元素的样式
+Object.style.color;Object.style.backgroundColor;
+Object.style.display="block"or"none";
+//为元素改变css样式
+Object.className
+</code></p>
 
   </article>
 

@@ -8,7 +8,7 @@ categories: liuqianchao update
 Highlight for your code by pygments.
 
 ###1. About pygments
-**pygments** is a syntax-highlighting package. We can know that it is written by Python according to its name. With it, can highlight our codes in our website.
+**pygments** is a syntax-highlighting package and Python-based code highlighting tool. With it, can highlight our codes in our website.
 
 ###2. How to intall it:
 
@@ -29,12 +29,11 @@ pygmentize -f html -S default > pygments.css
   copy this .css file to your local files of jekyll:
   `./css` and `./_site/css`
   
-###3. Result:
+###3. Result:   
 
-{% highlight java %}
-public class HelloWorld {
-    public static void main(String args[]) {
-      System.out.println("Hello World!");
-    }
-}
+
+{% highlight ruby %}
+def foo
+  puts 'foo'
+end
 {% endhighlight %}

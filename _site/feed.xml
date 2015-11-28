@@ -5,8 +5,8 @@
     <description>Welcome to Q.Liu&#39;s Homepage. Here you can find something about my research interests.</description>
     <link>http://qianchaoliu.github.io//</link>
     <atom:link href="http://qianchaoliu.github.io//feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sat, 28 Nov 2015 22:41:12 +0800</pubDate>
-    <lastBuildDate>Sat, 28 Nov 2015 22:41:12 +0800</lastBuildDate>
+    <pubDate>Sat, 28 Nov 2015 23:56:06 +0800</pubDate>
+    <lastBuildDate>Sat, 28 Nov 2015 23:56:06 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
@@ -49,7 +49,7 @@ In this way, we can complete our daily tasks in codes of Python. &lt;/p&gt;
         <description>&lt;p&gt;Highlight for your code by pygments.&lt;/p&gt;
 
 &lt;h3 id=&quot;about-pygments&quot;&gt;1. About pygments&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;pygments&lt;/strong&gt; is a syntax-highlighting package. We can know that it is written by Python according to its name. With it, can highlight our codes in our website.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;pygments&lt;/strong&gt; is a syntax-highlighting package and Python-based code highlighting tool. With it, can highlight our codes in our website.&lt;/p&gt;
 
 &lt;h3 id=&quot;how-to-intall-it&quot;&gt;2. How to intall it:&lt;/h3&gt;
 
@@ -78,11 +78,9 @@ copy this .css file to your local files of jekyll:
 
 &lt;h3 id=&quot;result&quot;&gt;3. Result:&lt;/h3&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;HelloWorld&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[])&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Hello World!&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;foo&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;foo&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 </description>
         <pubDate>Fri, 10 Oct 2014 06:35:04 +0800</pubDate>
         <link>http://qianchaoliu.github.io//liuqianchao/update/2014/10/10/about_pygments/</link>

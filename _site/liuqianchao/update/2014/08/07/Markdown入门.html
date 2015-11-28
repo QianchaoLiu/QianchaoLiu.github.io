@@ -4,10 +4,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Why R?</title>
+    <title>Markdown入门</title>
     <meta name="viewport" content="width=device-width">
     <meta name="description" content="Welcome to Q.Liu's Homepage. Here you can find something about my research interests.">
-    <link rel="canonical" href="http://qianchaoliu.github.io//liuqianchao/update/2015/11/10/R/">
+    <link rel="canonical" href="http://qianchaoliu.github.io//liuqianchao/update/2014/08/07/Markdown%E5%85%A5%E9%97%A8.html">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/main.css">
@@ -66,32 +66,75 @@
       <div class="post">
 
   <header class="post-header">
-    <h1>Why R?</h1>
-    <p class="meta">Nov 10, 2015</p>
+    <h1>Markdown入门</h1>
+    <p class="meta">Aug 7, 2014</p>
   </header>
 
   <article class="post-content">
-  <p>As one of the hottest programming languages, R has attracted lots of attention from people who are interested in data analysis. Although python, an advanced and high-level programming language, has satisfied most of needs for data processing, R still has some special advantages. In this short article, I will give a brief intro to R.  </p>
+  <h1 id="markdown">Markdown入门</h1>
+<p>Markdown,作为一种文档结构描述语言，其文本结构仅对应HTML语言的一个子集，其实现原理是通过正则表达式进行HTML标签的替换，其目的是为了更方便地书写审阅纯文本文档。</p>
 
-<h3 id="the-advantages">The advantages</h3>
-<p>More professional packages that are ralated with data analytics have been created, there are more than 5000 </p>
+<hr />
+<blockquote>
+  <p><strong>标题</strong></p>
+</blockquote>
 
-<h3 id="some-interesting-packages-in-r">Some interesting packages in R</h3>
-<p><a href="http://ggplot2.org/"><strong>ggplot2</strong></a> <br />
-python is good at the process of acquiring and handling data, but the ability of data visualization is 
-“relatively weak”. In general, we use <strong>matplotlib</strong> and other libraries to draw figures in Python. The matpoltlib is one of high quality libraies, however, the number of high quality libraries to draw figures are much smaller than that of R. Here in R, one of the most widely known packages to draw beautiful plots is <strong>ggplot2</strong>.   </p>
+<p>使用#代表标题的等级，一个#为一级标题，六个#为六级标题</p>
 
-<p><a href="http://jliblog.com/app/rweibo"><strong>Rweibo</strong></a> <br />
-Rweibo is a package based on official API of Sina Weibo. Although there are serious limits of offcial API, such as the maximum quantity of comments allowed for acquiring is 2000 for each Weibo post, the official API can satisfy a smale-scale applicaiton. <br />
-<strong>rMaps</strong></p>
+<hr />
+<blockquote>
+  <p><strong>强调</strong></p>
+</blockquote>
 
-<h3 id="can-we-use-r-in-a-more-familiar-way">Can we use R in a more familiar way?</h3>
-<p>Actually, We can use <strong>rpy2</strong>, which is an interface to R running embedded in Python. With the help of this interface, we can take advantage of R in the code of Python. <br />
-To install the package of rpy2 (via pip in your terminal): <br />
- <code>pip install pip</code>   </p>
+<p>使用*文字*，添加<em>斜体文字</em><br />
+  使用**文字**，添加<strong>粗体文字</strong><br />
+  使用---作为一条横线</p>
 
-<p>Find documentation of rpy2 at <a href="http://rpy.sourceforge.net/">rpy.sourceforge.net/</a> <br />
-In this way, we can complete our daily tasks in codes of Python. </p>
+<hr />
+<blockquote>
+  <p><strong>代码</strong></p>
+</blockquote>
+
+<p>使用```（反引号）将代码块括起来</p>
+
+<p>``` python<br />
+print “test”
+```  </p>
+
+<p><code>python
+ print"test"
+</code></p>
+
+<hr />
+<blockquote>
+  <p><strong>引用超链接或图片</strong></p>
+</blockquote>
+
+<p>！[描述](地址) 作为图片引用<br />
+[描述](地址) 作为超链接引用  </p>
+
+<p>[维基百科](wikipedia.org)  <br />
+<a href="wikipedia.org">维基百科</a></p>
+
+<hr />
+<blockquote>
+  <p>其他常用技巧</p>
+</blockquote>
+
+<ul>
+  <li>
+    <p>单个反引号作为highlight
+`高亮`
+<code>高亮</code></p>
+  </li>
+  <li>
+    <p>*(空格)文字 作为无序列表
+ * 列表</p>
+    <ul>
+      <li>列表</li>
+    </ul>
+  </li>
+</ul>
 
   </article>
 
