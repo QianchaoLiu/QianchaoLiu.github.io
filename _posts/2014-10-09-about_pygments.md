@@ -31,10 +31,10 @@ pygmentize -f html -S default > pygments.css
   
 ###3. Result:
 
-{% highlight python linenos %}
-{
-    cout<<endl;
-    cout<<"HAHAHA"<<endl;
-    cout<<"I am KICIOLLO"<<endl;
+{% highlight java %}
+public class HelloWorld {
+    public static void main(String args[]) {
+      System.out.println("Hello World!");
+    }
 }
 {% endhighlight %}

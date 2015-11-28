@@ -10,3 +10,4 @@ github_username:  qianchaoliu
 # Build settings
 markdown: kramdown
 permalink: pretty
+highlighter: pygments
