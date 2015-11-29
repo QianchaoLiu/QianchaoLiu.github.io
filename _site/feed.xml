@@ -5,8 +5,8 @@
     <description>Welcome to Q.Liu&#39;s Homepage. Here you can find something about my research interests.</description>
     <link>http://qianchaoliu.github.io//</link>
     <atom:link href="http://qianchaoliu.github.io//feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sun, 29 Nov 2015 22:23:12 +0800</pubDate>
-    <lastBuildDate>Sun, 29 Nov 2015 22:23:12 +0800</lastBuildDate>
+    <pubDate>Sun, 29 Nov 2015 22:43:16 +0800</pubDate>
+    <lastBuildDate>Sun, 29 Nov 2015 22:43:16 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
@@ -90,7 +90,7 @@ However, for most of cases, we can not assume that the desity of data samples is
 
 &lt;h4 id=&quot;result-of-classification&quot;&gt;Result of classification&lt;/h4&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://qianchaoliu.github.io//assets/svm.png&quot; alt=&quot;图片&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://qianchaoliu.github.io//assets/screenshot.png&quot; alt=&quot;图片&quot; /&gt;&lt;/p&gt;
 
 &lt;h4 id=&quot;reference&quot;&gt;Reference&lt;/h4&gt;
 &lt;ol&gt;
