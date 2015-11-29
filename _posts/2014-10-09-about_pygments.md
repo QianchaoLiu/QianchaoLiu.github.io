@@ -25,10 +25,10 @@ to make sure that your have installed python and easy_intall in your pc
 pygmentize -f html -S default > pygments.css
 ```
 
-- Step 3, set your jekyll.   
-  copy this .css file to your local files of jekyll:`./css`,   
-  add `<link rel="stylesheet" href="/css/pygments.css">` to your `head.html`.   
-  and add `highlighter: pygments`to your `_config.yml`   
+- Step 3, set your jekyll or octopress. Following steps are under the environment of jekyll.   
+  - copy this .css file to your local files of jekyll:`./css`,   
+  - add `<link rel="stylesheet" href="/css/pygments.css">` to your `head.html`.   
+  - and add `highlighter: pygments`to your `_config.yml`   
 
   
 ###3. Result:   
@@ -39,4 +39,3 @@ def foo
   puts 'foo'
 end
 {% endhighlight %}
-

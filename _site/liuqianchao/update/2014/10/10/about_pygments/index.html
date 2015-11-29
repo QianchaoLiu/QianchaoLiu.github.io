@@ -12,6 +12,11 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/pygments.css">
+
+    <script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -96,10 +101,13 @@ pygmentize -f html -S default &gt; pygments.css
 </code></p>
 
 <ul>
-  <li>Step 3, set your jekyll. <br />
-copy this .css file to your local files of jekyll:<code>./css</code>, <br />
-add <code>&lt;link rel="stylesheet" href="/css/pygments.css"&gt;</code> to your <code>head.html</code>. <br />
-and add <code>highlighter: pygments</code>to your <code>_config.yml</code>   </li>
+  <li>Step 3, set your jekyll or octopress. Following steps are under the environment of jekyll. <br />
+    <ul>
+      <li>copy this .css file to your local files of jekyll:<code>./css</code>,   </li>
+      <li>add <code>&lt;link rel="stylesheet" href="/css/pygments.css"&gt;</code> to your <code>head.html</code>.   </li>
+      <li>and add <code>highlighter: pygments</code>to your <code>_config.yml</code>   </li>
+    </ul>
+  </li>
 </ul>
 
 <h3 id="result">3. Result:</h3>
