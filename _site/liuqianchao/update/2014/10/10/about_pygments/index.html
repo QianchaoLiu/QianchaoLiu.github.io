@@ -97,8 +97,9 @@ pygmentize -f html -S default &gt; pygments.css
 
 <ul>
   <li>Step 3, set your jekyll. <br />
-copy this .css file to your local files of jekyll:
-<code>./css</code> and <code>./_site/css</code></li>
+copy this .css file to your local files of jekyll:<code>./css</code>, <br />
+add <code>&lt;link rel="stylesheet" href="/css/pygments.css"&gt;</code> to your <code>head.html</code>. <br />
+and add <code>highlighter: pygments</code>to your <code>_config.yml</code>   </li>
 </ul>
 
 <h3 id="result">3. Result:</h3>
@@ -106,6 +107,7 @@ copy this .css file to your local files of jekyll:
 <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">foo</span>
   <span class="nb">puts</span> <span class="s1">&#39;foo&#39;</span>
 <span class="k">end</span></code></pre></figure>
+
 
   </article>
 

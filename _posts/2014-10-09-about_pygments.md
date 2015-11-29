@@ -26,8 +26,10 @@ pygmentize -f html -S default > pygments.css
 ```
 
 - Step 3, set your jekyll.   
-  copy this .css file to your local files of jekyll:
-  `./css` and `./_site/css`
+  copy this .css file to your local files of jekyll:`./css`,   
+  add `<link rel="stylesheet" href="/css/pygments.css">` to your `head.html`.   
+  and add `highlighter: pygments`to your `_config.yml`   
+
   
 ###3. Result:   
 
@@ -37,3 +39,4 @@ def foo
   puts 'foo'
 end
 {% endhighlight %}
+

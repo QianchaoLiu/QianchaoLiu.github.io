@@ -5,8 +5,8 @@
     <description>Welcome to Q.Liu&#39;s Homepage. Here you can find something about my research interests.</description>
     <link>http://qianchaoliu.github.io//</link>
     <atom:link href="http://qianchaoliu.github.io//feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sat, 28 Nov 2015 23:56:06 +0800</pubDate>
-    <lastBuildDate>Sat, 28 Nov 2015 23:56:06 +0800</lastBuildDate>
+    <pubDate>Sun, 29 Nov 2015 13:02:42 +0800</pubDate>
+    <lastBuildDate>Sun, 29 Nov 2015 13:02:42 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
@@ -72,8 +72,9 @@ pygmentize -f html -S default &amp;gt; pygments.css
 
 &lt;ul&gt;
   &lt;li&gt;Step 3, set your jekyll. &lt;br /&gt;
-copy this .css file to your local files of jekyll:
-&lt;code&gt;./css&lt;/code&gt; and &lt;code&gt;./_site/css&lt;/code&gt;&lt;/li&gt;
+copy this .css file to your local files of jekyll:&lt;code&gt;./css&lt;/code&gt;, &lt;br /&gt;
+add &lt;code&gt;&amp;lt;link rel=&quot;stylesheet&quot; href=&quot;/css/pygments.css&quot;&amp;gt;&lt;/code&gt; to your &lt;code&gt;head.html&lt;/code&gt;. &lt;br /&gt;
+and add &lt;code&gt;highlighter: pygments&lt;/code&gt;to your &lt;code&gt;_config.yml&lt;/code&gt;   &lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&quot;result&quot;&gt;3. Result:&lt;/h3&gt;
@@ -81,6 +82,7 @@ copy this .css file to your local files of jekyll:
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;foo&lt;/span&gt;
   &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;foo&amp;#39;&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
 </description>
         <pubDate>Fri, 10 Oct 2014 06:35:04 +0800</pubDate>
         <link>http://qianchaoliu.github.io//liuqianchao/update/2014/10/10/about_pygments/</link>
