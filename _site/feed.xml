@@ -5,8 +5,8 @@
     <description>Welcome to Q.Liu&#39;s Homepage. Here you can find something about my research interests.</description>
     <link>http://qianchaoliu.github.io//</link>
     <atom:link href="http://qianchaoliu.github.io//feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Mon, 30 Nov 2015 15:48:03 +0800</pubDate>
-    <lastBuildDate>Mon, 30 Nov 2015 15:48:03 +0800</lastBuildDate>
+    <pubDate>Tue, 08 Dec 2015 15:51:54 +0800</pubDate>
+    <lastBuildDate>Tue, 08 Dec 2015 15:51:54 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
@@ -18,11 +18,38 @@
 However, for most of cases, we can not assume that the desity of data samples can be characterised by a series of parameters in this irregular world. So we introduce the non-parametric method which includes &lt;em&gt;SVM&lt;/em&gt;.&lt;/p&gt;
 
 &lt;h3 id=&quot;how-it-works&quot;&gt;2. How it works?&lt;/h3&gt;
+&lt;p&gt;The &lt;em&gt;SVM&lt;/em&gt; uses a very simple idea. Beforing explaining how &lt;em&gt;SVM&lt;/em&gt; works, we will introduce the concept of &lt;strong&gt;&lt;em&gt;kernel trick&lt;/em&gt;&lt;/strong&gt;. How can we distinguish ◇ from △ showed below? Obiviously, there are no hyperplane to classify one from the other. To solve this problem, &lt;em&gt;kernel trick&lt;/em&gt; has been created.&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;   
+&lt;canvas id=&quot;myCanvas&quot; width=&quot;250&quot; height=&quot;180&quot; style=&quot;border:0px solid #c3c3c3;&quot;&gt;
+Your browser does not support the canvas element. here is graph written by html.
+&lt;/canvas&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+var c=document.getElementById(&quot;myCanvas&quot;);
+var ctx=c.getContext(&quot;2d&quot;);
+
+var txt1=&quot;△                     ◇&quot;;
+var txt2=&quot;◇                     △&quot;;
+ctx.font = &quot;20px Helvetica red&quot;;            
+ctx.textBaseline = &#39;top&#39;;
+ctx.fillText(txt1, 40, 0);
+ctx.fillText(txt2, 0,130);
+&lt;/script&gt;
+&lt;/div&gt;
+&lt;p&gt;Suppose that we have a set of training patterns.{&lt;script type=&quot;math/tex&quot;&gt;x_{i},i=1,...,m&lt;/script&gt;} assigned to one of two classes &lt;script type=&quot;math/tex&quot;&gt;\omega_{1}&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;\omega_{2}&lt;/script&gt;, with corresponding labels &lt;script type=&quot;math/tex&quot;&gt;y_{i}=\pm1&lt;/script&gt;. 
+Denote the linear discriminant function &lt;script type=&quot;math/tex&quot;&gt;g(x)&lt;/script&gt;, and &lt;script type=&quot;math/tex&quot;&gt;x&lt;/script&gt; is a n-dimension vector:&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;
+$$g(x)=w^{T}x+w_{0}$$
+&lt;/div&gt;
+&lt;p&gt;if &lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
+g(x)&lt;0 %]]&gt;&lt;/script&gt; we see &lt;script type=&quot;math/tex&quot;&gt;x&lt;/script&gt; as label &lt;script type=&quot;math/tex&quot;&gt;y_{i}=-1&lt;/script&gt;, and if &lt;script type=&quot;math/tex&quot;&gt;g(x)&gt;0&lt;/script&gt; we see &lt;script type=&quot;math/tex&quot;&gt;x&lt;/script&gt; as label &lt;script type=&quot;math/tex&quot;&gt;y_{i}=+1&lt;/script&gt;.
+Here we &lt;/p&gt;
 
 &lt;h3 id=&quot;using-svm-in-your-work&quot;&gt;3. Using &lt;em&gt;SVM&lt;/em&gt; in your work.&lt;/h3&gt;
-&lt;p&gt;There is a package named &lt;em&gt;scikit-learn&lt;/em&gt; in Python. Find information to install it at &lt;a href=&quot;http://scikit-learn.org/stable/index.html&quot;&gt;here&lt;/a&gt;. We can use the official date sets of &lt;em&gt;scikit-learn&lt;/em&gt;, and examine the performance of classification. Here, we use &lt;em&gt;Iris&lt;/em&gt; dataset. There are 3 kinds of iris, each sample has 4 properties which include petal length, petal width, sepal length, and sepal width.    &lt;/p&gt;
+&lt;p&gt;There is a package named &lt;strong&gt;&lt;em&gt;scikit-learn&lt;/em&gt;&lt;/strong&gt; in Python. Find information to install it at &lt;a href=&quot;http://scikit-learn.org/stable/index.html&quot;&gt;here&lt;/a&gt;. We can use the official date sets of &lt;em&gt;scikit-learn&lt;/em&gt;, and examine the performance of classification. Here, we use &lt;em&gt;Iris&lt;/em&gt; dataset. There are 3 kinds of iris, each sample has 4 properties which include petal length, petal width, sepal length, and sepal width.    &lt;/p&gt;
 
-&lt;p&gt;In this experiment, we removed one kind of iris, and two groups of iris are left. After this process, we have two kinds of iris, and each kind has 50 samples. And in order to draw two-dimensional chart, two properties are left: petal length and sepal length.&lt;/p&gt;
+&lt;p&gt;In this experiment, we will show how to conduct a binary classification task. We removed one kind of iris, and two groups of iris are left. After this process, we have two kinds of iris, and each kind has 50 samples. And in order to draw two-dimensional chart, two properties are left: petal length and sepal length.&lt;/p&gt;
 
 &lt;h4 id=&quot;handle-the-dataset&quot;&gt;3.1 Handle the dataset&lt;/h4&gt;
 

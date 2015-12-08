@@ -83,11 +83,38 @@
 However, for most of cases, we can not assume that the desity of data samples can be characterised by a series of parameters in this irregular world. So we introduce the non-parametric method which includes <em>SVM</em>.</p>
 
 <h3 id="how-it-works">2. How it works?</h3>
+<p>The <em>SVM</em> uses a very simple idea. Beforing explaining how <em>SVM</em> works, we will introduce the concept of <strong><em>kernel trick</em></strong>. How can we distinguish ◇ from △ showed below? Obiviously, there are no hyperplane to classify one from the other. To solve this problem, <em>kernel trick</em> has been created.</p>
+
+<div align="center">   
+<canvas id="myCanvas" width="250" height="180" style="border:0px solid #c3c3c3;">
+Your browser does not support the canvas element. here is graph written by html.
+</canvas>
+<script type="text/javascript">
+var c=document.getElementById("myCanvas");
+var ctx=c.getContext("2d");
+
+var txt1="△                     ◇";
+var txt2="◇                     △";
+ctx.font = "20px Helvetica red";            
+ctx.textBaseline = 'top';
+ctx.fillText(txt1, 40, 0);
+ctx.fillText(txt2, 0,130);
+</script>
+</div>
+<p>Suppose that we have a set of training patterns.{<script type="math/tex">x_{i},i=1,...,m</script>} assigned to one of two classes <script type="math/tex">\omega_{1}</script> and <script type="math/tex">\omega_{2}</script>, with corresponding labels <script type="math/tex">y_{i}=\pm1</script>. 
+Denote the linear discriminant function <script type="math/tex">g(x)</script>, and <script type="math/tex">x</script> is a n-dimension vector:</p>
+
+<div align="center">
+$$g(x)=w^{T}x+w_{0}$$
+</div>
+<p>if <script type="math/tex">% <![CDATA[
+g(x)<0 %]]></script> we see <script type="math/tex">x</script> as label <script type="math/tex">y_{i}=-1</script>, and if <script type="math/tex">g(x)>0</script> we see <script type="math/tex">x</script> as label <script type="math/tex">y_{i}=+1</script>.
+Here we </p>
 
 <h3 id="using-svm-in-your-work">3. Using <em>SVM</em> in your work.</h3>
-<p>There is a package named <em>scikit-learn</em> in Python. Find information to install it at <a href="http://scikit-learn.org/stable/index.html">here</a>. We can use the official date sets of <em>scikit-learn</em>, and examine the performance of classification. Here, we use <em>Iris</em> dataset. There are 3 kinds of iris, each sample has 4 properties which include petal length, petal width, sepal length, and sepal width.    </p>
+<p>There is a package named <strong><em>scikit-learn</em></strong> in Python. Find information to install it at <a href="http://scikit-learn.org/stable/index.html">here</a>. We can use the official date sets of <em>scikit-learn</em>, and examine the performance of classification. Here, we use <em>Iris</em> dataset. There are 3 kinds of iris, each sample has 4 properties which include petal length, petal width, sepal length, and sepal width.    </p>
 
-<p>In this experiment, we removed one kind of iris, and two groups of iris are left. After this process, we have two kinds of iris, and each kind has 50 samples. And in order to draw two-dimensional chart, two properties are left: petal length and sepal length.</p>
+<p>In this experiment, we will show how to conduct a binary classification task. We removed one kind of iris, and two groups of iris are left. After this process, we have two kinds of iris, and each kind has 50 samples. And in order to draw two-dimensional chart, two properties are left: petal length and sepal length.</p>
 
 <h4 id="handle-the-dataset">3.1 Handle the dataset</h4>
 
