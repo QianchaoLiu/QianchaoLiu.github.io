@@ -5,8 +5,8 @@
     <description>Welcome to Q.Liu&#39;s Homepage. Here you can find something about my research interests.</description>
     <link>http://qianchaoliu.github.io//</link>
     <atom:link href="http://qianchaoliu.github.io//feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Tue, 08 Dec 2015 15:51:54 +0800</pubDate>
-    <lastBuildDate>Tue, 08 Dec 2015 15:51:54 +0800</lastBuildDate>
+    <pubDate>Sat, 12 Dec 2015 21:03:38 +0800</pubDate>
+    <lastBuildDate>Sat, 12 Dec 2015 21:03:38 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
@@ -18,7 +18,67 @@
 However, for most of cases, we can not assume that the desity of data samples can be characterised by a series of parameters in this irregular world. So we introduce the non-parametric method which includes &lt;em&gt;SVM&lt;/em&gt;.&lt;/p&gt;
 
 &lt;h3 id=&quot;how-it-works&quot;&gt;2. How it works?&lt;/h3&gt;
-&lt;p&gt;The &lt;em&gt;SVM&lt;/em&gt; uses a very simple idea. Beforing explaining how &lt;em&gt;SVM&lt;/em&gt; works, we will introduce the concept of &lt;strong&gt;&lt;em&gt;kernel trick&lt;/em&gt;&lt;/strong&gt;. How can we distinguish ◇ from △ showed below? Obiviously, there are no hyperplane to classify one from the other. To solve this problem, &lt;em&gt;kernel trick&lt;/em&gt; has been created.&lt;/p&gt;
+
+&lt;h4 id=&quot;maximum-margin-classifier&quot;&gt;2.1 Maximum margin classifier&lt;/h4&gt;
+&lt;p&gt;The &lt;em&gt;SVM&lt;/em&gt; uses a very simple idea which can be conclude in a word: maximum margin.  &lt;br /&gt;
+Suppose that we have a set of training patterns.{&lt;script type=&quot;math/tex&quot;&gt;x_{i},i=1,...,m&lt;/script&gt;} assigned to one of two classes &lt;script type=&quot;math/tex&quot;&gt;\omega_{1}&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;\omega_{2}&lt;/script&gt;, with corresponding labels &lt;script type=&quot;math/tex&quot;&gt;y_{i}=\pm1&lt;/script&gt;.   &lt;br /&gt;
+Denote the linear discriminant function &lt;script type=&quot;math/tex&quot;&gt;g(x)&lt;/script&gt;, and &lt;script type=&quot;math/tex&quot;&gt;x_{i}&lt;/script&gt; is a n-dimension vector:&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;
+$$g(x_{i})=w^{T}x_{i}+b$$
+&lt;/div&gt;
+&lt;p&gt;if &lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
+g(x)&lt;0 %]]&gt;&lt;/script&gt; we see &lt;script type=&quot;math/tex&quot;&gt;x&lt;/script&gt; as label &lt;script type=&quot;math/tex&quot;&gt;y_{i}=-1&lt;/script&gt;, and if &lt;script type=&quot;math/tex&quot;&gt;g(x)&gt;0&lt;/script&gt; we see &lt;script type=&quot;math/tex&quot;&gt;x&lt;/script&gt; as label &lt;script type=&quot;math/tex&quot;&gt;y_{i}=+1&lt;/script&gt;. Here all points are subject to: &lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;
+$$y_{i}(w^{T}x_{i}+b)\geq1$$
+&lt;/div&gt;
+&lt;p&gt;Then we introduce &lt;strong&gt;functional margin&lt;/strong&gt; &lt;script type=&quot;math/tex&quot;&gt;\gamma&lt;/script&gt; : &lt;script type=&quot;math/tex&quot;&gt;y_{i}(w^{T}x_{i}+b)&lt;/script&gt;, which is a positive number. &lt;br /&gt;
+And the &lt;strong&gt;geometric margin&lt;/strong&gt; &lt;script type=&quot;math/tex&quot;&gt;\tilde{\gamma}&lt;/script&gt;: &lt;script type=&quot;math/tex&quot;&gt;y_{i}(\frac{w^{T}x_{i}}{||w||}+\frac{b}{||w||})&lt;/script&gt;. After introducing the geometric margin, we can scale value of &lt;script type=&quot;math/tex&quot;&gt;w&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;b&lt;/script&gt; arbitrarily and without changing the geometric margin and the position of this hyperplane: &lt;script type=&quot;math/tex&quot;&gt;y_{i}(w^{T}x_{i}+b)=0&lt;/script&gt;.
+For better classify, we should maximize the margin between two groups by some methods about convex optimization which will change the value of &lt;script type=&quot;math/tex&quot;&gt;w&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;b&lt;/script&gt;.   &lt;/p&gt;
+
+&lt;p&gt;To maximize the geometric margin:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;step 1 build the model:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div align=&quot;center&quot;&gt;$$\max \limits_{w,b} y_{i}(\frac{w^{T}x_{i}}{||w||}+\frac{b}{||w||})$$&lt;/div&gt;
+&lt;p&gt;At first, we constraint that &lt;script type=&quot;math/tex&quot;&gt;||w||=1&lt;/script&gt;, this step can be finished by rescaling the parameters after find solution of &lt;script type=&quot;math/tex&quot;&gt;w^{T}&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;b&lt;/script&gt;. And this constraint can make sure that geometric and the functional margin are the same. However, this contraint is a nonconvex constraint.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;step 2 convert to convex optimization problem:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div align=&quot;center&quot;&gt;$$\min \limits_{w,b} \frac{1}{2}||w||^{2}$$&lt;/div&gt;
+&lt;p&gt;Here another constraint has been added: the functional margin &lt;script type=&quot;math/tex&quot;&gt;\gamma=1&lt;/script&gt; which is the same with: &lt;script type=&quot;math/tex&quot;&gt;\min \limits_{i} y_{i}(w^{T}x_{i}+b)=1 &lt;/script&gt;. And this objective function is a quadratic problem.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;step 3 another kind of convex optimization problem(applied for high or infinite dimensional vector):&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div align=&quot;center&quot;&gt;$$\frac{1}{2}||w||^{2}-\sum_{i=1}^m\alpha_{i}[y_{i}(w^{T}x_{i}+b)-1]$$&lt;/div&gt;
+&lt;p&gt;Using the method of &lt;em&gt;Lagrange multipliers&lt;/em&gt;, you construct a Lagrangian and set the partial derivative with respect to the original parameters &lt;script type=&quot;math/tex&quot;&gt;w&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;b&lt;/script&gt; and the Lagrange multipliers &lt;script type=&quot;math/tex&quot;&gt;\alpha&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;\beta&lt;/script&gt; equal to 0.
+The original objective function: &lt;script type=&quot;math/tex&quot;&gt;\min \limits_{w,b} \frac{1}{2}||w||^{2}&lt;/script&gt; , and the constraint function: &lt;script type=&quot;math/tex&quot;&gt;y_{i}(w^{T}x_{i}+b)\geq1&lt;/script&gt;, Then we get the function as showed above. Therefore, to satisfy demand, our objective function turns out:&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;$$\min \limits_{w,b}\max \limits_{\alpha_{i}} \frac{1}{2}||w||^{2}-\sum_{i=1}^m\alpha_{i}[y_{i}(w^{T}x_{i}+b)-1]=L_{P}$$&lt;/div&gt;
+&lt;p&gt;which is equal to the objective function in step 2. And the dual form of &lt;script type=&quot;math/tex&quot;&gt;L_{P}&lt;/script&gt; is:&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;$$\max \limits_{\alpha_{i}}\min \limits_{w,b} \frac{1}{2}||w||^{2}-\sum_{i=1}^m\alpha_{i}[y_{i}(w^{T}x_{i}+b)-1]=L_{D}$$&lt;/div&gt;
+&lt;p&gt;where &lt;script type=&quot;math/tex&quot;&gt;L_{D}\leq L_{P}&lt;/script&gt; and function &lt;script type=&quot;math/tex&quot;&gt;L_{P}&lt;/script&gt; must be satisfied with the KKT (5 rules). With &lt;script type=&quot;math/tex&quot;&gt;\frac{\delta L_{P}}{\delta w}=0&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;\frac{\delta L_{P}}{\delta b}=0&lt;/script&gt;, we get:&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;$$w=\sum_{i=1}^m \alpha_{i} y_{i} x_{i}$$&lt;/div&gt;
+
+&lt;div align=&quot;center&quot;&gt;$$\sum_{i=1}^m \alpha_{i} y_{i} = 0$$&lt;/div&gt;
+&lt;p&gt;Substituting into &lt;script type=&quot;math/tex&quot;&gt;L_{D}&lt;/script&gt;:&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;$$\max \limits_{\alpha_{i}} \sum_{i=1}^m \alpha_{i} - \frac{1}{2} \sum_{i=1}^m \sum_{j=1}^m \alpha_{i} \alpha_{j} y_{i} y_{j} x_{i}^{T} x_{j}$$&lt;/div&gt;
+
+&lt;div align=&quot;center&quot;&gt;$$s.t. \alpha_{i}\geq0$$ $$\sum_{i=1}^m \alpha_{i} y_{i} =0$$&lt;/div&gt;
+&lt;p&gt;which is also a convex problem, we can get the solution of &lt;script type=&quot;math/tex&quot;&gt;w&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;b&lt;/script&gt;.&lt;/p&gt;
+
+&lt;h4 id=&quot;kernel-trick&quot;&gt;2.2 kernel trick&lt;/h4&gt;
+&lt;p&gt;Then, we will introduce the concept of &lt;strong&gt;&lt;em&gt;kernel trick&lt;/em&gt;&lt;/strong&gt;. How can we distinguish ◇ from △ showed below? Obiviously, there are no hyperplane to classify one from the other. To solve this problem, &lt;em&gt;kernel trick&lt;/em&gt; has been created.&lt;/p&gt;
 
 &lt;div align=&quot;center&quot;&gt;   
 &lt;canvas id=&quot;myCanvas&quot; width=&quot;250&quot; height=&quot;180&quot; style=&quot;border:0px solid #c3c3c3;&quot;&gt;
@@ -36,15 +96,6 @@ ctx.fillText(txt1, 40, 0);
 ctx.fillText(txt2, 0,130);
 &lt;/script&gt;
 &lt;/div&gt;
-&lt;p&gt;Suppose that we have a set of training patterns.{&lt;script type=&quot;math/tex&quot;&gt;x_{i},i=1,...,m&lt;/script&gt;} assigned to one of two classes &lt;script type=&quot;math/tex&quot;&gt;\omega_{1}&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;\omega_{2}&lt;/script&gt;, with corresponding labels &lt;script type=&quot;math/tex&quot;&gt;y_{i}=\pm1&lt;/script&gt;. 
-Denote the linear discriminant function &lt;script type=&quot;math/tex&quot;&gt;g(x)&lt;/script&gt;, and &lt;script type=&quot;math/tex&quot;&gt;x&lt;/script&gt; is a n-dimension vector:&lt;/p&gt;
-
-&lt;div align=&quot;center&quot;&gt;
-$$g(x)=w^{T}x+w_{0}$$
-&lt;/div&gt;
-&lt;p&gt;if &lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
-g(x)&lt;0 %]]&gt;&lt;/script&gt; we see &lt;script type=&quot;math/tex&quot;&gt;x&lt;/script&gt; as label &lt;script type=&quot;math/tex&quot;&gt;y_{i}=-1&lt;/script&gt;, and if &lt;script type=&quot;math/tex&quot;&gt;g(x)&gt;0&lt;/script&gt; we see &lt;script type=&quot;math/tex&quot;&gt;x&lt;/script&gt; as label &lt;script type=&quot;math/tex&quot;&gt;y_{i}=+1&lt;/script&gt;.
-Here we &lt;/p&gt;
 
 &lt;h3 id=&quot;using-svm-in-your-work&quot;&gt;3. Using &lt;em&gt;SVM&lt;/em&gt; in your work.&lt;/h3&gt;
 &lt;p&gt;There is a package named &lt;strong&gt;&lt;em&gt;scikit-learn&lt;/em&gt;&lt;/strong&gt; in Python. Find information to install it at &lt;a href=&quot;http://scikit-learn.org/stable/index.html&quot;&gt;here&lt;/a&gt;. We can use the official date sets of &lt;em&gt;scikit-learn&lt;/em&gt;, and examine the performance of classification. Here, we use &lt;em&gt;Iris&lt;/em&gt; dataset. There are 3 kinds of iris, each sample has 4 properties which include petal length, petal width, sepal length, and sepal width.    &lt;/p&gt;
@@ -122,6 +173,8 @@ Figure: result of classification
 &lt;h4 id=&quot;reference&quot;&gt;Reference&lt;/h4&gt;
 &lt;ol&gt;
   &lt;li&gt;Andrew R. Webb and Keith D. Copsey &lt;em&gt;Statistical Pattern Recognition(Third Edition)&lt;/em&gt;.&lt;/li&gt;
+  &lt;li&gt;Martin Law &lt;a href=&quot;http://www.cise.ufl.edu/class/cis4930sp11dtm/notes/intro_svm_new.pdf&quot;&gt;&lt;em&gt;A Simple Introduction to Support Vector Machines&lt;/em&gt;&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;Andrew Ng &lt;em&gt;Machine Learning (Stanford CS229)&lt;/em&gt;.&lt;/li&gt;
 &lt;/ol&gt;
 </description>
         <pubDate>Sun, 29 Nov 2015 06:35:04 +0800</pubDate>
