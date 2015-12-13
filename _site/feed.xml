@@ -5,8 +5,8 @@
     <description>Welcome to Q.Liu&#39;s Homepage. Here you can find something about my research interests.</description>
     <link>http://qianchaoliu.github.io//</link>
     <atom:link href="http://qianchaoliu.github.io//feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sat, 12 Dec 2015 21:03:38 +0800</pubDate>
-    <lastBuildDate>Sat, 12 Dec 2015 21:03:38 +0800</lastBuildDate>
+    <pubDate>Sun, 13 Dec 2015 15:27:16 +0800</pubDate>
+    <lastBuildDate>Sun, 13 Dec 2015 15:27:16 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
@@ -22,7 +22,7 @@ However, for most of cases, we can not assume that the desity of data samples ca
 &lt;h4 id=&quot;maximum-margin-classifier&quot;&gt;2.1 Maximum margin classifier&lt;/h4&gt;
 &lt;p&gt;The &lt;em&gt;SVM&lt;/em&gt; uses a very simple idea which can be conclude in a word: maximum margin.  &lt;br /&gt;
 Suppose that we have a set of training patterns.{&lt;script type=&quot;math/tex&quot;&gt;x_{i},i=1,...,m&lt;/script&gt;} assigned to one of two classes &lt;script type=&quot;math/tex&quot;&gt;\omega_{1}&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;\omega_{2}&lt;/script&gt;, with corresponding labels &lt;script type=&quot;math/tex&quot;&gt;y_{i}=\pm1&lt;/script&gt;.   &lt;br /&gt;
-Denote the linear discriminant function &lt;script type=&quot;math/tex&quot;&gt;g(x)&lt;/script&gt;, and &lt;script type=&quot;math/tex&quot;&gt;x_{i}&lt;/script&gt; is a n-dimension vector:&lt;/p&gt;
+Denote the linear discriminant function &lt;script type=&quot;math/tex&quot;&gt;g(x)&lt;/script&gt;, where both &lt;script type=&quot;math/tex&quot;&gt;x_{i}&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;w&lt;/script&gt; are n-dimension vectors:&lt;/p&gt;
 
 &lt;div align=&quot;center&quot;&gt;
 $$g(x_{i})=w^{T}x_{i}+b$$
@@ -31,9 +31,10 @@ $$g(x_{i})=w^{T}x_{i}+b$$
 g(x)&lt;0 %]]&gt;&lt;/script&gt; we see &lt;script type=&quot;math/tex&quot;&gt;x&lt;/script&gt; as label &lt;script type=&quot;math/tex&quot;&gt;y_{i}=-1&lt;/script&gt;, and if &lt;script type=&quot;math/tex&quot;&gt;g(x)&gt;0&lt;/script&gt; we see &lt;script type=&quot;math/tex&quot;&gt;x&lt;/script&gt; as label &lt;script type=&quot;math/tex&quot;&gt;y_{i}=+1&lt;/script&gt;. Here all points are subject to: &lt;/p&gt;
 
 &lt;div align=&quot;center&quot;&gt;
-$$y_{i}(w^{T}x_{i}+b)\geq1$$
+$$y_{i}(w^{T}x_{i}+b)\geq0$$
 &lt;/div&gt;
-&lt;p&gt;Then we introduce &lt;strong&gt;functional margin&lt;/strong&gt; &lt;script type=&quot;math/tex&quot;&gt;\gamma&lt;/script&gt; : &lt;script type=&quot;math/tex&quot;&gt;y_{i}(w^{T}x_{i}+b)&lt;/script&gt;, which is a positive number. &lt;br /&gt;
+&lt;p&gt;The &lt;strong&gt;hyperplane&lt;/strong&gt; is :&lt;script type=&quot;math/tex&quot;&gt;y_{i}(w^{T}x_{i}+b)=0&lt;/script&gt;. &lt;br /&gt;
+Then we introduce &lt;strong&gt;functional margin&lt;/strong&gt; &lt;script type=&quot;math/tex&quot;&gt;\gamma&lt;/script&gt; : &lt;script type=&quot;math/tex&quot;&gt;y_{i}(w^{T}x_{i}+b)&lt;/script&gt;, which is a positive number. &lt;br /&gt;
 And the &lt;strong&gt;geometric margin&lt;/strong&gt; &lt;script type=&quot;math/tex&quot;&gt;\tilde{\gamma}&lt;/script&gt;: &lt;script type=&quot;math/tex&quot;&gt;y_{i}(\frac{w^{T}x_{i}}{||w||}+\frac{b}{||w||})&lt;/script&gt;. After introducing the geometric margin, we can scale value of &lt;script type=&quot;math/tex&quot;&gt;w&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;b&lt;/script&gt; arbitrarily and without changing the geometric margin and the position of this hyperplane: &lt;script type=&quot;math/tex&quot;&gt;y_{i}(w^{T}x_{i}+b)=0&lt;/script&gt;.
 For better classify, we should maximize the margin between two groups by some methods about convex optimization which will change the value of &lt;script type=&quot;math/tex&quot;&gt;w&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;b&lt;/script&gt;.   &lt;/p&gt;
 
@@ -78,7 +79,7 @@ The original objective function: &lt;script type=&quot;math/tex&quot;&gt;\min \l
 &lt;p&gt;which is also a convex problem, we can get the solution of &lt;script type=&quot;math/tex&quot;&gt;w&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;b&lt;/script&gt;.&lt;/p&gt;
 
 &lt;h4 id=&quot;kernel-trick&quot;&gt;2.2 kernel trick&lt;/h4&gt;
-&lt;p&gt;Then, we will introduce the concept of &lt;strong&gt;&lt;em&gt;kernel trick&lt;/em&gt;&lt;/strong&gt;. How can we distinguish ◇ from △ showed below? Obiviously, there are no hyperplane to classify one from the other. To solve this problem, &lt;em&gt;kernel trick&lt;/em&gt; has been created.&lt;/p&gt;
+&lt;p&gt;Then, we will introduce the concept of &lt;strong&gt;&lt;em&gt;kernel trick&lt;/em&gt;&lt;/strong&gt;. How can we distinguish ◇ from △ showed below? Obiviously, there are no hyperplane to classify one from the other. &lt;/p&gt;
 
 &lt;div align=&quot;center&quot;&gt;   
 &lt;canvas id=&quot;myCanvas&quot; width=&quot;250&quot; height=&quot;180&quot; style=&quot;border:0px solid #c3c3c3;&quot;&gt;
@@ -96,6 +97,24 @@ ctx.fillText(txt1, 40, 0);
 ctx.fillText(txt2, 0,130);
 &lt;/script&gt;
 &lt;/div&gt;
+&lt;p&gt;One possible way for us to solve this problem is to find out a projection function &lt;script type=&quot;math/tex&quot;&gt;\phi(\cdot)&lt;/script&gt; which will figure out a hyperplane in a higher dimension space. However, this method may also bring the dimension disaster problem. To solve this problem, &lt;em&gt;kernel trick&lt;/em&gt; has been created. &lt;br /&gt;
+Instead of &lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
+&lt;\phi(x_{i}),\phi(x)&gt; %]]&gt;&lt;/script&gt;, here we use kernel function:&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;$$K(x_{i},x)$$&lt;/div&gt;
+&lt;p&gt;Many kernel functions have been proposed, the most popular menthods are: linear kernel, RBF kernel, polynomial kernel and Sigmoid kernel. &lt;br /&gt;
+&lt;strong&gt;Linear kernel&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;$$K(x_{i},x)=x_{i}^{T}x$$&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;RBF kernel with width &lt;script type=&quot;math/tex&quot;&gt;\sigma&lt;/script&gt;&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;$$K(x_{i},x)=exp(\frac{-||x_{i}-x||^{2}}{2 \sigma^{2}})$$&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;polynomial kernel with degree &lt;script type=&quot;math/tex&quot;&gt;d&lt;/script&gt;&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;$$K(x_{i},x)=(x_{i}^{T}x+1)^{d}$$&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Sigmoid kernel with parameter &lt;script type=&quot;math/tex&quot;&gt;k&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;\theta&lt;/script&gt;&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;$$K(x_{i},x)=tanh(kx_{i}^{T}x+\theta)$$&lt;/div&gt;
 
 &lt;h3 id=&quot;using-svm-in-your-work&quot;&gt;3. Using &lt;em&gt;SVM&lt;/em&gt; in your work.&lt;/h3&gt;
 &lt;p&gt;There is a package named &lt;strong&gt;&lt;em&gt;scikit-learn&lt;/em&gt;&lt;/strong&gt; in Python. Find information to install it at &lt;a href=&quot;http://scikit-learn.org/stable/index.html&quot;&gt;here&lt;/a&gt;. We can use the official date sets of &lt;em&gt;scikit-learn&lt;/em&gt;, and examine the performance of classification. Here, we use &lt;em&gt;Iris&lt;/em&gt; dataset. There are 3 kinds of iris, each sample has 4 properties which include petal length, petal width, sepal length, and sepal width.    &lt;/p&gt;

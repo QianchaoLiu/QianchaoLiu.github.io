@@ -87,7 +87,7 @@ However, for most of cases, we can not assume that the desity of data samples ca
 <h4 id="maximum-margin-classifier">2.1 Maximum margin classifier</h4>
 <p>The <em>SVM</em> uses a very simple idea which can be conclude in a word: maximum margin.  <br />
 Suppose that we have a set of training patterns.{<script type="math/tex">x_{i},i=1,...,m</script>} assigned to one of two classes <script type="math/tex">\omega_{1}</script> and <script type="math/tex">\omega_{2}</script>, with corresponding labels <script type="math/tex">y_{i}=\pm1</script>.   <br />
-Denote the linear discriminant function <script type="math/tex">g(x)</script>, and <script type="math/tex">x_{i}</script> is a n-dimension vector:</p>
+Denote the linear discriminant function <script type="math/tex">g(x)</script>, where both <script type="math/tex">x_{i}</script> and <script type="math/tex">w</script> are n-dimension vectors:</p>
 
 <div align="center">
 $$g(x_{i})=w^{T}x_{i}+b$$
@@ -96,9 +96,10 @@ $$g(x_{i})=w^{T}x_{i}+b$$
 g(x)<0 %]]></script> we see <script type="math/tex">x</script> as label <script type="math/tex">y_{i}=-1</script>, and if <script type="math/tex">g(x)>0</script> we see <script type="math/tex">x</script> as label <script type="math/tex">y_{i}=+1</script>. Here all points are subject to: </p>
 
 <div align="center">
-$$y_{i}(w^{T}x_{i}+b)\geq1$$
+$$y_{i}(w^{T}x_{i}+b)\geq0$$
 </div>
-<p>Then we introduce <strong>functional margin</strong> <script type="math/tex">\gamma</script> : <script type="math/tex">y_{i}(w^{T}x_{i}+b)</script>, which is a positive number. <br />
+<p>The <strong>hyperplane</strong> is :<script type="math/tex">y_{i}(w^{T}x_{i}+b)=0</script>. <br />
+Then we introduce <strong>functional margin</strong> <script type="math/tex">\gamma</script> : <script type="math/tex">y_{i}(w^{T}x_{i}+b)</script>, which is a positive number. <br />
 And the <strong>geometric margin</strong> <script type="math/tex">\tilde{\gamma}</script>: <script type="math/tex">y_{i}(\frac{w^{T}x_{i}}{||w||}+\frac{b}{||w||})</script>. After introducing the geometric margin, we can scale value of <script type="math/tex">w</script> and <script type="math/tex">b</script> arbitrarily and without changing the geometric margin and the position of this hyperplane: <script type="math/tex">y_{i}(w^{T}x_{i}+b)=0</script>.
 For better classify, we should maximize the margin between two groups by some methods about convex optimization which will change the value of <script type="math/tex">w</script> and <script type="math/tex">b</script>.   </p>
 
@@ -143,7 +144,7 @@ The original objective function: <script type="math/tex">\min \limits_{w,b} \fra
 <p>which is also a convex problem, we can get the solution of <script type="math/tex">w</script> and <script type="math/tex">b</script>.</p>
 
 <h4 id="kernel-trick">2.2 kernel trick</h4>
-<p>Then, we will introduce the concept of <strong><em>kernel trick</em></strong>. How can we distinguish ◇ from △ showed below? Obiviously, there are no hyperplane to classify one from the other. To solve this problem, <em>kernel trick</em> has been created.</p>
+<p>Then, we will introduce the concept of <strong><em>kernel trick</em></strong>. How can we distinguish ◇ from △ showed below? Obiviously, there are no hyperplane to classify one from the other. </p>
 
 <div align="center">   
 <canvas id="myCanvas" width="250" height="180" style="border:0px solid #c3c3c3;">
@@ -161,6 +162,24 @@ ctx.fillText(txt1, 40, 0);
 ctx.fillText(txt2, 0,130);
 </script>
 </div>
+<p>One possible way for us to solve this problem is to find out a projection function <script type="math/tex">\phi(\cdot)</script> which will figure out a hyperplane in a higher dimension space. However, this method may also bring the dimension disaster problem. To solve this problem, <em>kernel trick</em> has been created. <br />
+Instead of <script type="math/tex">% <![CDATA[
+<\phi(x_{i}),\phi(x)> %]]></script>, here we use kernel function:</p>
+
+<div align="center">$$K(x_{i},x)$$</div>
+<p>Many kernel functions have been proposed, the most popular menthods are: linear kernel, RBF kernel, polynomial kernel and Sigmoid kernel. <br />
+<strong>Linear kernel</strong>:</p>
+
+<div align="center">$$K(x_{i},x)=x_{i}^{T}x$$</div>
+<p><strong>RBF kernel with width <script type="math/tex">\sigma</script></strong>:</p>
+
+<div align="center">$$K(x_{i},x)=exp(\frac{-||x_{i}-x||^{2}}{2 \sigma^{2}})$$</div>
+<p><strong>polynomial kernel with degree <script type="math/tex">d</script></strong>:</p>
+
+<div align="center">$$K(x_{i},x)=(x_{i}^{T}x+1)^{d}$$</div>
+<p><strong>Sigmoid kernel with parameter <script type="math/tex">k</script> and <script type="math/tex">\theta</script></strong>:</p>
+
+<div align="center">$$K(x_{i},x)=tanh(kx_{i}^{T}x+\theta)$$</div>
 
 <h3 id="using-svm-in-your-work">3. Using <em>SVM</em> in your work.</h3>
 <p>There is a package named <strong><em>scikit-learn</em></strong> in Python. Find information to install it at <a href="http://scikit-learn.org/stable/index.html">here</a>. We can use the official date sets of <em>scikit-learn</em>, and examine the performance of classification. Here, we use <em>Iris</em> dataset. There are 3 kinds of iris, each sample has 4 properties which include petal length, petal width, sepal length, and sepal width.    </p>
