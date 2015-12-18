@@ -14,5 +14,5 @@ You can also find the source codes written by me at [github.com/qianchaoliu](htt
 <center><h3> <bold>Education Background</bold></h3></center>
 　　　　　　　Tianjin University　　　　　　　　　　　　　　　　　　　　　2012.9-2016.7<br>
 　　　　　　　Bachelor's degree in Information Management and Information System<br>
-　　　　　　　GPA ranking 1-st in the department of Management Science and Engineering
+　　　　　　　
 <hr>

@@ -5,8 +5,8 @@
     <description>Welcome to Q.Liu&#39;s Homepage. Here you can find something about my research interests.</description>
     <link>http://qianchaoliu.github.io//</link>
     <atom:link href="http://qianchaoliu.github.io//feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sun, 13 Dec 2015 15:27:16 +0800</pubDate>
-    <lastBuildDate>Sun, 13 Dec 2015 15:27:16 +0800</lastBuildDate>
+    <pubDate>Mon, 14 Dec 2015 21:19:44 +0800</pubDate>
+    <lastBuildDate>Mon, 14 Dec 2015 21:19:44 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
@@ -212,7 +212,14 @@ Figure: result of classification
         <description>&lt;p&gt;As one of the hottest programming languages, R has attracted lots of attention from people who are interested in data analysis. Although python, an advanced and high-level programming language, has satisfied most of needs for data processing, R still has some special advantages. In this short article, I will give a brief intro to R.  &lt;/p&gt;
 
 &lt;h3 id=&quot;the-advantages&quot;&gt;The advantages&lt;/h3&gt;
-&lt;p&gt;More professional packages that are ralated with data analytics have been created, there are more than 5000 &lt;/p&gt;
+&lt;p&gt;More professional packages that are ralated with data analytics have been created, there are more than 7000 packages have been created on &lt;a href=&quot;http://cran.r-project.org&quot;&gt;CRAN&lt;/a&gt; by users and programmers around the world.&lt;/p&gt;
+
+&lt;p&gt;Of course, there are some drawbacks of R, such as:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Little built in support for dynamic or 3-D graphics.&lt;/li&gt;
+  &lt;li&gt;Objects must be stored in physical memory, if the objects are too big, you can not load them into memory.&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h3 id=&quot;some-interesting-packages-in-r&quot;&gt;Some interesting packages in R&lt;/h3&gt;
 &lt;p&gt;&lt;a href=&quot;http://ggplot2.org/&quot;&gt;&lt;strong&gt;ggplot2&lt;/strong&gt;&lt;/a&gt; &lt;br /&gt;
@@ -226,7 +233,7 @@ Rweibo is a package based on official API of Sina Weibo. Although there are seri
 &lt;h3 id=&quot;can-we-use-r-in-a-more-familiar-way&quot;&gt;Can we use R in a more familiar way?&lt;/h3&gt;
 &lt;p&gt;Actually, We can use &lt;strong&gt;rpy2&lt;/strong&gt;, which is an interface to R running embedded in Python. With the help of this interface, we can take advantage of R in the code of Python. &lt;br /&gt;
 To install the package of rpy2 (via pip in your terminal): &lt;br /&gt;
- &lt;code&gt;pip install pip&lt;/code&gt;   &lt;/p&gt;
+ &lt;code&gt;pip install rpy2&lt;/code&gt;   &lt;/p&gt;
 
 &lt;p&gt;Find documentation of rpy2 at &lt;a href=&quot;http://rpy.sourceforge.net/&quot;&gt;rpy.sourceforge.net/&lt;/a&gt; &lt;br /&gt;
 In this way, we can complete our daily tasks in codes of Python. &lt;/p&gt;
