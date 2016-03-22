@@ -7,17 +7,17 @@ categories: liuqianchao update
 
 &nbsp;&nbsp;&nbsp;&nbsp;市面上的深度学习框架不断发布，包括：ConvNet,Caffe(图像),Torch以及Tensorflow，其中最引入瞩目的莫过于来自Google的Tensorflow，在这篇文章中，将对提供Python API的Tensorflow以及Theano作简要介绍。
 
-###1.背景
+### 1.背景   
 &nbsp;&nbsp;&nbsp;&nbsp;Theano最初是被设计成一套符号表达系统，Tensorflow类似于Theano，也属于符号编程框架	（微软开源的CNTK也是如此）。
 
 &nbsp;&nbsp;&nbsp;&nbsp;选择合适的层数，每层的神经元数量，激活函数，损失函数，正则化的参数，然后使用validation数据来判定这次训练的效果。
 
-###2.简介
+### 2.简介   
 &nbsp;&nbsp;&nbsp;&nbsp;下面将以Theano为例，通过官方给出的Tutorial介绍其基本框架:   
 
-####2.1 Theano
+#### 2.1 Theano   
 
-####2.1.1 代数基础
+#### 2.1.1 代数基础   
 &nbsp;&nbsp;&nbsp;&nbsp;在Theano中所有的数据对象都必须是Theano类型([Theano Type](http://deeplearning.net/software/theano/extending/graphstructures.html#type))的,这里在代数运算中引入**标量(scalar)**的概念,将每一个标量数据通过theano.tensor定义成与python存储数据类型（int,float,double等）相一致的Theano类型(iscalar,fscalar,dscalar等)，且这种对应是一对一(即Python存在的数据类型，Theano中均有实现)。   
 
 &nbsp;&nbsp;&nbsp;&nbsp;除了标量(scalar)之外，Theano中还包含**vector**,**matrix**，在定义这两种类型的Theano变量时，使用相应的dvector(vector contains double elements),dmatrix即可。   
@@ -74,11 +74,12 @@ array([[ 0.37328447, -0.65746672],
 {% endhighlight %} 
 &nbsp;&nbsp;&nbsp;&nbsp;这里要注意到RandomStream仅工作在CPU环境下（MRG31k3p工作在CPU和GPU下，CURAND仅工作在GPU下）。
 
-####2.1.2 导数
+
+#### 2.1.2 导数   
 &nbsp;&nbsp;&nbsp;&nbsp;在Theano中，使用`T.grad(y,x)`来计算表达式y（代价函数）关于x（自变量）的导数。   
 &nbsp;&nbsp;&nbsp;&nbsp;此外可以使用`theano.gradient.jacobian()`来计算雅可比矩阵（多元函数的一阶偏导数矩阵），使用`theano.gradient.hessian()`来计算海森矩阵（二阶偏导数矩阵）。
 
-####2.1.3 条件
+#### 2.1.3 条件   
 &nbsp;&nbsp;&nbsp;&nbsp;由于Theano是一种类似于函数式编程的语言，在使用中，Python的if语句只在编译时起作用，编译时会将if判断后的结果进行编译，所以这里需要单独引入条件函数IfElse和Switch。   
 &nbsp;&nbsp;&nbsp;&nbsp;`theano.ifelse(cond, ift, iff)`有三个参数，一个boolean类型的表达式和两个返回变量，`tensor.switch(cond, ift, iff)`则为一个tensor和两个返回变量。
 {% highlight Python %}
@@ -99,7 +100,7 @@ f_lazyifelse = theano.function([a, b, x, y], z_lazy,
                                mode=theano.Mode(linker='vm'))
 {% endhighlight %} 
 
-####2.1.4 scan
+#### 2.1.4 scan   
 &nbsp;&nbsp;&nbsp;&nbsp;设计scan的目的是为了实现循环（递归）地影响一个对象，其主要有四个参数，fn为每次迭代要进行的操作，是一个函数；sequences(y,p)为迭代序列（for(i in range(10)) 中的range(10)）,其中y为要迭代的次数(如果sequences=None，要通过n_steps参数来指定迭代次数)；outputs_info描述使用到前几次迭代结果作为lambda的参数，non_sequences是非序列化的输入，通常用来存储固定的指定值。(good for RNNs)
 
 {% highlight Python %}
@@ -109,7 +110,7 @@ results, updates = theano.scan(fn=lambda y, p, x_tm2, x_tm1, A: y+p+x_tm2+x_tm1+
                     non_sequences=A)
 {% endhighlight %} 
 
-####2.1.5 稀疏
+#### 2.1.5 稀疏   
 &nbsp;&nbsp;&nbsp;&nbsp;Theano专门对稀疏矩阵制定了处理策略，稀疏矩阵中，只有非0元素才会被存储。这里，稀疏矩阵的存储格式有两种csc和csr，当矩阵的行比较多时，建议使用csc:基于矩阵列的存储格式；当行数较少时，则应选择csr:基于矩阵列的存储格式，两者的区别仅在于存储数据的位置。
 
 {% highlight Python %}
@@ -124,7 +125,7 @@ data, indices, indptr, shape = sparse.csm_properties(x)  #使用sparse.csm_prope
 {% endhighlight %} 
 
 
-####2.1.6 Other key words:
+#### 2.1.6 Other key words:   
 **theano.tensor.ones_like(x)**   
 Parameters:	x – tensor that has same shape as output   
 Returns a tensor filled with 1s that has same shape as x.
@@ -140,7 +141,7 @@ Compute the element-wise rectified linear activation function(激活函数为Rec
 此外使用Lasagne、Keras等建立在theano基础上的library可以作为theano的部分或全部替代,此外这些包支持Pretrained model。
 
 
-####2.2 Tensorflow
+#### 2.2 Tensorflow   
 &nbsp;&nbsp;&nbsp;&nbsp;Tensorflow和theano非常相似，它的一些亮点包括：可视化(TensorBoard),multi-GPU and multi-node training.
 
 placeholder来代替tensor
