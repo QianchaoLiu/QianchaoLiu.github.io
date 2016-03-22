@@ -63,12 +63,19 @@ How to modify your Python code style, and use it in a more effective way, this p
 	#all constraint to: length of return is equal to length of iterable
 	{% endhighlight %} 	
 
+- **List comprehensions**   
+	When programming, frequently we want to transform one type of data into another. With the help of list comprehensions we can do it more effectively.
+	{% highlight python %}
+	nums = [0, 1, 2, 3, 4]
+	even_squares = [x ** 2 for x in nums if x % 2 == 0]
+	print even_squares  # Prints "[0, 4, 16]"
+	{% endhighlight %} 	
 
 - **Concurrency and Parallelism**   
 	To make full use of the CPU resource of computer. Concurrent(Thread) program may run thousands of separate paths of execution simultaneously. In contrast, the time parallelism(Process) takes to do the total work is cut in half.   
 	In python, The existence of GIL(Global Interpreter Lock) means your program could utilize only one thread at the same time.   
-	**CPU-bound**:Multiprocessing   
-	**I/O-bound**:Use use `Threading` for blocking I/O, which may take more time to execute the CPU-bound program. 
+	**I/O-bound**:Use `Threading`(false parallelism) for blocking I/O, which may take more time to execute the CPU-bound program. Also use `Lock` class in the `Threading` to avoid data races which may not be avoid by GIL.
+	**CPU-bound**:Use `Multiprocessing`   
 
 
 #### Reference

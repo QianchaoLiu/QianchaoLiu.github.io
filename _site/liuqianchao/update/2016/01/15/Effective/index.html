@@ -12,11 +12,11 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/pygments.css">
-
+<!--
     <script type="text/javascript"
   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
     </script>
-
+-->
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -152,11 +152,21 @@
 	</code></pre></figure>
 
 <ul>
+  <li><strong>List comprehensions</strong> <br />
+  When programming, frequently we want to transform one type of data into another. With the help of list comprehensions we can do it more effectively.</li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python">	<span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+	<span class="n">even_squares</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">**</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums</span> <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+	<span class="k">print</span> <span class="n">even_squares</span>  <span class="c"># Prints &quot;[0, 4, 16]&quot;</span>
+	</code></pre></figure>
+
+<ul>
   <li><strong>Concurrency and Parallelism</strong> <br />
   To make full use of the CPU resource of computer. Concurrent(Thread) program may run thousands of separate paths of execution simultaneously. In contrast, the time parallelism(Process) takes to do the total work is cut in half. <br />
   In python, The existence of GIL(Global Interpreter Lock) means your program could utilize only one thread at the same time. <br />
-  <strong>CPU-bound</strong>:Multiprocessing <br />
-  <strong>I/O-bound</strong>:Use use <code>Threading</code> for blocking I/O, which may take more time to execute the CPU-bound program. </li>
+  <strong>I/O-bound</strong>:Use <code>Threading</code>(false parallelism) for blocking I/O, which may take more time to execute the CPU-bound program. Also use <code>Lock</code> class in the <code>Threading</code> to avoid data races which may not be avoid by GIL.
+  <strong>CPU-bound</strong>:Use <code>Multiprocessing</code>   </li>
 </ul>
 
 <h4 id="reference">Reference</h4>

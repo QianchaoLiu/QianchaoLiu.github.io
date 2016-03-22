@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Theano & Tensorflow"
-date:   2016-01-15 10:00:04
+date:   2016-02-02 10:00:04
 categories: liuqianchao update
 ---
 
