@@ -6,6 +6,44 @@
   padding: 0;
 }
 
+
+.daily{
+  margin-top: 50px;
+
+  font-family: "MicrosoftYaHei";
+  font-weight: 30;
+
+}
+
+.daily .dailytitle{
+  text-align:center;
+  display: bold;
+  font-size: 30px;
+  color: black;
+
+}
+
+.daily .dailycontent{
+  margin-top: 5px;
+  margin-left: 256px;
+  margin-right: 256px;
+}
+
+.daily .dailytodo{
+  margin-top: 5px;
+  margin-left: 256px;
+  margin-right: 256px;
+  background-color:black;
+  color:white;
+
+}
+
+
+
+
+
+
+
 html, body { height: 100%; }
 
 body {
