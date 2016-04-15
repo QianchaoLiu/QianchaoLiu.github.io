@@ -4,32 +4,29 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Theano & Tensorflow</title>
+    <title>LSTM</title>
     <meta name="viewport" content="width=device-width">
     <meta name="description" content="Welcome to Q.Liu's Homepage. Here you can find something about my research interests.">
-    <link rel="canonical" href="http://qianchaoliu.github.io//liuqianchao/update/2016/02/02/Theano&Tensorflow/">
+    <link rel="canonical" href="http://qianchaoliu.github.io//liuqianchao/update/2016/01/15/LSTM%E5%AE%9A%E4%B9%89%E5%8F%8A%E5%AE%9E%E7%8E%B0/">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/pygments.css">
-
-    <!-- mathjax -->
+<!--
     <script type="text/javascript"
-      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
     </script>
+-->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
+  ga('create', 'UA-69826873-1', 'auto');
+  ga('send', 'pageview');
 
-    <!-- GoogleAnalytics -->
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-      ga('create', 'UA-69826873-1', 'auto');
-      ga('send', 'pageview');
-
-    </script>
+</script>
 
 </head>
 
@@ -74,12 +71,12 @@
       <div class="post">
 
   <header class="post-header">
-    <h1>Theano & Tensorflow</h1>
-    <p class="meta">Feb 2, 2016</p>
+    <h1>LSTM</h1>
+    <p class="meta">Jan 15, 2016</p>
   </header>
 
   <article class="post-content">
-  <p>    市面上的深度学习框架不断发布，包括：ConvNet,Caffe(图像),Torch以及Tensorflow，其中最引入瞩目的莫过于来自Google的Tensorflow，在这篇文章中，将对提供Python API的Tensorflow以及Theano作简要介绍。</p>
+  <p>    市面上的深度学习框架不断发布，包括：ConvNet,Caffe(图像)以及Tensorflow，其中最引入瞩目的莫过于来自Google的Tensorflow，在这篇文章中，将对提供Python API的Tensorflow以及Theano作简要介绍。</p>
 
 <h3 id="section">1.背景</h3>
 <p>    Theano最初是被设计成一套符号表达系统，Tensorflow类似于Theano，也属于符号编程框架	（微软开源的CNTK也是如此）。</p>
@@ -89,9 +86,9 @@
 <h3 id="section-1">2.简介</h3>
 <p>    下面将以Theano为例，通过官方给出的Tutorial介绍其基本框架:   </p>
 
-<h4 id="theano">2.1 Theano</h4>
+<h4 id="section-2">2.1 基础定义</h4>
 
-<h4 id="section-2">2.1.1 代数基础</h4>
+<h4 id="section-3">2.1.1 代数基础</h4>
 <p>    在Theano中所有的数据对象都必须是Theano类型(<a href="http://deeplearning.net/software/theano/extending/graphstructures.html#type">Theano Type</a>)的,这里在代数运算中引入<strong>标量(scalar)</strong>的概念,将每一个标量数据通过theano.tensor定义成与python存储数据类型（int,float,double等）相一致的Theano类型(iscalar,fscalar,dscalar等)，且这种对应是一对一(即Python存在的数据类型，Theano中均有实现)。   </p>
 
 <p>    除了标量(scalar)之外，Theano中还包含<strong>vector</strong>,<strong>matrix</strong>，在定义这两种类型的Theano变量时，使用相应的dvector(vector contains double elements),dmatrix即可。   </p>
@@ -102,7 +99,7 @@
 <span class="kn">import</span> <span class="nn">theano.tensor</span> <span class="kn">as</span> <span class="nn">T</span>
 <span class="kn">from</span> <span class="nn">theano</span> <span class="kn">import</span> <span class="n">function</span>
 <span class="kn">from</span> <span class="nn">theano</span> <span class="kn">import</span> <span class="n">In</span>
-<span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">T</span><span class="o">.</span><span class="n">dscalar</span><span class="p">(</span><span class="s">'x'</span><span class="p">,</span><span class="s">'y'</span><span class="p">)</span>
+<span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">T</span><span class="o">.</span><span class="n">dscalar</span><span class="p">(</span><span class="s">&#39;x&#39;</span><span class="p">,</span><span class="s">&#39;y&#39;</span><span class="p">)</span>
 <span class="n">z</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
 <span class="n">f</span> <span class="o">=</span> <span class="n">function</span><span class="p">([</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">],</span><span class="n">z</span><span class="p">)</span>
 <span class="c">#using In to set default value: set default value 5 for y, taking place of y by In(y, default=5) </span>
@@ -111,7 +108,7 @@
 <span class="c">#Shared变量</span>
 <span class="kn">from</span> <span class="nn">theano</span> <span class="kn">import</span> <span class="n">shared</span>
 <span class="n">state</span> <span class="o">=</span> <span class="n">shared</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">inc</span> <span class="o">=</span> <span class="n">T</span><span class="o">.</span><span class="n">iscalar</span><span class="p">(</span><span class="s">'inc'</span><span class="p">)</span>
+<span class="n">inc</span> <span class="o">=</span> <span class="n">T</span><span class="o">.</span><span class="n">iscalar</span><span class="p">(</span><span class="s">&#39;inc&#39;</span><span class="p">)</span>
 <span class="n">accumulator</span> <span class="o">=</span> <span class="n">function</span><span class="p">([</span><span class="n">inc</span><span class="p">],</span> <span class="n">state</span><span class="p">,</span> <span class="n">updates</span><span class="o">=</span><span class="p">[(</span><span class="n">state</span><span class="p">,</span> <span class="n">state</span><span class="o">+</span><span class="n">inc</span><span class="p">)])</span>
 <span class="c">#UPDATES: An expression which indicates updates to the Value after each function call, also means that expressions for new SharedVariable values</span>
 <span class="c">#UPDATES: (iterable over pairs (shared_variable, new_expression). List, tuple or dict.) </span></code></pre></figure>
@@ -121,11 +118,7 @@
     首先就是给function中的变量定义缺省值,通过使用<code>In(y,default=5)</code>代替原来的变量<code>y</code>. <br />
 2. <strong>Shared变量</strong> <br />
     当你需要在不同的函数中持续使用某一个变量时，一般会定义一个shared变量，通过function中的updates参数来改变shared变量的值，在Theano中使用updates的主要目的是提高运算速度（在GPU上），Theano对其进行了特别的优化。同时，还可以通过使用function的<code>givens=[(var1,var2)]</code>参数(var1的值被var2替换)，来使用state而不改变state.value. <br />
-    引入shared变量的原因：在进行大量求导运算时(GPU擅长)，需要把gradients数据从GPU传输到CPU，通过shared变量，可以省去这个步骤(计算(GPU)与更新(CPU)可以放在一起进行)，一般在训练网络的过程中会将weights定义为shared variable(that persist in the graph between calls).</p>
-
-<ol>
-  <li><strong>随机数</strong>   </li>
-</ol>
+3. <strong>随机数</strong>   </p>
 
 <figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">theano.tensor.shared_randomstreams</span> <span class="kn">import</span> <span class="n">RandomStreams</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">theano</span> <span class="kn">import</span> <span class="n">function</span>
@@ -150,11 +143,11 @@
 
 <p>    这里要注意到RandomStream仅工作在CPU环境下（MRG31k3p工作在CPU和GPU下，CURAND仅工作在GPU下）。</p>
 
-<h4 id="section-3">2.1.2 导数</h4>
+<h4 id="section-4">2.1.2 导数</h4>
 <p>    在Theano中，使用<code>T.grad(y,x)</code>来计算表达式y（代价函数）关于x（自变量）的导数。 <br />
     此外可以使用<code>theano.gradient.jacobian()</code>来计算雅可比矩阵（多元函数的一阶偏导数矩阵），使用<code>theano.gradient.hessian()</code>来计算海森矩阵（二阶偏导数矩阵）。</p>
 
-<h4 id="section-4">2.1.3 条件</h4>
+<h4 id="section-5">2.1.3 条件</h4>
 <p>    由于Theano是一种类似于函数式编程的语言，在使用中，Python的if语句只在编译时起作用，编译时会将if判断后的结果进行编译，所以这里需要单独引入条件函数IfElse和Switch。 <br />
     <code>theano.ifelse(cond, ift, iff)</code>有三个参数，一个boolean类型的表达式和两个返回变量，<code>tensor.switch(cond, ift, iff)</code>则为一个tensor和两个返回变量。</p>
 
@@ -162,56 +155,32 @@
 <span class="kn">from</span> <span class="nn">theano.ifelse</span> <span class="kn">import</span> <span class="n">ifelse</span>
 <span class="kn">import</span> <span class="nn">theano</span><span class="o">,</span> <span class="nn">time</span><span class="o">,</span> <span class="nn">numpy</span>
 
-<span class="n">a</span><span class="p">,</span><span class="n">b</span> <span class="o">=</span> <span class="n">T</span><span class="o">.</span><span class="n">scalars</span><span class="p">(</span><span class="s">'a'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">)</span>
-<span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">T</span><span class="o">.</span><span class="n">matrices</span><span class="p">(</span><span class="s">'x'</span><span class="p">,</span> <span class="s">'y'</span><span class="p">)</span>
+<span class="n">a</span><span class="p">,</span><span class="n">b</span> <span class="o">=</span> <span class="n">T</span><span class="o">.</span><span class="n">scalars</span><span class="p">(</span><span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">T</span><span class="o">.</span><span class="n">matrices</span><span class="p">(</span><span class="s">&#39;x&#39;</span><span class="p">,</span> <span class="s">&#39;y&#39;</span><span class="p">)</span>
 
 <span class="n">z_switch</span> <span class="o">=</span> <span class="n">T</span><span class="o">.</span><span class="n">switch</span><span class="p">(</span><span class="n">T</span><span class="o">.</span><span class="n">lt</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="n">T</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">T</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
 <span class="n">z_lazy</span> <span class="o">=</span> <span class="n">ifelse</span><span class="p">(</span><span class="n">T</span><span class="o">.</span><span class="n">lt</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="n">T</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">T</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
 
 <span class="n">f_switch</span> <span class="o">=</span> <span class="n">theano</span><span class="o">.</span><span class="n">function</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">],</span> <span class="n">z_switch</span><span class="p">,</span>
-                           <span class="n">mode</span><span class="o">=</span><span class="n">theano</span><span class="o">.</span><span class="n">Mode</span><span class="p">(</span><span class="n">linker</span><span class="o">=</span><span class="s">'vm'</span><span class="p">))</span>
+                           <span class="n">mode</span><span class="o">=</span><span class="n">theano</span><span class="o">.</span><span class="n">Mode</span><span class="p">(</span><span class="n">linker</span><span class="o">=</span><span class="s">&#39;vm&#39;</span><span class="p">))</span>
 <span class="n">f_lazyifelse</span> <span class="o">=</span> <span class="n">theano</span><span class="o">.</span><span class="n">function</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">],</span> <span class="n">z_lazy</span><span class="p">,</span>
-                               <span class="n">mode</span><span class="o">=</span><span class="n">theano</span><span class="o">.</span><span class="n">Mode</span><span class="p">(</span><span class="n">linker</span><span class="o">=</span><span class="s">'vm'</span><span class="p">))</span></code></pre></figure>
+                               <span class="n">mode</span><span class="o">=</span><span class="n">theano</span><span class="o">.</span><span class="n">Mode</span><span class="p">(</span><span class="n">linker</span><span class="o">=</span><span class="s">&#39;vm&#39;</span><span class="p">))</span></code></pre></figure>
 
 <h4 id="scan">2.1.4 scan</h4>
-<p>    设计scan的目的是为了实现循环（递归）地影响一个对象，其主要有四个参数，fn为每次迭代要进行的操作，是一个函数；sequences(y,p)为迭代序列（for(i in range(10)) 中的range(10)）,其中y为要迭代的次数(如果sequences=None，要通过n_steps参数来指定迭代次数)；outputs_info描述使用到前几次迭代结果作为lambda的参数，non_sequences是非序列化的输入，通常用来存储固定的指定值。(good for RNNs)</p>
+<p>    设计scan的目的是为了实现循环（递归）地影响一个对象，其主要有四个参数，fn为每次迭代要进行的操作，是一个函数；sequences(y,p)为迭代序列（for(i in range(10)) 中的range(10)）,其中y为要迭代的次数(如果sequences=None，要通过n_steps参数来指定迭代次数)；outputs_info描述使用到前几次迭代结果作为lambda的参数，non_sequences是非序列化的输入，通常用来存储固定的指定值。</p>
 
 <figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">results</span><span class="p">,</span> <span class="n">updates</span> <span class="o">=</span> <span class="n">theano</span><span class="o">.</span><span class="n">scan</span><span class="p">(</span><span class="n">fn</span><span class="o">=</span><span class="k">lambda</span> <span class="n">y</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">x_tm2</span><span class="p">,</span> <span class="n">x_tm1</span><span class="p">,</span> <span class="n">A</span><span class="p">:</span> <span class="n">y</span><span class="o">+</span><span class="n">p</span><span class="o">+</span><span class="n">x_tm2</span><span class="o">+</span><span class="n">x_tm1</span><span class="o">+</span><span class="n">A</span><span class="p">,</span>
                     <span class="n">sequences</span><span class="o">=</span><span class="p">[</span><span class="n">Y</span><span class="p">,</span> <span class="n">P</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span>
                     <span class="n">outputs_info</span><span class="o">=</span><span class="p">[</span><span class="nb">dict</span><span class="p">(</span><span class="n">initial</span><span class="o">=</span><span class="n">X</span><span class="p">,</span> <span class="n">taps</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])],</span>
                     <span class="n">non_sequences</span><span class="o">=</span><span class="n">A</span><span class="p">)</span></code></pre></figure>
 
-<h4 id="section-5">2.1.5 稀疏</h4>
-<p>    Theano专门对稀疏矩阵制定了处理策略，稀疏矩阵中，只有非0元素才会被存储。这里，稀疏矩阵的存储格式有两种csc和csr，当矩阵的行比较多时，建议使用csc:基于矩阵列的存储格式；当行数较少时，则应选择csr:基于矩阵列的存储格式，两者的区别仅在于存储数据的位置。</p>
+<h4 id="section-6">2.1.5 稀疏</h4>
+<p>    Theano专门对稀疏矩阵制定了处理策略，稀疏矩阵中，只有非0元素才会被存储，</p>
 
-<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">theano</span> <span class="kn">import</span> <span class="n">sparse</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">sparse</span><span class="o">.</span><span class="n">csc_matrix</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'x'</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s">'float32'</span><span class="p">)</span>  
-<span class="n">y</span> <span class="o">=</span> <span class="n">sparse</span><span class="o">.</span><span class="n">dense_from_sparse</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c">#将稀疏矩阵转换为密集矩阵</span>
-<span class="n">data</span><span class="p">,</span> <span class="n">indices</span><span class="p">,</span> <span class="n">indptr</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">sparse</span><span class="o">.</span><span class="n">csm_properties</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="c">#使用sparse.csm_properties来返回一个tensor变量的元组，来表示稀疏矩阵的内部特征。</span>
-<span class="c">#data 属性是一个一维的 ndarray ，它包含稀疏矩阵所有的非0元素。</span>
-<span class="c">#indices 和indptr 属性是用来存储稀疏矩阵中数据的位置的。</span>
-<span class="c">#shape 属性，准确的说是和密集矩阵的shape属性一样的。如果从前三个属性上没法推断，那么它可以在稀疏矩阵创建的时候显式指定 。</span></code></pre></figure>
-
-<h4 id="other-key-words">2.1.6 Other key words:</h4>
+<h4 id="other-key-words">2.2 Other key words:</h4>
 <p><strong>theano.tensor.ones_like(x)</strong> <br />
-Parameters:	x – tensor that has same shape as output <br />
+Parameters:	x – tensor that has same shape as output
 Returns a tensor filled with 1s that has same shape as x.</p>
-
-<p><strong>theano.tensor.dot(x,y)</strong> <br />
-tensor 变量的点乘操作</p>
-
-<p><strong>theano.tensor.nnet.softmax(x)</strong> or <strong>theano.tensor.nnet.sigmoid(x)</strong> or <strong>theano.tensor.nnet.relu()</strong>    <br />
-Returns the standard sigmoid nonlinearity applied to x <br />
-Returns the softmax function of x: <br />
-Compute the element-wise rectified linear activation function(激活函数为Rectified Linear Units,Relu易于求导便于反向传播求误差梯度，由于会使一部分神经元输出为0，从而造成网络的稀疏性，减少了参数的相互依存关系).</p>
-
-<p>此外使用Lasagne、Keras等建立在theano基础上的library可以作为theano的部分或全部替代,此外这些包支持Pretrained model。</p>
-
-<h4 id="tensorflow">2.2 Tensorflow</h4>
-<p>    Tensorflow和theano非常相似，它的一些亮点包括：可视化(TensorBoard),multi-GPU and multi-node training.</p>
-
-<p>placeholder来代替tensor
-Variables来代替shared variables</p>
 
 <h4 id="reference">Reference</h4>
 <ol>
@@ -219,7 +188,6 @@ Variables来代替shared variables</p>
   <li>赵孽 <a href="https://www.zhihu.com/question/35485591">如何评价 Theano？</a></li>
   <li>松尾丰 <a href="http://book.douban.com/subject/26698202/">人工智能狂潮</a></li>
   <li>Kenneth Tran <a href="https://github.com/zer0n/deepframeworks/blob/master/README.Kenneth Tran md?utm_source=tuicool&amp;utm_medium=referral">Evaluation of Deep Learning Toolkits</a></li>
-  <li>Stanford/vision <a href="http://vision.stanford.edu/teaching/cs231n/index.html">CS231n Winter 2016: Convolutional Neural Networks for Visual Recognition</a>(Lecture 12)</li>
 </ol>
 
 

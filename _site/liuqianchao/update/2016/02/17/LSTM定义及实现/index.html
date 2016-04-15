@@ -4,32 +4,29 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Markdown入门</title>
+    <title>神经网络定义及实现</title>
     <meta name="viewport" content="width=device-width">
     <meta name="description" content="Welcome to Q.Liu's Homepage. Here you can find something about my research interests.">
-    <link rel="canonical" href="http://qianchaoliu.github.io//liuqianchao/update/2014/08/07/Markdown%E5%85%A5%E9%97%A8/">
+    <link rel="canonical" href="http://qianchaoliu.github.io//liuqianchao/update/2016/02/17/LSTM%E5%AE%9A%E4%B9%89%E5%8F%8A%E5%AE%9E%E7%8E%B0/">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/pygments.css">
-
-    <!-- mathjax -->
+<!--
     <script type="text/javascript"
-      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
     </script>
+-->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
+  ga('create', 'UA-69826873-1', 'auto');
+  ga('send', 'pageview');
 
-    <!-- GoogleAnalytics -->
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-      ga('create', 'UA-69826873-1', 'auto');
-      ga('send', 'pageview');
-
-    </script>
+</script>
 
 </head>
 
@@ -74,75 +71,40 @@
       <div class="post">
 
   <header class="post-header">
-    <h1>Markdown入门</h1>
-    <p class="meta">Aug 7, 2014</p>
+    <h1>神经网络定义及实现</h1>
+    <p class="meta">Feb 17, 2016</p>
   </header>
 
   <article class="post-content">
-  <h1 id="markdown">Markdown入门</h1>
-<p>Markdown,作为一种文档结构描述语言，其文本结构仅对应HTML语言的一个子集，其实现原理是通过正则表达式进行HTML标签的替换，其目的是为了更方便地书写审阅纯文本文档。</p>
+  <p>    就像CNN(Convolutional Neural Network)在图像特征提取发挥着有效作用一样，RNN(Recurrent Neural Network)在自然语言领域同样展现了显著的有效性。在这篇文章中，将介绍并训练一个CNN模型，之后将介绍RNN和LSTM.</p>
 
-<hr />
-<blockquote>
-  <p><strong>标题</strong></p>
-</blockquote>
+<h3 id="convolutional-neural-network">1.Convolutional Neural Network</h3>
 
-<p>使用#代表标题的等级，一个#为一级标题，六个#为六级标题</p>
+<div align="center">
+<img src="/assets/Conv2-9x5-Conv2Conv2.png" width="500" height="310" />
+</div>
 
-<hr />
-<blockquote>
-  <p><strong>强调</strong></p>
-</blockquote>
+<h3 id="recurrent-neural-network">2.Recurrent Neural Network</h3>
+<p>    </p>
 
-<p>使用*文字*，添加<em>斜体文字</em><br />
-  使用**文字**，添加<strong>粗体文字</strong><br />
-  使用---作为一条横线</p>
+<p>    选择合适的层数，每层的神经元数量，激活函数，损失函数，正则化的参数，然后使用validation数据来判定这次训练的效果。</p>
 
-<hr />
-<blockquote>
-  <p><strong>代码</strong></p>
-</blockquote>
+<h3 id="lstm">3.LSTM</h3>
+<p>    </p>
 
-<p>使用```（反引号）将代码块括起来</p>
+<div align="center">
+<img src="/assets/LSTM3-chain.png" width="600" height="240" />
+</div>
 
-<p>``` python<br />
-print “test”
-```  </p>
+<p>＃http://qianchaoliu.github.io/</p>
 
-<p><code>python
- print"test"
-</code></p>
+<h3 id="implement-of-lstm">3. Implement of LSTM</h3>
 
-<hr />
-<blockquote>
-  <p><strong>引用超链接或图片</strong></p>
-</blockquote>
+<h4 id="reference">Reference</h4>
+<ol>
+  <li>Christopher Olah <a href="http://http://colah.github.io/">colah’s blog</a></li>
+</ol>
 
-<p>！[描述](地址) 作为图片引用<br />
-[描述](地址) 作为超链接引用  </p>
-
-<p>[维基百科](wikipedia.org)  <br />
-<a href="wikipedia.org">维基百科</a></p>
-
-<hr />
-<blockquote>
-  <p>其他常用技巧</p>
-</blockquote>
-
-<ul>
-  <li>
-    <p>单个反引号作为highlight
-`高亮`
-<code>高亮</code></p>
-  </li>
-  <li>
-    <p>*(空格)文字 作为无序列表
- * 列表</p>
-    <ul>
-      <li>列表</li>
-    </ul>
-  </li>
-</ul>
 
   </article>
 

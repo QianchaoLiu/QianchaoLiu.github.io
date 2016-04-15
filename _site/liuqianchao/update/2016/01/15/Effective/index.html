@@ -12,21 +12,24 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/pygments.css">
-<!--
+
+    <!-- mathjax -->
     <script type="text/javascript"
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
     </script>
--->
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-69826873-1', 'auto');
-  ga('send', 'pageview');
 
-</script>
+    <!-- GoogleAnalytics -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-69826873-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
 
 </head>
 
@@ -91,17 +94,17 @@
   </li>
 </ul>
 
-<figure class="highlight"><pre><code class="language-python" data-lang="python">	<span class="n">value</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;greet&#39;</span><span class="p">:</span><span class="s">&#39;Hello world&#39;</span><span class="p">,</span><span class="s">&#39;language&#39;</span><span class="p">:</span><span class="s">&#39;Python&#39;</span><span class="p">}</span>
-	<span class="k">print</span> <span class="s">&#39;</span><span class="si">%(greet)s</span><span class="s"> from </span><span class="si">%(language)s</span><span class="s">.&#39;</span> <span class="o">%</span> <span class="n">value</span>
+<figure class="highlight"><pre><code class="language-python" data-lang="python">	<span class="n">value</span><span class="o">=</span><span class="p">{</span><span class="s">'greet'</span><span class="p">:</span><span class="s">'Hello world'</span><span class="p">,</span><span class="s">'language'</span><span class="p">:</span><span class="s">'Python'</span><span class="p">}</span>
+	<span class="k">print</span> <span class="s">'</span><span class="si">%(greet)</span><span class="s">s from </span><span class="si">%(language)</span><span class="s">s.'</span> <span class="o">%</span> <span class="n">value</span>
 	<span class="c">#or</span>
-	<span class="k">print</span> <span class="s">&#39;{greet} from {language}.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">greet</span><span class="o">=</span><span class="s">&#39;Hello world&#39;</span><span class="p">,</span><span class="n">language</span><span class="o">=</span><span class="s">&#39;Python&#39;</span><span class="p">)</span>
+	<span class="k">print</span> <span class="s">'{greet} from {language}.'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">greet</span><span class="o">=</span><span class="s">'Hello world'</span><span class="p">,</span><span class="n">language</span><span class="o">=</span><span class="s">'Python'</span><span class="p">)</span>
 	</code></pre></figure>
 
 <ul>
   <li><strong>join</strong>   </li>
 </ul>
 
-<figure class="highlight"><pre><code class="language-python" data-lang="python">	<span class="s">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s">&#39;str1&#39;</span><span class="p">,</span><span class="s">&#39;str2&#39;</span><span class="p">])</span> <span class="c">#instead of using str1+str2.</span>
+<figure class="highlight"><pre><code class="language-python" data-lang="python">	<span class="s">''</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s">'str1'</span><span class="p">,</span><span class="s">'str2'</span><span class="p">])</span> <span class="c">#instead of using str1+str2.</span>
 	</code></pre></figure>
 
 <ul>
@@ -109,8 +112,8 @@
   To close a file immediately, use ‘with’ to operate the file.</li>
 </ul>
 
-<figure class="highlight"><pre><code class="language-python" data-lang="python"> 	<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;files/tex.txt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
- 		<span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;first line&#39;</span><span class="p">)</span>
+<figure class="highlight"><pre><code class="language-python" data-lang="python"> 	<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'files/tex.txt'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+ 		<span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">'first line'</span><span class="p">)</span>
 	</code></pre></figure>
 
 <ul>
@@ -141,7 +144,7 @@
 	</code></pre></figure>
 
 <ul>
-  <li><strong>map</strong> <br />
+  <li><strong>map &amp; filter</strong> <br />
   use <code>map( func, seq1[, seq2...] )</code> to call a function and return a list of the results, which is equal to <code>[f(x) for x in iterable]</code>.</li>
 </ul>
 
@@ -158,16 +161,54 @@
 
 <figure class="highlight"><pre><code class="language-python" data-lang="python">	<span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
 	<span class="n">even_squares</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">**</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums</span> <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
-	<span class="k">print</span> <span class="n">even_squares</span>  <span class="c"># Prints &quot;[0, 4, 16]&quot;</span>
+	<span class="k">print</span> <span class="n">even_squares</span>  <span class="c"># Prints "[0, 4, 16]"</span>
+
+	<span class="c"># filter</span>
+	<span class="n">x</span> <span class="o">=</span> <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">,</span><span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+	<span class="o">&gt;&gt;&gt;</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
 	</code></pre></figure>
 
 <ul>
-  <li><strong>Concurrency and Parallelism</strong> <br />
+  <li>
+    <p><strong>Concurrency &amp; Parallelism</strong> <br />
   To make full use of the CPU resource of computer. Concurrent(Thread) program may run thousands of separate paths of execution simultaneously. In contrast, the time parallelism(Process) takes to do the total work is cut in half. <br />
   In python, The existence of GIL(Global Interpreter Lock) means your program could utilize only one thread at the same time. <br />
   <strong>I/O-bound</strong>:Use <code>Threading</code>(false parallelism) for blocking I/O, which may take more time to execute the CPU-bound program. Also use <code>Lock</code> class in the <code>Threading</code> to avoid data races which may not be avoid by GIL.
-  <strong>CPU-bound</strong>:Use <code>Multiprocessing</code>   </li>
+  <strong>CPU-bound</strong>:Use <code>Multiprocessing</code>   </p>
+  </li>
+  <li>
+    <p><strong>*args and **kwargs</strong> <br />
+  In <code>def(arg, *args, **kwargs)</code>, <code>*args</code> means all the default value of arguments, and <code>**kwargs</code> means all the default key-value arguments. Inside of a function, we use args and kwargs(without *) to call the value passed to this function.</p>
+  </li>
+  <li>
+    <p><strong>docstring</strong> <br />
+  Use docstring(Triple double-quoted strings) to describe your function and class. </p>
+  </li>
 </ul>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python">	<span class="k">def</span> <span class="nf">load_data</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">arg</span><span class="p">):</span>
+	    <span class="s">"""
+	    :param f:first argument
+	    :param arg: another argument
+	    :return:{item_key(header of excel/csv):item_value}
+    	    """</span>
+	</code></pre></figure>
+
+<ul>
+  <li><strong>Generators</strong> <br />
+  Generator is a kind of Iterator(which has next or __next__ def), However, during the iteration, the result of return will be created when they are called instead of storing them all in memory.   </li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python">	<span class="k">def</span> <span class="nf">generator_func</span><span class="p">():</span>
+		<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+			<span class="k">yield</span> <span class="n">item</span>
+	<span class="c"># fist way to call</span>
+	<span class="n">gen</span> <span class="o">=</span> <span class="n">generator_func</span><span class="p">()</span>
+	<span class="nb">next</span><span class="p">(</span><span class="n">gen</span><span class="p">)</span> <span class="c"># for iterable such as str, use iter() instead of next() for itertor</span>
+	<span class="c"># second way to call</span>
+	<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">generator_func</span><span class="p">():</span>
+		<span class="k">print</span> <span class="n">item</span>
+	</code></pre></figure>
 
 <h4 id="reference">Reference</h4>
 <ol>

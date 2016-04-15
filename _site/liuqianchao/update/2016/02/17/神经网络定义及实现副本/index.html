@@ -4,10 +4,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Markdown入门</title>
+    <title>神经网络定义及实现</title>
     <meta name="viewport" content="width=device-width">
     <meta name="description" content="Welcome to Q.Liu's Homepage. Here you can find something about my research interests.">
-    <link rel="canonical" href="http://qianchaoliu.github.io//liuqianchao/update/2014/08/07/Markdown%E5%85%A5%E9%97%A8/">
+    <link rel="canonical" href="http://qianchaoliu.github.io//liuqianchao/update/2016/02/17/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%AE%9A%E4%B9%89%E5%8F%8A%E5%AE%9E%E7%8E%B0%E5%89%AF%E6%9C%AC/">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/main.css">
@@ -74,75 +74,73 @@
       <div class="post">
 
   <header class="post-header">
-    <h1>Markdown入门</h1>
-    <p class="meta">Aug 7, 2014</p>
+    <h1>神经网络定义及实现</h1>
+    <p class="meta">Feb 17, 2016</p>
   </header>
 
   <article class="post-content">
-  <h1 id="markdown">Markdown入门</h1>
-<p>Markdown,作为一种文档结构描述语言，其文本结构仅对应HTML语言的一个子集，其实现原理是通过正则表达式进行HTML标签的替换，其目的是为了更方便地书写审阅纯文本文档。</p>
+  <p>    就像CNN(Convolutional Neural Network)在图像特征提取发挥着有效作用一样，RNN(Recurrent Neural Network)在自然语言领域同样展现了显著的有效性。在这篇文章中，将介绍并训练一个CNN模型，之后将介绍RNN和LSTM.</p>
 
-<hr />
-<blockquote>
-  <p><strong>标题</strong></p>
-</blockquote>
+<h3 id="convolutional-neural-network">1.Convolutional Neural Network</h3>
 
-<p>使用#代表标题的等级，一个#为一级标题，六个#为六级标题</p>
+<div align="center">
+<img src="/assets/Conv2-9x5-Conv2Conv2.png" width="500" height="310" />
+</div>
 
-<hr />
-<blockquote>
-  <p><strong>强调</strong></p>
-</blockquote>
+<p>    从仿生学的角度思考，我们获取图像时，是由一系列的神经元网络状连接而成，从串联的角度是由一系列由低级神经元（获取图像基本的像素信息）到高级神经元（抽象能力逐步增强），从并联的角度，在低级神经元层，横向来看又有无数低级神经元连接而成，这些神经元负责不同的图像采集区域。由这些低级神经元和高级神经元共同组成cnn的conv layer。而从“视网膜”，到“中枢组织”再到“大脑的视觉皮层（又分为初级高级）”相当于由若干的conv layer，这样就组成了信息逐层处理的cnn。</p>
 
-<p>使用*文字*，添加<em>斜体文字</em><br />
-  使用**文字**，添加<strong>粗体文字</strong><br />
-  使用---作为一条横线</p>
+<h3 id="recurrent-neural-network">2.Recurrent Neural Network</h3>
 
-<hr />
-<blockquote>
-  <p><strong>代码</strong></p>
-</blockquote>
+<div align="center">
+<img src="/assets/RNN-unrolled.png" width="470" height="130" />
+</div>
+<p>    无论是卷积神经网络(cnn)还是全连接神经网络(fully connected network), forward过程中，隐层中每一层的输入都是仅来自上一层，信息是逐层传递的，但我们体验文本阅读时，上下文的关联相比与图像识别的需求更高了。我们理解一个词的含义时，不仅不要这个词本身(一个词本身也是具有许多种含义的)，同时需要来自上下文的支持，因此修正之前神经网络模型的仅从上一层获取输入，增加本层间信息流的输入，就产生了循环神经网络(recurrent nn, 后文中rnn特指recurrent nn, 而非recursive nn),接下来我将介绍一种特殊的RNN：LSTM.</p>
 
-<p>使用```（反引号）将代码块括起来</p>
+<h3 id="long-short-term-memory">3.Long Short Term Memory</h3>
+<p>    一方面，较长的语句中，前后句间的word间隔过远，信息保留较少，比如：“云在‘天空’中”，‘天空’这个词很容易通过‘云’这个词来锁定，RNN对该情形也能较好地覆盖；但“我生活在法国，所以说一口流利的’法语‘”中，法语与法国间隔较远，存在明显的gap，如果关联词间的gap较大，RNN已经不能有效地关联相关信息.所以RNN只能较好地处理“short term”的情形。 <br />
+    另一方面,由于RNN自身结构的原因(大量的weights),较小的weights经常造成梯度弥散现象(gradient vanishing),梯度弥散现象进一步加剧了‘long term memory’的难度，较大的weights则会造成gradient exploding。</p>
 
-<p>``` python<br />
-print “test”
-```  </p>
+<div align="center">
+<img src="/assets/LSTM3-chain.png" width="600" height="240" />
+</div>
+<p>    这里于是引入LSTM的概念，首先，从层内的横向角度来看，区别于RNN中横向传来的一个<script type="math/tex">h_{t-1}</script>，这里增加一个横向传递的变量<script type="math/tex">C_{t-1}</script>，用以“线性”地保留上文信息(在传统RNN中<script type="math/tex">wh_{t-1}*h_{t-1}＋ wx_{t}*x_{t}</script>经过一个激活函数的非线性变换为<script type="math/tex">h_{t}</script>)。</p>
 
-<p><code>python
- print"test"
-</code></p>
+<div align="center">
+<img src="/assets/LSTM3-C-line.png" width="600" height="180" />
+</div>
+<p>    接下来是gates的概念，通过设置引入激活函数(sigmoid)来建立“门”，从而决定是否保留该项信息。每一个图中的黄色方块都是一个完整的神经元，包括weight，输入以及激活函数。激活函数(取<script type="math/tex">\sigma(wh_{t-1}*h_{t-1}＋ wx_{t}*x_{t})</script>)的结果为1时，<script type="math/tex">C_{t-1}*1</script>运算的结果即为保留之前的信息。</p>
 
-<hr />
-<blockquote>
-  <p><strong>引用超链接或图片</strong></p>
-</blockquote>
+<div align="center">
+<img src="/assets/LSTM3-gate.png" width="80" height="110" />
+</div>
+<p>    下图所示的第一个gate，是用来决定之前的信息是否舍弃的。</p>
 
-<p>！[描述](地址) 作为图片引用<br />
-[描述](地址) 作为超链接引用  </p>
+<div align="center">
+<img src="/assets/LSTM3-focus-f.png" width="580" height="180" />
+</div>
 
-<p>[维基百科](wikipedia.org)  <br />
-<a href="wikipedia.org">维基百科</a></p>
+<p>    接下来我们来决定什么信息要被加入到<script type="math/tex">C_{t}</script>中，经过<script type="math/tex">+</script>运算<script type="math/tex">C_{t-1}</script>就变成了<script type="math/tex">C_{t}</script> (<script type="math/tex">C_{t}=f_{t}*C_{t-1}+i_{t}*\hat{C}{t}</script>)</p>
 
-<hr />
-<blockquote>
-  <p>其他常用技巧</p>
-</blockquote>
+<div align="center">
+<img src="/assets/LSTM3-focus-i.png" width="580" height="180" />
+</div>
 
-<ul>
-  <li>
-    <p>单个反引号作为highlight
-`高亮`
-<code>高亮</code></p>
-  </li>
-  <li>
-    <p>*(空格)文字 作为无序列表
- * 列表</p>
-    <ul>
-      <li>列表</li>
-    </ul>
-  </li>
-</ul>
+<p>梯度弥散(gradient vanishing)</p>
+
+<p>1.读blog 理解结构，
+2.然后看cs231n的视频，理解框架。</p>
+
+<p>＃http://qianchaoliu.github.io/</p>
+
+<p>问题:RNN 是否考虑的下文的内容？</p>
+
+<h3 id="implement-of-lstm">3. Implement of LSTM</h3>
+
+<h4 id="reference">Reference</h4>
+<ol>
+  <li>Christopher Olah <a href="http://http://colah.github.io/">colah’s blog</a></li>
+</ol>
+
 
   </article>
 

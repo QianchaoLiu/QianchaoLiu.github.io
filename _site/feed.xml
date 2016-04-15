@@ -5,12 +5,12 @@
     <description>Welcome to Q.Liu&#39;s Homepage. Here you can find something about my research interests.</description>
     <link>http://qianchaoliu.github.io//</link>
     <atom:link href="http://qianchaoliu.github.io//feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 24 Mar 2016 13:49:30 +0800</pubDate>
-    <lastBuildDate>Thu, 24 Mar 2016 13:49:30 +0800</lastBuildDate>
+    <pubDate>Fri, 15 Apr 2016 21:51:22 +0800</pubDate>
+    <lastBuildDate>Fri, 15 Apr 2016 21:51:22 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
-        <title>神经网络定义及实现</title>
+        <title>Reinforce Learning</title>
         <description>&lt;p&gt;    就像CNN(Convolutional Neural Network)在图像特征提取发挥着有效作用一样，RNN(Recurrent Neural Network)在自然语言领域同样展现了显著的有效性。在这篇文章中，将介绍并训练一个CNN模型，之后将介绍RNN和LSTM.&lt;/p&gt;
 
 &lt;h3 id=&quot;convolutional-neural-network&quot;&gt;1.Convolutional Neural Network&lt;/h3&gt;
@@ -19,19 +19,52 @@
 &lt;img src=&quot;/assets/Conv2-9x5-Conv2Conv2.png&quot; width=&quot;500&quot; height=&quot;310&quot; /&gt;
 &lt;/div&gt;
 
+&lt;p&gt;    从仿生学的角度思考，我们获取图像时，是由一系列的神经元网络状连接而成，从串联的角度是由一系列由低级神经元（获取图像基本的像素信息）到高级神经元（抽象能力逐步增强），从并联的角度，在低级神经元层，横向来看又有无数低级神经元连接而成，这些神经元负责不同的图像采集区域。由这些低级神经元和高级神经元共同组成cnn的conv layer。而从“视网膜”，到“中枢组织”再到“大脑的视觉皮层（又分为初级高级）”相当于由若干的conv layer，这样就组成了信息逐层处理的cnn。&lt;/p&gt;
+
 &lt;h3 id=&quot;recurrent-neural-network&quot;&gt;2.Recurrent Neural Network&lt;/h3&gt;
-&lt;p&gt;    &lt;/p&gt;
 
-&lt;p&gt;    选择合适的层数，每层的神经元数量，激活函数，损失函数，正则化的参数，然后使用validation数据来判定这次训练的效果。&lt;/p&gt;
+&lt;div align=&quot;center&quot;&gt;
+&lt;img src=&quot;/assets/RNN-unrolled.png&quot; width=&quot;470&quot; height=&quot;130&quot; /&gt;
+&lt;/div&gt;
+&lt;p&gt;    无论是卷积神经网络(cnn)还是全连接神经网络(fully connected network), forward过程中，隐层中每一层的输入都是仅来自上一层，信息是逐层传递的，但我们体验文本阅读时，上下文的关联相比与图像识别的需求更高了。我们理解一个词的含义时，不仅不要这个词本身(一个词本身也是具有许多种含义的)，同时需要来自上下文的支持，因此修正之前神经网络模型的仅从上一层获取输入，增加本层间信息流的输入，就产生了循环神经网络(recurrent nn, 后文中rnn特指recurrent nn, 而非recursive nn),接下来我将介绍一种特殊的RNN：LSTM.&lt;/p&gt;
 
-&lt;h3 id=&quot;lstm&quot;&gt;3.LSTM&lt;/h3&gt;
-&lt;p&gt;    &lt;/p&gt;
+&lt;h3 id=&quot;long-short-term-memory&quot;&gt;3.Long Short Term Memory&lt;/h3&gt;
+&lt;p&gt;    一方面，较长的语句中，前后句间的word间隔过远，信息保留较少，比如：“云在‘天空’中”，‘天空’这个词很容易通过‘云’这个词来锁定，RNN对该情形也能较好地覆盖；但“我生活在法国，所以说一口流利的’法语‘”中，法语与法国间隔较远，存在明显的gap，如果关联词间的gap较大，RNN已经不能有效地关联相关信息.所以RNN只能较好地处理“short term”的情形。 &lt;br /&gt;
+    另一方面,由于RNN自身结构的原因(大量的weights),较小的weights经常造成梯度弥散现象(gradient vanishing),梯度弥散现象进一步加剧了‘long term memory’的难度，较大的weights则会造成gradient exploding。&lt;/p&gt;
 
 &lt;div align=&quot;center&quot;&gt;
 &lt;img src=&quot;/assets/LSTM3-chain.png&quot; width=&quot;600&quot; height=&quot;240&quot; /&gt;
 &lt;/div&gt;
+&lt;p&gt;    这里于是引入LSTM的概念，首先，从层内的横向角度来看，区别于RNN中横向传来的一个&lt;script type=&quot;math/tex&quot;&gt;h_{t-1}&lt;/script&gt;，这里增加一个横向传递的变量&lt;script type=&quot;math/tex&quot;&gt;C_{t-1}&lt;/script&gt;，用以“线性”地保留上文信息(在传统RNN中&lt;script type=&quot;math/tex&quot;&gt;wh_{t-1}*h_{t-1}＋ wx_{t}*x_{t}&lt;/script&gt;经过一个激活函数的非线性变换为&lt;script type=&quot;math/tex&quot;&gt;h_{t}&lt;/script&gt;)。&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;
+&lt;img src=&quot;/assets/LSTM3-C-line.png&quot; width=&quot;600&quot; height=&quot;180&quot; /&gt;
+&lt;/div&gt;
+&lt;p&gt;    接下来是gates的概念，通过设置引入激活函数(sigmoid)来建立“门”，从而决定是否保留该项信息。每一个图中的黄色方块都是一个完整的神经元，包括weight，输入以及激活函数。激活函数(取&lt;script type=&quot;math/tex&quot;&gt;\sigma(wh_{t-1}*h_{t-1}＋ wx_{t}*x_{t})&lt;/script&gt;)的结果为1时，&lt;script type=&quot;math/tex&quot;&gt;C_{t-1}*1&lt;/script&gt;运算的结果即为保留之前的信息。&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;
+&lt;img src=&quot;/assets/LSTM3-gate.png&quot; width=&quot;80&quot; height=&quot;110&quot; /&gt;
+&lt;/div&gt;
+&lt;p&gt;    下图所示的第一个gate，是用来决定之前的信息是否舍弃的。&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;
+&lt;img src=&quot;/assets/LSTM3-focus-f.png&quot; width=&quot;580&quot; height=&quot;180&quot; /&gt;
+&lt;/div&gt;
+
+&lt;p&gt;    接下来我们来决定什么信息要被加入到&lt;script type=&quot;math/tex&quot;&gt;C_{t}&lt;/script&gt;中，经过&lt;script type=&quot;math/tex&quot;&gt;+&lt;/script&gt;运算&lt;script type=&quot;math/tex&quot;&gt;C_{t-1}&lt;/script&gt;就变成了&lt;script type=&quot;math/tex&quot;&gt;C_{t}&lt;/script&gt; (&lt;script type=&quot;math/tex&quot;&gt;C_{t}=f_{t}*C_{t-1}+i_{t}*\hat{C}{t}&lt;/script&gt;)&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;
+&lt;img src=&quot;/assets/LSTM3-focus-i.png&quot; width=&quot;580&quot; height=&quot;180&quot; /&gt;
+&lt;/div&gt;
+
+&lt;p&gt;梯度弥散(gradient vanishing)&lt;/p&gt;
+
+&lt;p&gt;1.读blog 理解结构，
+2.然后看cs231n的视频，理解框架。&lt;/p&gt;
 
 &lt;p&gt;＃http://qianchaoliu.github.io/&lt;/p&gt;
+
+&lt;p&gt;问题:RNN 是否考虑的下文的内容？&lt;/p&gt;
 
 &lt;h3 id=&quot;implement-of-lstm&quot;&gt;3. Implement of LSTM&lt;/h3&gt;
 
@@ -41,9 +74,86 @@
 &lt;/ol&gt;
 
 </description>
+        <pubDate>Sat, 09 Apr 2016 18:00:04 +0800</pubDate>
+        <link>http://qianchaoliu.github.io//liuqianchao/update/2016/04/09/Reinforce-Learning/</link>
+        <guid isPermaLink="true">http://qianchaoliu.github.io//liuqianchao/update/2016/04/09/Reinforce-Learning/</guid>
+        
+        
+        <category>liuqianchao</category>
+        
+        <category>update</category>
+        
+      </item>
+    
+      <item>
+        <title>神经网络定义及实现</title>
+        <description>&lt;p&gt;    就像CNN(Convolutional Neural Network)在图像特征提取发挥着有效作用一样，RNN(Recurrent Neural Network)在自然语言领域同样展现了显著的有效性。在这篇文章中，将介绍并训练一个CNN模型，之后将介绍RNN和LSTM.&lt;/p&gt;
+
+&lt;h3 id=&quot;convolutional-neural-network&quot;&gt;1.Convolutional Neural Network&lt;/h3&gt;
+
+&lt;div align=&quot;center&quot;&gt;
+&lt;img src=&quot;http://qianchaoliu.github.io//assets/Conv2-9x5-Conv2Conv2.png&quot; width=&quot;500&quot; height=&quot;310&quot; /&gt;
+&lt;/div&gt;
+
+&lt;p&gt;    从仿生学的角度思考，我们获取图像时，是由一系列的神经元网络状连接而成，从串联的角度是由一系列由低级神经元（获取图像基本的像素信息）到高级神经元（抽象能力逐步增强），从并联的角度，在低级神经元层，横向来看又有无数低级神经元连接而成，这些神经元负责不同的图像采集区域。由这些低级神经元和高级神经元共同组成cnn的conv layer。而从“视网膜”，到“中枢组织”再到“大脑的视觉皮层（又分为初级高级）”相当于由若干的conv layer，这样就组成了信息逐层处理的cnn。&lt;/p&gt;
+
+&lt;h3 id=&quot;recurrent-neural-network&quot;&gt;2.Recurrent Neural Network&lt;/h3&gt;
+
+&lt;div align=&quot;center&quot;&gt;
+&lt;img src=&quot;http://qianchaoliu.github.io//assets/RNN-unrolled.png&quot; width=&quot;470&quot; height=&quot;130&quot; /&gt;
+&lt;/div&gt;
+&lt;p&gt;    无论是卷积神经网络(cnn)还是全连接神经网络(fully connected network), forward过程中，隐层中每一层的输入都是仅来自上一层，信息是逐层传递的，但我们体验文本阅读时，上下文的关联相比与图像识别的需求更高了。我们理解一个词的含义时，不仅不要这个词本身(一个词本身也是具有许多种含义的)，同时需要来自上下文的支持，因此修正之前神经网络模型的仅从上一层获取输入，增加本层间信息流的输入，就产生了循环神经网络(recurrent nn, 后文中rnn特指recurrent nn, 而非recursive nn),接下来我将介绍一种特殊的RNN：LSTM.&lt;/p&gt;
+
+&lt;h3 id=&quot;long-short-term-memory&quot;&gt;3.Long Short Term Memory&lt;/h3&gt;
+&lt;p&gt;    一方面，较长的语句中，前后句间的word间隔过远，信息保留较少，比如：“云在‘天空’中”，‘天空’这个词很容易通过‘云’这个词来锁定，RNN对该情形也能较好地覆盖；但“我生活在法国，所以说一口流利的’法语‘”中，法语与法国间隔较远，存在明显的gap，如果关联词间的gap较大，RNN已经不能有效地关联相关信息.所以RNN只能较好地处理“short term”的情形。 &lt;br /&gt;
+    另一方面,由于RNN自身结构的原因(大量的weights),较小的weights经常造成梯度弥散现象(gradient vanishing),梯度弥散现象进一步加剧了‘long term memory’的难度，较大的weights则会造成gradient exploding。&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;
+&lt;img src=&quot;http://qianchaoliu.github.io//assets/LSTM3-chain.png&quot; width=&quot;600&quot; height=&quot;240&quot; /&gt;
+&lt;/div&gt;
+&lt;p&gt;    这里于是引入LSTM的概念，首先，从层内的横向角度来看，区别于RNN中横向传来的一个&lt;script type=&quot;math/tex&quot;&gt;h_{t-1}&lt;/script&gt;，这里增加一个横向传递的变量cell state: &lt;script type=&quot;math/tex&quot;&gt;C_{t-1}&lt;/script&gt;，用以“线性”地保留上文信息(在传统RNN中&lt;script type=&quot;math/tex&quot;&gt;wh_{t-1}*h_{t-1}＋ wx_{t}*x_{t}&lt;/script&gt;经过一个激活函数的非线性变换为&lt;script type=&quot;math/tex&quot;&gt;h_{t}&lt;/script&gt;)。&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;
+&lt;img src=&quot;/assets/LSTM3-C-line.png&quot; width=&quot;600&quot; height=&quot;180&quot; /&gt;
+&lt;/div&gt;
+&lt;p&gt;    接下来是gates的概念，通过设置引入激活函数(sigmoid)来建立“门”，从而决定是否保留该项信息。每一个图中的黄色方块都是一个完整的神经元，包括weight，输入以及激活函数。激活函数(取&lt;script type=&quot;math/tex&quot;&gt;\sigma(wh_{t-1}*h_{t-1}＋ wx_{t}*x_{t})&lt;/script&gt;)的结果为1时，&lt;script type=&quot;math/tex&quot;&gt;C_{t-1}*1&lt;/script&gt;运算的结果即为保留之前的信息。&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;
+&lt;img src=&quot;http://qianchaoliu.github.io//assets/LSTM3-gate.png&quot; width=&quot;80&quot; height=&quot;110&quot; /&gt;
+&lt;/div&gt;
+&lt;p&gt;    下图所示的第一个gate，是用来决定之前的信息是否舍弃的。&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;
+&lt;img src=&quot;http://qianchaoliu.github.io//assets/LSTM3-focus-f.png&quot; width=&quot;580&quot; height=&quot;180&quot; /&gt;
+&lt;/div&gt;
+
+&lt;p&gt;    接下来我们来决定什么新信息要被加入到&lt;script type=&quot;math/tex&quot;&gt;C_{t}&lt;/script&gt;中，经过&lt;script type=&quot;math/tex&quot;&gt;+&lt;/script&gt;运算&lt;script type=&quot;math/tex&quot;&gt;C_{t-1}&lt;/script&gt;就变成了&lt;script type=&quot;math/tex&quot;&gt;C_{t}&lt;/script&gt; (&lt;script type=&quot;math/tex&quot;&gt;C_{t}=f_{t}*C_{t-1}+i_{t}*\hat{C}{t}&lt;/script&gt;)&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;
+&lt;img src=&quot;http://qianchaoliu.github.io//assets/LSTM3-focus-i.png&quot; width=&quot;580&quot; height=&quot;180&quot; /&gt;
+&lt;/div&gt;
+
+&lt;p&gt;    剩下要输出的便是我们传递给下一隐层和同一层下一个LSTM单元的输入&lt;script type=&quot;math/tex&quot;&gt;h_{t}&lt;/script&gt;&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;
+&lt;img src=&quot;http://qianchaoliu.github.io//assets/LSTM3-focus-o.png&quot; width=&quot;580&quot; height=&quot;180&quot; /&gt;
+&lt;/div&gt;
+
+&lt;p&gt;http://qianchaoliu.github.io/&lt;/p&gt;
+
+&lt;p&gt;问题:RNN 是否考虑的下文的内容？&lt;/p&gt;
+
+&lt;h3 id=&quot;implement-of-lstm&quot;&gt;3. Implement of LSTM&lt;/h3&gt;
+
+&lt;h4 id=&quot;reference&quot;&gt;Reference&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;Christopher Olah &lt;a href=&quot;http://colah.github.io/posts/2015-08-Understanding-LSTMs/&quot;&gt;colah’s blog&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+</description>
         <pubDate>Wed, 17 Feb 2016 18:00:04 +0800</pubDate>
-        <link>http://qianchaoliu.github.io//liuqianchao/update/2016/02/17/LSTM%E5%AE%9A%E4%B9%89%E5%8F%8A%E5%AE%9E%E7%8E%B0/</link>
-        <guid isPermaLink="true">http://qianchaoliu.github.io//liuqianchao/update/2016/02/17/LSTM%E5%AE%9A%E4%B9%89%E5%8F%8A%E5%AE%9E%E7%8E%B0/</guid>
+        <link>http://qianchaoliu.github.io//liuqianchao/update/2016/02/17/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%AE%9A%E4%B9%89%E5%8F%8A%E5%AE%9E%E7%8E%B0/</link>
+        <guid isPermaLink="true">http://qianchaoliu.github.io//liuqianchao/update/2016/02/17/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%AE%9A%E4%B9%89%E5%8F%8A%E5%AE%9E%E7%8E%B0/</guid>
         
         
         <category>liuqianchao</category>
@@ -276,7 +386,7 @@ Variables来代替shared variables&lt;/p&gt;
 	&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;map&lt;/strong&gt; &lt;br /&gt;
+  &lt;li&gt;&lt;strong&gt;map &amp;amp; filter&lt;/strong&gt; &lt;br /&gt;
   use &lt;code&gt;map( func, seq1[, seq2...] )&lt;/code&gt; to call a function and return a list of the results, which is equal to &lt;code&gt;[f(x) for x in iterable]&lt;/code&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -294,15 +404,53 @@ Variables来代替shared variables&lt;/p&gt;
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;	&lt;span class=&quot;n&quot;&gt;nums&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
 	&lt;span class=&quot;n&quot;&gt;even_squares&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;**&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nums&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
 	&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;even_squares&lt;/span&gt;  &lt;span class=&quot;c&quot;&gt;# Prints &quot;[0, 4, 16]&quot;&lt;/span&gt;
+
+	&lt;span class=&quot;c&quot;&gt;# filter&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;filter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
 	&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Concurrency and Parallelism&lt;/strong&gt; &lt;br /&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Concurrency &amp;amp; Parallelism&lt;/strong&gt; &lt;br /&gt;
   To make full use of the CPU resource of computer. Concurrent(Thread) program may run thousands of separate paths of execution simultaneously. In contrast, the time parallelism(Process) takes to do the total work is cut in half. &lt;br /&gt;
   In python, The existence of GIL(Global Interpreter Lock) means your program could utilize only one thread at the same time. &lt;br /&gt;
   &lt;strong&gt;I/O-bound&lt;/strong&gt;:Use &lt;code&gt;Threading&lt;/code&gt;(false parallelism) for blocking I/O, which may take more time to execute the CPU-bound program. Also use &lt;code&gt;Lock&lt;/code&gt; class in the &lt;code&gt;Threading&lt;/code&gt; to avoid data races which may not be avoid by GIL.
-  &lt;strong&gt;CPU-bound&lt;/strong&gt;:Use &lt;code&gt;Multiprocessing&lt;/code&gt;   &lt;/li&gt;
+  &lt;strong&gt;CPU-bound&lt;/strong&gt;:Use &lt;code&gt;Multiprocessing&lt;/code&gt;   &lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;*args and **kwargs&lt;/strong&gt; &lt;br /&gt;
+  In &lt;code&gt;def(arg, *args, **kwargs)&lt;/code&gt;, &lt;code&gt;*args&lt;/code&gt; means all the default value of arguments, and &lt;code&gt;**kwargs&lt;/code&gt; means all the default key-value arguments. Inside of a function, we use args and kwargs(without *) to call the value passed to this function.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;docstring&lt;/strong&gt; &lt;br /&gt;
+  Use docstring(Triple double-quoted strings) to describe your function and class. &lt;/p&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;	&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;load_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+	    &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;
+	    :param f:first argument
+	    :param arg: another argument
+	    :return:{item_key(header of excel/csv):item_value}
+    	    &quot;&quot;&quot;&lt;/span&gt;
+	&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Generators&lt;/strong&gt; &lt;br /&gt;
+  Generator is a kind of Iterator(which has next or __next__ def), However, during the iteration, the result of return will be created when they are called instead of storing them all in memory.   &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;	&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;generator_func&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;item&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+			&lt;span class=&quot;k&quot;&gt;yield&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;item&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;# fist way to call&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;gen&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;generator_func&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+	&lt;span class=&quot;nb&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# for iterable such as str, use iter() instead of next() for itertor&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;# second way to call&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;item&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;generator_func&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;item&lt;/span&gt;
+	&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;h4 id=&quot;reference&quot;&gt;Reference&lt;/h4&gt;
 &lt;ol&gt;
@@ -705,7 +853,7 @@ With the limits of the display in website, more details find at  &lt;a href=&quo
 &lt;ul&gt;
   &lt;li&gt;The test environment in this passage is &lt;a href=&quot;http://tug.org/mactex/morepackages.html&quot;&gt;MacTex&lt;/a&gt;.   &lt;/li&gt;
   &lt;li&gt;To use LateX in &lt;a href=&quot;www.sublimetext.com/&quot;&gt;Sublime Text&lt;/a&gt;, you can find steps of configuration at &lt;a href=&quot;http://economistry.com/2013/01/installing-and-using-latex-for-mac/&quot;&gt;here&lt;/a&gt;.   &lt;/li&gt;
-  &lt;li&gt;To use Chinese characters in your LaTeX, you can use &lt;strong&gt;xelatex&lt;/strong&gt; Engine. Adding &lt;code&gt;%!TEX program = xelatex&lt;/code&gt; at the beginning of your LaTeX code.&lt;/li&gt;
+  &lt;li&gt;To use Chinese characters in your LaTeX, you can use &lt;strong&gt;xelatex&lt;/strong&gt; Engine. Adding &lt;code&gt;%!TEX program = xelatex&lt;/code&gt; at the beginning of your LaTeX code.   &lt;/li&gt;
   &lt;li&gt;To install more available package:&lt;code&gt;tlmgr install &amp;lt;package&amp;gt;&lt;/code&gt; in your terminal&lt;/li&gt;
 &lt;/ul&gt;
 </description>
