@@ -5,8 +5,8 @@
     <description>Welcome to Q.Liu&#39;s Homepage. Here you can find something about my research interests.</description>
     <link>http://qianchaoliu.github.io//</link>
     <atom:link href="http://qianchaoliu.github.io//feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Fri, 15 Apr 2016 21:51:22 +0800</pubDate>
-    <lastBuildDate>Fri, 15 Apr 2016 21:51:22 +0800</lastBuildDate>
+    <pubDate>Fri, 15 Apr 2016 23:15:46 +0800</pubDate>
+    <lastBuildDate>Fri, 15 Apr 2016 23:15:46 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
@@ -87,7 +87,9 @@
     
       <item>
         <title>神经网络定义及实现</title>
-        <description>&lt;p&gt;    就像CNN(Convolutional Neural Network)在图像特征提取发挥着有效作用一样，RNN(Recurrent Neural Network)在自然语言领域同样展现了显著的有效性。在这篇文章中，将介绍并训练一个CNN模型，之后将介绍RNN和LSTM.&lt;/p&gt;
+        <description>&lt;p&gt;    随着GPU等硬件的引入以及其在分布式计算的应用(CUDA)，深度学习越来越得到人们的关注，但是“深度”的增加带来的问题，不是仅仅通过计算资源的提高就能解决的，一个主要的问题就是深度的增加会带来梯度弥散，以往的反向传播的训练方式不再那么有效。 &lt;br /&gt;
+    在这种情况下，主要有两种方式来训练“深度”网络，一种是进行“权共享(weights sharing)”,比如我们本文介绍的CNN(Convolutional Neural Network)就是这样;另一种解决方式就是使用限制Boltzmann机,进行逐层无监督训练，最后使用反向传播算法进行整个系统的微调。    &lt;br /&gt;
+    CNN在图像特征提取发挥着有效作用，RNN(Recurrent Neural Network)则在自然语言领域同样展现了显著的有效性。在这篇文章中，将介绍并训练一个CNN模型，之后将介绍RNN和LSTM.&lt;/p&gt;
 
 &lt;h3 id=&quot;convolutional-neural-network&quot;&gt;1.Convolutional Neural Network&lt;/h3&gt;
 
@@ -138,8 +140,6 @@
 &lt;div align=&quot;center&quot;&gt;
 &lt;img src=&quot;http://qianchaoliu.github.io//assets/LSTM3-focus-o.png&quot; width=&quot;580&quot; height=&quot;180&quot; /&gt;
 &lt;/div&gt;
-
-&lt;p&gt;http://qianchaoliu.github.io/&lt;/p&gt;
 
 &lt;p&gt;问题:RNN 是否考虑的下文的内容？&lt;/p&gt;
 
