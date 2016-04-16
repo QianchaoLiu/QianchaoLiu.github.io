@@ -133,15 +133,32 @@
 <img src="http://qianchaoliu.github.io//assets/LSTM3-focus-o.png" width="580" height="180" />
 </div>
 
-<p>问题:RNN 是否考虑的下文的内容？</p>
-
 <h3 id="implement-of-lstm">3. Implement of LSTM</h3>
+<p>    这里我们使用与Theano非常相似的Tensorflow来介绍LSTM的核心代码,</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">Tensorflow</span> <span class="kn">as</span> <span class="nn">tf</span>
+<span class="kn">from</span> <span class="nn">tensorflow.models.rnn</span> <span class="kn">import</span> <span class="n">rnn_cell</span>
+<span class="c">#初始化lstm模型</span>
+<span class="n">lstm</span> <span class="o">=</span> <span class="n">rnn_cell</span><span class="o">.</span><span class="n">BasicLSTMCell</span><span class="p">(</span><span class="n">lstm_size</span><span class="p">)</span>
+
+<span class="c">#初始化横向传播的cell state为0向量</span>
+<span class="n">state</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">zeors</span><span class="p">([</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">lstm</span><span class="o">.</span><span class="n">state_size</span><span class="p">])</span>
+
+<span class="n">loss</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="k">for</span> <span class="n">current_batch_of_words</span> <span class="ow">in</span> <span class="n">words_in_dataset</span><span class="p">:</span>
+	<span class="c"># 逐层处理</span>
+	<span class="n">output</span><span class="p">,</span> <span class="n">state</span> <span class="o">=</span> <span class="n">lstm</span><span class="p">(</span><span class="n">current_batch_of_words</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span> 
+	<span class="c"># 使用output训练语言概率</span>
+	<span class="n">logits</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">softmax_w</span><span class="p">)</span> <span class="o">+</span> <span class="n">softmax_b</span>  
+	<span class="n">probabilities</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">logits</span><span class="p">)</span>
+	<span class="c"># 定义反向传播的loss</span>
+	<span class="n">loss</span> <span class="o">+=</span> <span class="n">loss_function</span><span class="p">(</span><span class="n">probabilities</span><span class="p">,</span> <span class="n">target_words</span><span class="p">)</span></code></pre></figure>
 
 <h4 id="reference">Reference</h4>
 <ol>
   <li>Christopher Olah <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs/">colah’s blog</a></li>
+  <li>Tensorflow <a href="https://www.tensorflow.org/versions/r0.8/tutorials/recurrent/index.html">Recurrent Neural Networks</a></li>
 </ol>
-
 
   </article>
 
