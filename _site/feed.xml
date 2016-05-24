@@ -5,78 +5,80 @@
     <description>Welcome to Q.Liu&#39;s Homepage. Here you can find something about my research interests.</description>
     <link>http://qianchaoliu.github.io//</link>
     <atom:link href="http://qianchaoliu.github.io//feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sat, 16 Apr 2016 16:31:58 +0800</pubDate>
-    <lastBuildDate>Sat, 16 Apr 2016 16:31:58 +0800</lastBuildDate>
+    <pubDate>Tue, 24 May 2016 18:11:35 +0800</pubDate>
+    <lastBuildDate>Tue, 24 May 2016 18:11:35 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
-        <title>Reinforce Learning</title>
-        <description>&lt;p&gt;    就像CNN(Convolutional Neural Network)在图像特征提取发挥着有效作用一样，RNN(Recurrent Neural Network)在自然语言领域同样展现了显著的有效性。在这篇文章中，将介绍并训练一个CNN模型，之后将介绍RNN和LSTM.&lt;/p&gt;
+        <title>Bayes Classification</title>
+        <description>&lt;p&gt;    和SVM、神经网络这些分类器一样，贝叶斯分类的基本思想也是通过设定一个“损失函数”，通过最小化损失函数来实现分类结果的最优。&lt;/p&gt;
 
-&lt;h3 id=&quot;convolutional-neural-network&quot;&gt;1.Convolutional Neural Network&lt;/h3&gt;
+&lt;h3 id=&quot;section&quot;&gt;1.贝叶斯分类中的损失函数是怎么定义的？&lt;/h3&gt;
+&lt;p&gt;    首先，定义损失&lt;script type=&quot;math/tex&quot;&gt;\lambda_{ij}&lt;/script&gt;是将本属于&lt;script type=&quot;math/tex&quot;&gt;c_{j}&lt;/script&gt;的样本&lt;script type=&quot;math/tex&quot;&gt;x&lt;/script&gt;错误地分为&lt;script type=&quot;math/tex&quot;&gt;c_{i}&lt;/script&gt;带来的损失，且&lt;script type=&quot;math/tex&quot;&gt;\lambda_{jj}=0&lt;/script&gt;,因此对于N类分类问题，一个样本的期望损失为：&lt;/p&gt;
 
-&lt;div align=&quot;center&quot;&gt;
-&lt;img src=&quot;/assets/Conv2-9x5-Conv2Conv2.png&quot; width=&quot;500&quot; height=&quot;310&quot; /&gt;
-&lt;/div&gt;
+&lt;div align=&quot;center&quot;&gt;$$R(c_{i} \mid x) = \sum_{i=1}^N \lambda_{ij}P(c_{i} \mid x)$$&lt;/div&gt;
 
-&lt;p&gt;    从仿生学的角度思考，我们获取图像时，是由一系列的神经元网络状连接而成，从串联的角度是由一系列由低级神经元（获取图像基本的像素信息）到高级神经元（抽象能力逐步增强），从并联的角度，在低级神经元层，横向来看又有无数低级神经元连接而成，这些神经元负责不同的图像采集区域。由这些低级神经元和高级神经元共同组成cnn的conv layer。而从“视网膜”，到“中枢组织”再到“大脑的视觉皮层（又分为初级高级）”相当于由若干的conv layer，这样就组成了信息逐层处理的cnn。&lt;/p&gt;
+&lt;p&gt;    假设&lt;script type=&quot;math/tex&quot;&gt;i≠j&lt;/script&gt;，令&lt;script type=&quot;math/tex&quot;&gt;\lambda_{ij}=1&lt;/script&gt;, 如果每个样本&lt;script type=&quot;math/tex&quot;&gt;x&lt;/script&gt;的期望损失都能最小化，总体损失必然最小化，&lt;/p&gt;
 
-&lt;h3 id=&quot;recurrent-neural-network&quot;&gt;2.Recurrent Neural Network&lt;/h3&gt;
+&lt;div align=&quot;center&quot;&gt;$$arg min R(c_{i} \mid x)$$&lt;/div&gt;
 
-&lt;div align=&quot;center&quot;&gt;
-&lt;img src=&quot;/assets/RNN-unrolled.png&quot; width=&quot;470&quot; height=&quot;130&quot; /&gt;
-&lt;/div&gt;
-&lt;p&gt;    无论是卷积神经网络(cnn)还是全连接神经网络(fully connected network), forward过程中，隐层中每一层的输入都是仅来自上一层，信息是逐层传递的，但我们体验文本阅读时，上下文的关联相比与图像识别的需求更高了。我们理解一个词的含义时，不仅不要这个词本身(一个词本身也是具有许多种含义的)，同时需要来自上下文的支持，因此修正之前神经网络模型的仅从上一层获取输入，增加本层间信息流的输入，就产生了循环神经网络(recurrent nn, 后文中rnn特指recurrent nn, 而非recursive nn),接下来我将介绍一种特殊的RNN：LSTM.&lt;/p&gt;
+&lt;p&gt;    依照惯例我们进行转换，得出&lt;script type=&quot;math/tex&quot;&gt;R(c_{i} \mid x) = 1 - P(c_{i} \mid x)&lt;/script&gt;,即：&lt;/p&gt;
 
-&lt;h3 id=&quot;long-short-term-memory&quot;&gt;3.Long Short Term Memory&lt;/h3&gt;
-&lt;p&gt;    一方面，较长的语句中，前后句间的word间隔过远，信息保留较少，比如：“云在‘天空’中”，‘天空’这个词很容易通过‘云’这个词来锁定，RNN对该情形也能较好地覆盖；但“我生活在法国，所以说一口流利的’法语‘”中，法语与法国间隔较远，存在明显的gap，如果关联词间的gap较大，RNN已经不能有效地关联相关信息.所以RNN只能较好地处理“short term”的情形。 &lt;br /&gt;
-    另一方面,由于RNN自身结构的原因(大量的weights),较小的weights经常造成梯度弥散现象(gradient vanishing),梯度弥散现象进一步加剧了‘long term memory’的难度，较大的weights则会造成gradient exploding。&lt;/p&gt;
+&lt;div align=&quot;center&quot;&gt;$$arg max P(c_{i} \mid x)$$&lt;/div&gt;
 
-&lt;div align=&quot;center&quot;&gt;
-&lt;img src=&quot;/assets/LSTM3-chain.png&quot; width=&quot;600&quot; height=&quot;240&quot; /&gt;
-&lt;/div&gt;
-&lt;p&gt;    这里于是引入LSTM的概念，首先，从层内的横向角度来看，区别于RNN中横向传来的一个&lt;script type=&quot;math/tex&quot;&gt;h_{t-1}&lt;/script&gt;，这里增加一个横向传递的变量&lt;script type=&quot;math/tex&quot;&gt;C_{t-1}&lt;/script&gt;，用以“线性”地保留上文信息(在传统RNN中&lt;script type=&quot;math/tex&quot;&gt;wh_{t-1}*h_{t-1}＋ wx_{t}*x_{t}&lt;/script&gt;经过一个激活函数的非线性变换为&lt;script type=&quot;math/tex&quot;&gt;h_{t}&lt;/script&gt;)。&lt;/p&gt;
+&lt;h3 id=&quot;section-1&quot;&gt;2.朴素贝叶斯&lt;/h3&gt;
+&lt;p&gt;    在我们列出来目标函数后，该谈一谈贝叶斯分类器是如何进行计算的了。&lt;/p&gt;
 
-&lt;div align=&quot;center&quot;&gt;
-&lt;img src=&quot;/assets/LSTM3-C-line.png&quot; width=&quot;600&quot; height=&quot;180&quot; /&gt;
-&lt;/div&gt;
-&lt;p&gt;    接下来是gates的概念，通过设置引入激活函数(sigmoid)来建立“门”，从而决定是否保留该项信息。每一个图中的黄色方块都是一个完整的神经元，包括weight，输入以及激活函数。激活函数(取&lt;script type=&quot;math/tex&quot;&gt;\sigma(wh_{t-1}*h_{t-1}＋ wx_{t}*x_{t})&lt;/script&gt;)的结果为1时，&lt;script type=&quot;math/tex&quot;&gt;C_{t-1}*1&lt;/script&gt;运算的结果即为保留之前的信息。&lt;/p&gt;
+&lt;p&gt;    首先，给出条件概率、贝叶斯公式的定义：&lt;/p&gt;
 
-&lt;div align=&quot;center&quot;&gt;
-&lt;img src=&quot;/assets/LSTM3-gate.png&quot; width=&quot;80&quot; height=&quot;110&quot; /&gt;
-&lt;/div&gt;
-&lt;p&gt;    下图所示的第一个gate，是用来决定之前的信息是否舍弃的。&lt;/p&gt;
+&lt;p&gt;    条件概率&lt;script type=&quot;math/tex&quot;&gt;P(A \mid B)&lt;/script&gt;的含义是在B事件发生的基础上发生A事件的概率,即：   &lt;/p&gt;
 
-&lt;div align=&quot;center&quot;&gt;
-&lt;img src=&quot;/assets/LSTM3-focus-f.png&quot; width=&quot;580&quot; height=&quot;180&quot; /&gt;
-&lt;/div&gt;
+&lt;div align=&quot;center&quot;&gt;$$P(A \mid B) = \frac{P(AB)}{P(B)}$$&lt;/div&gt;
 
-&lt;p&gt;    接下来我们来决定什么信息要被加入到&lt;script type=&quot;math/tex&quot;&gt;C_{t}&lt;/script&gt;中，经过&lt;script type=&quot;math/tex&quot;&gt;+&lt;/script&gt;运算&lt;script type=&quot;math/tex&quot;&gt;C_{t-1}&lt;/script&gt;就变成了&lt;script type=&quot;math/tex&quot;&gt;C_{t}&lt;/script&gt; (&lt;script type=&quot;math/tex&quot;&gt;C_{t}=f_{t}*C_{t-1}+i_{t}*\hat{C}{t}&lt;/script&gt;)&lt;/p&gt;
+&lt;p&gt;    而贝叶斯公式则指出了如何借助&lt;script type=&quot;math/tex&quot;&gt;P(A \mid B)&lt;/script&gt;计算出&lt;script type=&quot;math/tex&quot;&gt;P(AB)&lt;/script&gt;，继而得出&lt;script type=&quot;math/tex&quot;&gt;P(B \mid A)&lt;/script&gt;：&lt;/p&gt;
 
-&lt;div align=&quot;center&quot;&gt;
-&lt;img src=&quot;/assets/LSTM3-focus-i.png&quot; width=&quot;580&quot; height=&quot;180&quot; /&gt;
-&lt;/div&gt;
+&lt;div align=&quot;center&quot;&gt;$$P(B \mid A) = \frac{P(A \mid B)P(B)}{P(A)}$$&lt;/div&gt;
 
-&lt;p&gt;梯度弥散(gradient vanishing)&lt;/p&gt;
+&lt;p&gt;    我们在一个N类分类问题中，一个样本&lt;script type=&quot;math/tex&quot;&gt;x&lt;/script&gt;,被划分到各类的概率分别为&lt;script type=&quot;math/tex&quot;&gt;P(y_{1} \mid x)&lt;/script&gt;, &lt;script type=&quot;math/tex&quot;&gt;P(y_{2} \mid x)&lt;/script&gt;…&lt;script type=&quot;math/tex&quot;&gt;P(y_{N} \mid x)&lt;/script&gt;。朴素贝叶斯的分类方法即取条件概率最大的&lt;script type=&quot;math/tex&quot;&gt;y_{i}&lt;/script&gt;作为分类结果。&lt;/p&gt;
 
-&lt;p&gt;1.读blog 理解结构，
-2.然后看cs231n的视频，理解框架。&lt;/p&gt;
+&lt;p&gt;    因此我们在进行分类时，将问题转为了如何计算条件概率&lt;script type=&quot;math/tex&quot;&gt;P(y_{i} \mid x)&lt;/script&gt;， 由贝叶斯公式我们知道:&lt;/p&gt;
 
-&lt;p&gt;＃http://qianchaoliu.github.io/&lt;/p&gt;
+&lt;div align=&quot;center&quot;&gt;$$P(y_{i} \mid x) = \frac{P(x \mid y_{i})P(y_{i})}{P(x)}$$&lt;/div&gt;
 
-&lt;p&gt;问题:RNN 是否考虑的下文的内容？&lt;/p&gt;
+&lt;p&gt;    其中&lt;script type=&quot;math/tex&quot;&gt;P(y_{i})&lt;/script&gt;是“先验概率”，可以由大量的样本数据(训练集)直接给出；而&lt;script type=&quot;math/tex&quot;&gt;P(x)&lt;/script&gt;对于所有的样本个体均相同，作为一个分母，我们可以直接当做一个“缩放因子”不予考虑；  &lt;br /&gt;
+    剩下要计算的就是&lt;script type=&quot;math/tex&quot;&gt;P(x \mid y_{i})&lt;/script&gt;，其由&lt;script type=&quot;math/tex&quot;&gt;x&lt;/script&gt;的各个属性关于&lt;script type=&quot;math/tex&quot;&gt;y_{i}&lt;/script&gt;的条件概率的联合概率决定，在假设&lt;script type=&quot;math/tex&quot;&gt;x&lt;/script&gt;的各个属性&lt;script type=&quot;math/tex&quot;&gt;a_{1}&lt;/script&gt;, &lt;script type=&quot;math/tex&quot;&gt;a_{2}&lt;/script&gt;…&lt;script type=&quot;math/tex&quot;&gt;a_{m}&lt;/script&gt;相互独立的情况下:&lt;/p&gt;
 
-&lt;h3 id=&quot;implement-of-lstm&quot;&gt;3. Implement of LSTM&lt;/h3&gt;
+&lt;div align=&quot;center&quot;&gt;$$P(x \mid y_{i}) =\sum_{i=1}^m P(a_{i} \mid y_{i})$$&lt;/div&gt;
+
+&lt;p&gt;    上式可以直接通过训练集计算得出，以上便是朴素贝叶斯分类器的定义，但根据其定义不难得出朴素贝叶斯存在两处明显不足： &lt;br /&gt;
+    &lt;strong&gt;一方面&lt;/strong&gt;一旦属性可选的离散变量较多，样本空间会急遽增大（假设一共有10个属性，每个属性都是二值的，则有&lt;script type=&quot;math/tex&quot;&gt;2^{10}&lt;/script&gt;个样本属性变化范围），需要大量的训练集才能进行有效的分类。一旦某分类下的某一属性值未在样本中出现，即&lt;script type=&quot;math/tex&quot;&gt;P(a_{i} \mid y_{i})=0&lt;/script&gt;，由于我们在计算条件概率时是采用联合概率的乘积形式，于是计算出来的&lt;script type=&quot;math/tex&quot;&gt;P(x \mid y_{i})=0&lt;/script&gt;, 个体属性值的缺少会对抹去其它属性的价值。 &lt;br /&gt;
+    &lt;strong&gt;另一方面&lt;/strong&gt;其适用于属性间相互独立的情景。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;3.贝叶斯分类的改进&lt;/h3&gt;
+
+&lt;p&gt;    &lt;strong&gt;针对于第一不足&lt;/strong&gt;，我们可以引入Laplacian Correction，比如对于辨别某犬是否为阿拉斯加犬时，其中一个属性是眼球颜色，该选项共有3个可能，但在训练集中仅出现了其中两种，则对第三种眼球颜色，在计算其&lt;script type=&quot;math/tex&quot;&gt;P(a_{i} \mid y_{i})&lt;/script&gt;时，假定种类&lt;script type=&quot;math/tex&quot;&gt;y_{i}=10&lt;/script&gt;，则按照以往的计算方式有：   &lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;$$P(a_{i} \mid y_{i})=\frac{0}{10}=0$$&lt;/div&gt;
+
+&lt;p&gt;在经过修正后：&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;$$P(a_{i} \mid y_{i})=\frac{0+1}{10+3}=\frac{1}{13}$$&lt;/div&gt;
+
+&lt;p&gt;其中分子中的1为固定值，分母中的3对应三种可选眼球颜色。 &lt;br /&gt;
+    初此之外，将通过对联合概率取对数将“连乘”转换为“连加”的方式也能解决未出现属性值带来的“致命影响”（也能一定程度上解决浮点数下溢问题）。     &lt;br /&gt;
+    以上方法虽然能够一定程度上解决第一处不足，但样本属性空间的增加对样本数据的大量需求仍存在。&lt;/p&gt;
+
+&lt;p&gt;    &lt;strong&gt;针对于第二处不足&lt;/strong&gt;，又提出了“半朴素贝叶斯”和“贝叶斯网络”。&lt;/p&gt;
 
 &lt;h4 id=&quot;reference&quot;&gt;Reference&lt;/h4&gt;
 &lt;ol&gt;
-  &lt;li&gt;Christopher Olah &lt;a href=&quot;http://http://colah.github.io/&quot;&gt;colah’s blog&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Zhihua Zhou &lt;a href=&quot;https://www.amazon.cn/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E5%91%A8%E5%BF%97%E5%8D%8E/dp/B01ARKEV1G/ref=sr_1_1?ie=UTF8&amp;amp;qid=1461769135&amp;amp;sr=8-1&amp;amp;keywords=%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0&quot;&gt;Machine Learning&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
 </description>
-        <pubDate>Sat, 09 Apr 2016 18:00:04 +0800</pubDate>
-        <link>http://qianchaoliu.github.io//liuqianchao/update/2016/04/09/Reinforce-Learning/</link>
-        <guid isPermaLink="true">http://qianchaoliu.github.io//liuqianchao/update/2016/04/09/Reinforce-Learning/</guid>
+        <pubDate>Wed, 27 Apr 2016 18:00:04 +0800</pubDate>
+        <link>http://qianchaoliu.github.io//liuqianchao/update/2016/04/27/Bayesian/</link>
+        <guid isPermaLink="true">http://qianchaoliu.github.io//liuqianchao/update/2016/04/27/Bayesian/</guid>
         
         
         <category>liuqianchao</category>
@@ -728,6 +730,108 @@ In this way, we can complete our daily tasks in codes of Python. &lt;/p&gt;
       </item>
     
       <item>
+        <title>Brief intro to MongoDB</title>
+        <description>&lt;p&gt;    在以前我们使用数据库的时候，讨论的是使用哪一款关系数据库，如今非关系型数据库也渐渐成为一个可替代的选择，这篇文章将简单对非关系型数据库的代表之一MongoDB展开介绍。&lt;/p&gt;
+
+&lt;h4 id=&quot;nosql&quot;&gt;为什么我们需要NoSQL？&lt;/h4&gt;
+&lt;p&gt;    虽然像MySQL这数据库已经足够轻量级，但我们在使用存储和使用数据时，有时并不需要使用关系型数据库建立E-R的联系，表与表之间也不需要进行union操作，我们需要的仅仅是一个能让我们对结构化数据进行CRUD (Create, Retrieve, Update, Delete)操作。 &lt;br /&gt;
+    此外，NoSQL的火热也与近些年来XML或者JSON等数据结构的流行离不开关系。&lt;/p&gt;
+
+&lt;h4 id=&quot;mongodb&quot;&gt;MongoDB基础&lt;/h4&gt;
+&lt;p&gt;    在&lt;a href=&quot;https://docs.mongodb.org/manual/introduction/&quot;&gt;官方文件&lt;/a&gt;中对MongoDB的介绍是“MongoDB is an open-source document database”, 所谓document，对应关系型数据库中的一行数据，且document中的数据是通过键值(key-value)对来组织的, 其对数据的定义类似于JSON或者Python中的dict数据集合, 如下所示，下面的一组数据在MongoDB中被视为表的一行。&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&#39;QianchaoLiu&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&#39;20&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;School&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&#39;TJU&#39;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;    一些在RDBMS(关系型数据库)中的概念和MongoDB的对应概念如下表&lt;/p&gt;
+
+&lt;div id=&quot;content&quot;&gt;
+
+    &lt;table cellspacing=&quot;0&quot;&gt;
+    &lt;tr&gt;&lt;th&gt;RDBMS&lt;/th&gt;&lt;th&gt;MongoDB&lt;/th&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;database&lt;/td&gt;&lt;td&gt;database&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;table&lt;/td&gt;&lt;td&gt;collection&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;column&lt;/td&gt;&lt;td&gt;field&lt;/td&gt;&lt;/tr&gt;
+
+    &lt;/table&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;    接来下我们将从一些细节上学习MongoDB   &lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;数据类型&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;    MongoDB中包含的数据存储类型包括String,Array,Double,Object,Date,Null等等，详见&lt;a href=&quot;https://docs.mongodb.org/manual/reference/bson-types/&quot;&gt;文档&lt;/a&gt;。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;主键的处理&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;    每一个表(collection)，都有一个默认的字段(field): “_id”, 系统会默认地对表中的数据建立主键索引。&lt;/p&gt;
+
+&lt;h4 id=&quot;crud&quot;&gt;CRUD操作&lt;/h4&gt;
+
+&lt;p&gt;    下面以Python为例，对MongoDB的操作做出示例。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;连接数据库&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;pymongo&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MongoClient&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# 连接数据库&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;conn&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MongoClient&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&#39;local&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;27017&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;  &lt;span class=&quot;c&quot;&gt;# 和MongoClient(&#39;mongodb://localhost:27017/&#39;) 效果一样&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# 切换到database&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;db&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;connection&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;test_database&lt;/span&gt;  &lt;span class=&quot;c&quot;&gt;# 和db = connection[&#39;test_database&#39;] 效果一样&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# 切换到collection&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;collection&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;db&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;test_collection&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;    当Colelction和database未提前创建时，这里是滞后创建的，先连接，在创建第一个ducoment后collection和database才会被创建。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Insert document&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;    插入单行数据时，采用下叙述方法：&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;n&quot;&gt;post&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&#39;QianchaoLiu&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&#39;20&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;School&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&#39;TJU&#39;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;posts&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;db&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;posts&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;posts&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;insert_one&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;post&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# 插入一行数据&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# 或插入数据并返回默认创建的_id:_id = posts.insert_one(post).inserted_id&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;    当批量插入数据时，一个方法是使用for循环进行逐条插入，另一种方式是使用	&lt;code&gt;posts.insert_many([{},{}])&lt;/code&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Select&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;n&quot;&gt;posts&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;find_one&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;author&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Mike&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;    在查询唯一一行数据时使用上述方法，当查询多会返回多个数据时，我们使用：&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;item&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;posts&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;author&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Mike&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}):&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;item&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+</description>
+        <pubDate>Thu, 27 Aug 2015 08:35:04 +0800</pubDate>
+        <link>http://qianchaoliu.github.io//liuqianchao/update/2015/08/27/MongoDB/</link>
+        <guid isPermaLink="true">http://qianchaoliu.github.io//liuqianchao/update/2015/08/27/MongoDB/</guid>
+        
+        
+        <category>liuqianchao</category>
+        
+        <category>update</category>
+        
+      </item>
+    
+      <item>
         <title>About pygments</title>
         <description>&lt;p&gt;Highlight for your code by pygments.&lt;/p&gt;
 
@@ -960,84 +1064,6 @@ Object.className
         <pubDate>Thu, 21 Aug 2014 23:49:04 +0800</pubDate>
         <link>http://qianchaoliu.github.io//liuqianchao/update/2014/08/21/Js-primary/</link>
         <guid isPermaLink="true">http://qianchaoliu.github.io//liuqianchao/update/2014/08/21/Js-primary/</guid>
-        
-        
-        <category>liuqianchao</category>
-        
-        <category>update</category>
-        
-      </item>
-    
-      <item>
-        <title>Markdown入门</title>
-        <description>&lt;h1 id=&quot;markdown&quot;&gt;Markdown入门&lt;/h1&gt;
-&lt;p&gt;Markdown,作为一种文档结构描述语言，其文本结构仅对应HTML语言的一个子集，其实现原理是通过正则表达式进行HTML标签的替换，其目的是为了更方便地书写审阅纯文本文档。&lt;/p&gt;
-
-&lt;hr /&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;标题&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;使用#代表标题的等级，一个#为一级标题，六个#为六级标题&lt;/p&gt;
-
-&lt;hr /&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;强调&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;使用*文字*，添加&lt;em&gt;斜体文字&lt;/em&gt;&lt;br /&gt;
-  使用**文字**，添加&lt;strong&gt;粗体文字&lt;/strong&gt;&lt;br /&gt;
-  使用---作为一条横线&lt;/p&gt;
-
-&lt;hr /&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;代码&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;使用```（反引号）将代码块括起来&lt;/p&gt;
-
-&lt;p&gt;``` python&lt;br /&gt;
-print “test”
-```  &lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;python
- print&quot;test&quot;
-&lt;/code&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;引用超链接或图片&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;！[描述](地址) 作为图片引用&lt;br /&gt;
-[描述](地址) 作为超链接引用  &lt;/p&gt;
-
-&lt;p&gt;[维基百科](wikipedia.org)  &lt;br /&gt;
-&lt;a href=&quot;wikipedia.org&quot;&gt;维基百科&lt;/a&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;其他常用技巧&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;单个反引号作为highlight
-`高亮`
-&lt;code&gt;高亮&lt;/code&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;*(空格)文字 作为无序列表
- * 列表&lt;/p&gt;
-    &lt;ul&gt;
-      &lt;li&gt;列表&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Thu, 07 Aug 2014 08:35:04 +0800</pubDate>
-        <link>http://qianchaoliu.github.io//liuqianchao/update/2014/08/07/Markdown%E5%85%A5%E9%97%A8/</link>
-        <guid isPermaLink="true">http://qianchaoliu.github.io//liuqianchao/update/2014/08/07/Markdown%E5%85%A5%E9%97%A8/</guid>
         
         
         <category>liuqianchao</category>
