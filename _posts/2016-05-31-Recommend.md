@@ -24,8 +24,10 @@ categories: liuqianchao update
 &nbsp;&nbsp;&nbsp;&nbsp;同时需要注意的是，由于要计算商品之间的相似性，所以主要需要需要维护商品到商品属性的矩阵，比如对于一款游戏商品，其商品属性包括游戏类型、出品商等属性字段，因此对于不同类别的的商品需要设计不同的商品属性字段。
 
 ### 3.基于协同过滤的推荐
+&nbsp;&nbsp;&nbsp;&nbsp;首相我想要介绍一下，什么是协同过滤，维基上给出的解释是: ***collaborative filtering is the process of filtering for information or patterns using techniques involving collaboration among multiple agents, viewpoints, data sources, etc***.   
+&nbsp;&nbsp;&nbsp;&nbsp;这里有一组关键词，collaboration among multiple agents，借助群体的信息，通过别人的对商品的浏览、购买、评价记录来完成对某一个体的推荐，这就是协同过滤的特点。   
 &nbsp;&nbsp;&nbsp;&nbsp;基于协同过滤的推荐(Collaborative Filtering-Based Recommendation)，又可以细分为基于用户的(User-based),基于物品的(Item-based)以及基于模型的(Model-based)。   
-&nbsp;&nbsp;&nbsp;&nbsp;基于用户的协同过滤，与上文中提到的基于人口统计的推荐不同之处的计算用户相似时用的是用户对于商品的评分或者购买浏览记录，而不是人口统计特征。基于用户的协同过滤维护这样一个$$m × k$$的矩阵$$M$$.其中有$$m$$个用户和$$k$$个商品,通过计算行与行间的  
+&nbsp;&nbsp;&nbsp;&nbsp;**基于用户的协同过滤**，与上文中提到的基于人口统计的推荐不同之处的计算用户相似时用的是用户对于商品的评分或者购买浏览记录，而不是人口统计特征。基于用户的协同过滤维护这样一个$$m × k$$的矩阵$$M$$.其中有$$m$$个用户和$$k$$个商品,通过计算行与行间的  
 
 <div id="content">
 
@@ -40,8 +42,8 @@ categories: liuqianchao update
 </div> 
 <div align="center">基于用户的协同过滤</div>
 
-&nbsp;&nbsp;&nbsp;&nbsp;基于物品的协同过滤，与上文中提到的基于内容的推荐比较相似，不同之处是相似物品的的计算不是通过商品的属性，而是通过网络中用户对商品的历史浏览记录。   
-&nbsp;&nbsp;&nbsp;&nbsp;如果用户同时浏览过item1和item2，则下表中(1,2)和(2,1)处的值为3，这样可以表征商品之间的关联相似性，上述矩阵是通过$$M^{-1}M$$的到的，$$M$$是基于用户的协同过滤维护的矩阵。
+&nbsp;&nbsp;&nbsp;&nbsp;**基于物品的协同过滤**，与上文中提到的基于内容的推荐比较相似，不同之处是相似物品的的计算不是通过商品的属性，而是通过网络中用户对商品的历史浏览记录。   
+&nbsp;&nbsp;&nbsp;&nbsp;如果用户同时浏览过item1和item2，则下表中(1,2)和(2,1)处的值为3，这样可以表征商品之间的关联相似性，这样，一些经常被同时购买的商品会被推荐出来。上述矩阵是通过$$M^{T}M$$的到的，$$M$$是基于用户的协同过滤维护的矩阵。
 
 
 <div id="content">
@@ -56,6 +58,13 @@ categories: liuqianchao update
 
 </div> 
 <div align="center">基于物品的协同过滤</div>
+
+&nbsp;&nbsp;&nbsp;&nbsp;无论是User-Based还是Item-Based的方法，都需要进行人与人或物与物之间的相似性，这部分的计算量很大，难以实现实时在线响应，而**基于模型的推荐**(Model-Based)能够很好地解决这个问题，该方法事先根据历史信息“训练”好模型，使用该模型进行推荐。
+&nbsp;&nbsp;&nbsp;&nbsp;基于模型的协同过滤方法常见的技术手段包括语义分析(Latent Semantic Analysis),贝叶斯网络(Bayesian Networkds)以及矩阵分解(Matrix Factorization)，下面将以矩阵分解的方法为例，讲解模型的构建和训练。   
+&nbsp;&nbsp;&nbsp;&nbsp;首先这里要阐述一下矩阵分解的目的，这里，矩阵分解(svd等方法)，并不是为了降维，而是把user-item矩阵分解为user-factor矩阵和item-factor矩阵相乘的形式。   
+
+
+
 
 #### Reference
 1. Zhiyuan Liu [Big Data Intelligence](http://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Daps&field-keywords=big+data+intelligence&rh=i%3Aaps%2Ck%3Abig+data+intelligence)
