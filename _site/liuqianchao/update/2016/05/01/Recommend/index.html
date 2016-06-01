@@ -99,8 +99,10 @@
 <h3 id="section-2">3.基于协同过滤的推荐</h3>
 <p>    首相我想要介绍一下，什么是协同过滤，维基上给出的解释是: <strong><em>collaborative filtering is the process of filtering for information or patterns using techniques involving collaboration among multiple agents, viewpoints, data sources, etc</em></strong>. <br />
     这里有一组关键词，collaboration among multiple agents，借助群体的信息，通过别人的对商品的浏览、购买、评价记录来完成对某一个体的推荐，这就是协同过滤的特点。 <br />
-    基于协同过滤的推荐(Collaborative Filtering-Based Recommendation)，又可以细分为基于用户的(User-based),基于物品的(Item-based)以及基于模型的(Model-based)。 <br />
-    <strong>基于用户的协同过滤</strong>，与上文中提到的基于人口统计的推荐不同之处的计算用户相似时用的是用户对于商品的评分或者购买浏览记录，而不是人口统计特征。基于用户的协同过滤维护这样一个<script type="math/tex">m × k</script>的矩阵<script type="math/tex">M</script>.其中有<script type="math/tex">m</script>个用户和<script type="math/tex">k</script>个商品,通过计算行与行间的  </p>
+    基于协同过滤的推荐(Collaborative Filtering-Based Recommendation)，又可以细分为基于用户的(User-based),基于物品的(Item-based)以及基于模型的(Model-based)。</p>
+
+<h4 id="section-3">3.1 基于用户的协同过滤</h4>
+<p>    <strong>基于用户的协同过滤</strong>，与上文中提到的基于人口统计的推荐不同之处的计算用户相似时用的是用户对于商品的评分或者购买浏览记录，而不是人口统计特征。基于用户的协同过滤维护这样一个<script type="math/tex">m × k</script>的矩阵<script type="math/tex">M</script>.其中有<script type="math/tex">m</script>个用户和<script type="math/tex">k</script>个商品,通过计算行与行间的  </p>
 
 <div id="content">
 
@@ -114,6 +116,8 @@
 
 </div>
 <div align="center">基于用户的协同过滤</div>
+
+<h4 id="section-4">3.2 基于物品的协同过滤</h4>
 
 <p>    <strong>基于物品的协同过滤</strong>，与上文中提到的基于内容的推荐比较相似，不同之处是相似物品的的计算不是通过商品的属性，而是通过网络中用户对商品的历史浏览记录。 <br />
     如果用户同时浏览过item1和item2，则下表中(1,2)和(2,1)处的值为3，这样可以表征商品之间的关联相似性，这样，一些经常被同时购买的商品会被推荐出来。上述矩阵是通过<script type="math/tex">M^{T}M</script>的到的，<script type="math/tex">M</script>是基于用户的协同过滤维护的矩阵。</p>
@@ -131,7 +135,9 @@
 </div>
 <div align="center">基于物品的协同过滤</div>
 
-<p>    无论是User-Based还是Item-Based的方法，都需要进行人与人或物与物之间的相似性，这部分的计算量很大，难以实现实时在线响应，而<strong>基于模型的推荐</strong>(Model-Based)能够很好地解决这个问题，该方法事先根据历史信息“训练”好模型，使用该模型进行推荐。
+<h4 id="section-5">3.3 基于模型的协同过滤</h4>
+
+<p>    无论是User-Based还是Item-Based的方法，都需要进行人与人或物与物之间的相似性，这部分的计算量很大，难以实现实时在线响应，而<strong>基于模型的推荐</strong>(Model-Based)能够很好地解决这个问题，该方法事先根据历史信息“训练”好模型，使用该模型进行推荐。 <br />
     基于模型的协同过滤方法常见的技术手段包括语义分析(Latent Semantic Analysis),贝叶斯网络(Bayesian Networkds)以及矩阵分解(Matrix Factorization)，下面将以矩阵分解的方法为例，讲解模型的构建和训练。 <br />
     首先这里要阐述一下矩阵分解的目的，这里，矩阵分解(svd等方法)，并不是为了降维，而是把user-item矩阵分解为user-factor矩阵和item-factor矩阵相乘的形式。   </p>
 
