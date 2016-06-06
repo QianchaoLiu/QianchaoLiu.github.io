@@ -5,8 +5,8 @@
     <description>Welcome to Q.Liu&#39;s Homepage. Here you can find something about my research interests.</description>
     <link>http://qianchaoliu.github.io//</link>
     <atom:link href="http://qianchaoliu.github.io//feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 02 Jun 2016 00:11:56 +0800</pubDate>
-    <lastBuildDate>Thu, 02 Jun 2016 00:11:56 +0800</lastBuildDate>
+    <pubDate>Mon, 06 Jun 2016 11:08:33 +0800</pubDate>
+    <lastBuildDate>Mon, 06 Jun 2016 11:08:33 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
@@ -71,7 +71,16 @@
 
 &lt;p&gt;    无论是User-Based还是Item-Based的方法，都需要进行人与人或物与物之间的相似性，这部分的计算量很大，难以实现实时在线响应，而&lt;strong&gt;基于模型的推荐&lt;/strong&gt;(Model-Based)能够很好地解决这个问题，该方法事先根据历史信息“训练”好模型，使用该模型进行推荐。 &lt;br /&gt;
     基于模型的协同过滤方法常见的技术手段包括语义分析(Latent Semantic Analysis),贝叶斯网络(Bayesian Networkds)以及矩阵分解(Matrix Factorization)，下面将以矩阵分解的方法为例，讲解模型的构建和训练。 &lt;br /&gt;
-    首先这里要阐述一下矩阵分解的目的，这里，矩阵分解(svd等方法)，并不是为了降维，而是把user-item矩阵分解为user-factor矩阵和item-factor矩阵相乘的形式。   &lt;/p&gt;
+    首先这里要阐述一下矩阵分解的目的，这里，矩阵分解(svd等方法)，并不是为了降维，而是把user-item矩阵分解为user-factor矩阵和item-factor矩阵相乘的形式，下面介绍矩阵分解技术基本流程。 &lt;br /&gt;
+&lt;br /&gt;
+    1、假设已有稀疏矩阵&lt;script type=&quot;math/tex&quot;&gt;X \in R^{m \times n}&lt;/script&gt;表示用户对商品的打分（浏览、购买记录），该矩阵同“基于用户的协同过滤”中的矩阵，设定&lt;script type=&quot;math/tex&quot;&gt;U \in R^{m \times r}&lt;/script&gt;和&lt;script type=&quot;math/tex&quot;&gt;V \in R^{n \times r}&lt;/script&gt;是矩阵&lt;script type=&quot;math/tex&quot;&gt;X&lt;/script&gt;的低秩分解。 &lt;br /&gt;
+    2、建立优化问题的目标函数：&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;$$argmin [D_{w}(X,f(UV^{T}))+R(U,V)]$$&lt;/div&gt;
+
+&lt;p&gt;    其中，&lt;script type=&quot;math/tex&quot;&gt;D_{w}(X,f(UV^{T}))&lt;/script&gt;是&lt;script type=&quot;math/tex&quot;&gt;U&lt;/script&gt;,&lt;script type=&quot;math/tex&quot;&gt;V&lt;/script&gt;对于&lt;script type=&quot;math/tex&quot;&gt;X&lt;/script&gt;的损失函数,&lt;script type=&quot;math/tex&quot;&gt;R(U,V)&lt;/script&gt;是正则化因子(regularizaiton loss),用于避免过度拟合。   &lt;/p&gt;
+
+&lt;p&gt;    3、到这里，已经把问题转换为最优值求解问题，常见的方法包括梯度下降等。&lt;/p&gt;
 
 &lt;h4 id=&quot;reference&quot;&gt;Reference&lt;/h4&gt;
 &lt;ol&gt;

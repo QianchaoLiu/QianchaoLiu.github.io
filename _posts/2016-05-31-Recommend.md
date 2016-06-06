@@ -68,7 +68,17 @@ categories: liuqianchao update
 
 &nbsp;&nbsp;&nbsp;&nbsp;无论是User-Based还是Item-Based的方法，都需要进行人与人或物与物之间的相似性，这部分的计算量很大，难以实现实时在线响应，而**基于模型的推荐**(Model-Based)能够很好地解决这个问题，该方法事先根据历史信息“训练”好模型，使用该模型进行推荐。   
 &nbsp;&nbsp;&nbsp;&nbsp;基于模型的协同过滤方法常见的技术手段包括语义分析(Latent Semantic Analysis),贝叶斯网络(Bayesian Networkds)以及矩阵分解(Matrix Factorization)，下面将以矩阵分解的方法为例，讲解模型的构建和训练。   
-&nbsp;&nbsp;&nbsp;&nbsp;首先这里要阐述一下矩阵分解的目的，这里，矩阵分解(svd等方法)，并不是为了降维，而是把user-item矩阵分解为user-factor矩阵和item-factor矩阵相乘的形式。   
+&nbsp;&nbsp;&nbsp;&nbsp;首先这里要阐述一下矩阵分解的目的，这里，矩阵分解(svd等方法)，并不是为了降维，而是把user-item矩阵分解为user-factor矩阵和item-factor矩阵相乘的形式，下面介绍矩阵分解技术基本流程。   
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1、假设已有稀疏矩阵$$X \in R^{m \times n}$$表示用户对商品的打分（浏览、购买记录），该矩阵同“基于用户的协同过滤”中的矩阵，设定$$U \in R^{m \times r}$$和$$V \in R^{n \times r}$$是矩阵$$X$$的低秩分解。   
+&nbsp;&nbsp;&nbsp;&nbsp;2、建立优化问题的目标函数：
+
+<div align="center">$$argmin [D_{w}(X,f(UV^{T}))+R(U,V)]$$</div>
+
+&nbsp;&nbsp;&nbsp;&nbsp;其中，$$D_{w}(X,f(UV^{T}))$$是$$U$$,$$V$$对于$$X$$的损失函数,$$R(U,V)$$是正则化因子(regularizaiton loss),用于避免过度拟合。   
+
+&nbsp;&nbsp;&nbsp;&nbsp;3、到这里，已经把问题转换为最优值求解问题，常见的方法包括梯度下降等。
+
 
 
 
