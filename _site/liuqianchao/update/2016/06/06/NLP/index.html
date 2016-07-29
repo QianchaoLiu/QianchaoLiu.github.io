@@ -4,10 +4,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Q.Liu</title>
+    <title>NLP with Neural Network</title>
     <meta name="viewport" content="width=device-width">
     <meta name="description" content="Welcome to Q.Liu's Homepage. Here you can find something about my research interests.">
-    <link rel="canonical" href="http://qianchaoliu.github.io//">
+    <link rel="canonical" href="http://qianchaoliu.github.io//liuqianchao/update/2016/06/06/nlp/">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/main.css">
@@ -71,82 +71,74 @@
 
     <div class="page-content">
       <div class="wrap">
-      <div class="home">
+      <div class="post">
 
-  <h1>Posts</h1>
+  <header class="post-header">
+    <h1>NLP with Neural Network</h1>
+    <p class="meta">Jun 6, 2016</p>
+  </header>
 
-  <ul class="posts">
-    
-      <li>
-        <span class="post-date">Jun 6, 2016</span>
-        <a class="post-link" href="/liuqianchao/update/2016/06/06/nlp/">NLP with Neural Network</a>
-      </li>
-    
-      <li>
-        <span class="post-date">May 1, 2016</span>
-        <a class="post-link" href="/liuqianchao/update/2016/05/01/Recommend/">Recommender System</a>
-      </li>
-    
-      <li>
-        <span class="post-date">Apr 27, 2016</span>
-        <a class="post-link" href="/liuqianchao/update/2016/04/27/Bayesian/">Bayes Classification</a>
-      </li>
-    
-      <li>
-        <span class="post-date">Feb 17, 2016</span>
-        <a class="post-link" href="/liuqianchao/update/2016/02/17/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%AE%9A%E4%B9%89%E5%8F%8A%E5%AE%9E%E7%8E%B0/">神经网络定义及实现</a>
-      </li>
-    
-      <li>
-        <span class="post-date">Feb 2, 2016</span>
-        <a class="post-link" href="/liuqianchao/update/2016/02/02/Theano&Tensorflow/">Theano & Tensorflow</a>
-      </li>
-    
-      <li>
-        <span class="post-date">Jan 15, 2016</span>
-        <a class="post-link" href="/liuqianchao/update/2016/01/15/Effective/">Effective Python</a>
-      </li>
-    
-      <li>
-        <span class="post-date">Nov 29, 2015</span>
-        <a class="post-link" href="/liuqianchao/update/2015/11/29/SVM/">Support Vector Machine</a>
-      </li>
-    
-      <li>
-        <span class="post-date">Nov 10, 2015</span>
-        <a class="post-link" href="/liuqianchao/update/2015/11/10/R/">Why R?</a>
-      </li>
-    
-      <li>
-        <span class="post-date">Aug 27, 2015</span>
-        <a class="post-link" href="/liuqianchao/update/2015/08/27/MongoDB/">Brief intro to MongoDB</a>
-      </li>
-    
-      <li>
-        <span class="post-date">Oct 10, 2014</span>
-        <a class="post-link" href="/liuqianchao/update/2014/10/10/about_pygments/">About pygments</a>
-      </li>
-    
-      <li>
-        <span class="post-date">Sep 22, 2014</span>
-        <a class="post-link" href="/liuqianchao/update/2014/09/22/LATEX/">Brief into to LaTeX</a>
-      </li>
-    
-      <li>
-        <span class="post-date">Aug 21, 2014</span>
-        <a class="post-link" href="/liuqianchao/update/2014/08/21/Js-primary/">Js Primary</a>
-      </li>
-    
-      <li>
-        <span class="post-date">Aug 7, 2014</span>
-        <a class="post-link" href="/liuqianchao/update/2014/08/07/Markdown%E5%85%A5%E9%97%A8/">Markdown入门</a>
-      </li>
-    
-  </ul>
+  <article class="post-content">
+  <p>    本文是使用神经网络的方法进行自然语言处理的技术路线，以Stanford的CS224d课程为主，仅供参考。</p>
 
-  <p class="rss-subscribe">subscribe <a href="/feed.xml">via RSS</a></p>
+<h3 id="section">1.一些必要的知识</h3>
+<p>    1.<strong>线性代数</strong>，包括矩阵的运算，以及模，秩，特征值、特征向量以及和导数求解相关的矩阵知识(比如牛顿法中的Hessian Matrix)等。 <br />
+    2.<strong>概率论</strong>，包括概率密度函数，条件概率，联合概率，贝叶斯，协方差等。 <br />
+    3.<strong>凸优化</strong>，包括什么是凸集合，凸函数，如何进行。   </p>
+
+<h3 id="section-1">2.课程正文</h3>
+
+<h3 id="section-2">2.1词向量</h3>
+
+<p>    本小节的重点是word vectors，介绍了词汇向量化的几种经典的方法。</p>
+
+<p>    首先介绍了使用descrete representation(比如one-hot)的方法进行词汇向量化的方法，其中一个典型的代表就是使用WordNet这样的字典,但是直接使用字典的方式来将词汇向量化，有很多问题存在： <br />
+1. 会丢失很多词汇的本意细节(nuance), 比如一词多义的问题没办法保留多个意思。<br />
+2. wordnet中的词汇有限，不能及时覆盖所有的词汇。 <br />
+3. 不能直接用来计算词汇之间的相似性。   </p>
+
+<p>    第二种表示方式是使用neighbors的count来表示词汇，其思想是一个词可以用句子中它周围的词来表示。该种方法有两种的选择，一个是使用“full document”，另一个种是使用“windows”；前者的思想又引出了latent semantic analysis(可以用于文章分类等)；使用neighbors来进行词汇的表达存在的问题包括： <br />
+1. 需要维护高维矩阵，该矩阵需要大量的存储空间 <br />
+2. 模型的鲁棒性不高   <br />
+    由此，针对上述问题，提出的解决方式是进行矩阵降维，常用的方法包括：SVD（对于<script type="math/tex">m n</script>矩阵，时间复杂度为<script type="math/tex">o(mn^{2})</script>，其中<script type="math/tex">% <![CDATA[
+n< m %]]></script>）,此外SVD分解的方法实现词汇向量化对于新词汇的加入不是很友好。      </p>
+
+<p>    除了第二种方法中的使用临近词汇的count来表示，并通过一定的降维方式来实现word embedding外，还有一种方式是直接生成低维向量(其实这个低维一般也有几百维)。该种方法的思想是通过训练机器学习模型来“modeling”词向量,其代表方法包括Google的word2vec，其特点是对于新的词汇有较好的接收。该种方法通过建立目标函数，使用梯度下降(链式法则)的方法来maximize/minimize目标函数。   </p>
+
+<p>    对于数据量较大的语料集，上述训练模型的方法会训练地比较慢，可以定义negative prediction，只对从未出现的词汇进行训练。</p>
+
+<div align="center">$$S(X_{1},X_{2}) = \sum_{i=1}^N (x_{1i}-x_{2i})^2 $$</div>
+
+<h4 id="reference">Reference</h4>
+<ol>
+  <li>Stanford <a href="http://cs224d.stanford.edu/index.html">cs224d</a></li>
+</ol>
+
+
+  </article>
+
 
 </div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<div id="disqus_thread"></div>
+
+<script>
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+
+s.src = '//liuqianchao.disqus.com/embed.js';
+
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
       </div>
     </div>
 

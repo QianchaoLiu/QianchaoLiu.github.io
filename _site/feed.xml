@@ -5,9 +5,58 @@
     <description>Welcome to Q.Liu&#39;s Homepage. Here you can find something about my research interests.</description>
     <link>http://qianchaoliu.github.io//</link>
     <atom:link href="http://qianchaoliu.github.io//feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Mon, 06 Jun 2016 11:08:33 +0800</pubDate>
-    <lastBuildDate>Mon, 06 Jun 2016 11:08:33 +0800</lastBuildDate>
+    <pubDate>Fri, 29 Jul 2016 09:01:38 +0800</pubDate>
+    <lastBuildDate>Fri, 29 Jul 2016 09:01:38 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
+    
+      <item>
+        <title>NLP with Neural Network</title>
+        <description>&lt;p&gt;    本文是使用神经网络的方法进行自然语言处理的技术路线，以Stanford的CS224d课程为主，仅供参考。&lt;/p&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;1.一些必要的知识&lt;/h3&gt;
+&lt;p&gt;    1.&lt;strong&gt;线性代数&lt;/strong&gt;，包括矩阵的运算，以及模，秩，特征值、特征向量以及和导数求解相关的矩阵知识(比如牛顿法中的Hessian Matrix)等。 &lt;br /&gt;
+    2.&lt;strong&gt;概率论&lt;/strong&gt;，包括概率密度函数，条件概率，联合概率，贝叶斯，协方差等。 &lt;br /&gt;
+    3.&lt;strong&gt;凸优化&lt;/strong&gt;，包括什么是凸集合，凸函数，如何进行。   &lt;/p&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;2.课程正文&lt;/h3&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;2.1词向量&lt;/h3&gt;
+
+&lt;p&gt;    本小节的重点是word vectors，介绍了词汇向量化的几种经典的方法。&lt;/p&gt;
+
+&lt;p&gt;    首先介绍了使用descrete representation(比如one-hot)的方法进行词汇向量化的方法，其中一个典型的代表就是使用WordNet这样的字典,但是直接使用字典的方式来将词汇向量化，有很多问题存在： &lt;br /&gt;
+1. 会丢失很多词汇的本意细节(nuance), 比如一词多义的问题没办法保留多个意思。&lt;br /&gt;
+2. wordnet中的词汇有限，不能及时覆盖所有的词汇。 &lt;br /&gt;
+3. 不能直接用来计算词汇之间的相似性。   &lt;/p&gt;
+
+&lt;p&gt;    第二种表示方式是使用neighbors的count来表示词汇，其思想是一个词可以用句子中它周围的词来表示。该种方法有两种的选择，一个是使用“full document”，另一个种是使用“windows”；前者的思想又引出了latent semantic analysis(可以用于文章分类等)；使用neighbors来进行词汇的表达存在的问题包括： &lt;br /&gt;
+1. 需要维护高维矩阵，该矩阵需要大量的存储空间 &lt;br /&gt;
+2. 模型的鲁棒性不高   &lt;br /&gt;
+    由此，针对上述问题，提出的解决方式是进行矩阵降维，常用的方法包括：SVD（对于&lt;script type=&quot;math/tex&quot;&gt;m n&lt;/script&gt;矩阵，时间复杂度为&lt;script type=&quot;math/tex&quot;&gt;o(mn^{2})&lt;/script&gt;，其中&lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
+n&lt; m %]]&gt;&lt;/script&gt;）,此外SVD分解的方法实现词汇向量化对于新词汇的加入不是很友好。      &lt;/p&gt;
+
+&lt;p&gt;    除了第二种方法中的使用临近词汇的count来表示，并通过一定的降维方式来实现word embedding外，还有一种方式是直接生成低维向量(其实这个低维一般也有几百维)。该种方法的思想是通过训练机器学习模型来“modeling”词向量,其代表方法包括Google的word2vec，其特点是对于新的词汇有较好的接收。该种方法通过建立目标函数，使用梯度下降(链式法则)的方法来maximize/minimize目标函数。   &lt;/p&gt;
+
+&lt;p&gt;    对于数据量较大的语料集，上述训练模型的方法会训练地比较慢，可以定义negative prediction，只对从未出现的词汇进行训练。&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;$$S(X_{1},X_{2}) = \sum_{i=1}^N (x_{1i}-x_{2i})^2 $$&lt;/div&gt;
+
+&lt;h4 id=&quot;reference&quot;&gt;Reference&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;Stanford &lt;a href=&quot;http://cs224d.stanford.edu/index.html&quot;&gt;cs224d&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+</description>
+        <pubDate>Mon, 06 Jun 2016 18:00:04 +0800</pubDate>
+        <link>http://qianchaoliu.github.io//liuqianchao/update/2016/06/06/nlp/</link>
+        <guid isPermaLink="true">http://qianchaoliu.github.io//liuqianchao/update/2016/06/06/nlp/</guid>
+        
+        
+        <category>liuqianchao</category>
+        
+        <category>update</category>
+        
+      </item>
     
       <item>
         <title>Recommender System</title>
@@ -967,110 +1016,6 @@ pygmentize -f html -S default &amp;gt; pygments.css
         <pubDate>Fri, 10 Oct 2014 06:35:04 +0800</pubDate>
         <link>http://qianchaoliu.github.io//liuqianchao/update/2014/10/10/about_pygments/</link>
         <guid isPermaLink="true">http://qianchaoliu.github.io//liuqianchao/update/2014/10/10/about_pygments/</guid>
-        
-        
-        <category>liuqianchao</category>
-        
-        <category>update</category>
-        
-      </item>
-    
-      <item>
-        <title>Brief into to LaTeX</title>
-        <description>&lt;p&gt;In this short article, I will give a brief introduction to the grammar of LaTeX.   &lt;/p&gt;
-
-&lt;h3 id=&quot;structure-of-tex-file&quot;&gt;1.  Structure of .tex file&lt;/h3&gt;
-
-&lt;h4 id=&quot;basic-elements&quot;&gt;1.1  Basic elements&lt;/h4&gt;
-
-&lt;hr /&gt;
-&lt;p&gt;&lt;code&gt;\documentclass[opt,opt]{class}.&lt;/code&gt; uesd at the very beginning of a document. where &lt;code&gt;opt&lt;/code&gt; can be:   &lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Font Size:10pt/11pt/12pt etc.   &lt;/li&gt;
-  &lt;li&gt;Papar Size:leterpaper/a4paper etc.   &lt;/li&gt;
-  &lt;li&gt;Use two columns:twocolumn.   &lt;/li&gt;
-  &lt;li&gt;Set margins for two-sided:twoside.  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;and &lt;code&gt;class&lt;/code&gt; can be:   &lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;book/report/article/letter/slides   &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;code&gt;\input{inputfile.tex}&lt;/code&gt; used to include the file specifying ducument layout, which is optional.   &lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;\author{text}&lt;/code&gt;, &lt;code&gt;\title{text}&lt;/code&gt;, &lt;code&gt;\date{text}&lt;/code&gt; are used to declare proprieties of this file. &lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;\begin{document}&lt;/code&gt; and &lt;code&gt;\end{document}&lt;/code&gt; used to start contents and end the document  &lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;\section{text}&lt;/code&gt; used to begin a new section. And &lt;code&gt;\subsection{text}&lt;/code&gt; to create sub-section.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;some other strucures:&lt;code&gt;\part{text}&lt;/code&gt;,&lt;code&gt;\chapter{text}&lt;/code&gt;   &lt;/li&gt;
-  &lt;li&gt;in &lt;code&gt;\section*{title}&lt;/code&gt;, to not number a particular item—these items will also not appear in the table of contents.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;key-elements&quot;&gt;1.2  key elements&lt;/h4&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;code&gt;\begin{tabbing}&lt;/code&gt; and  &lt;code&gt;\end{tabbing}&lt;/code&gt; used to start tabbing and end the tabbing   &lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code&gt;\hspace{l}&lt;/code&gt;  Horizontal space of length l (Ex:l=20pt or l=3cm). And &lt;code&gt;\vspace{l}&lt;/code&gt; where v means vertical.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;use &lt;code&gt;\=&lt;/code&gt; to &lt;strong&gt;set&lt;/strong&gt; tab stop, and &lt;code&gt;\kill&lt;/code&gt; at the end of the line.
-    &lt;ul&gt;
-      &lt;li&gt;Ex: &lt;code&gt;\hspace{3cm} \= \hspace{4cm} \= \kill&lt;/code&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;\&amp;gt;&lt;/code&gt; used to &lt;strong&gt;go&lt;/strong&gt; to tab stop (&lt;em&gt;set&lt;/em&gt; once, and &lt;em&gt;go&lt;/em&gt; many times), and &lt;code&gt;\\&lt;/code&gt; is used to separate lines(end this line, and may create a new line).&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;code&gt;\begin{tabular}[position]{cols}&lt;/code&gt; and &lt;code&gt;\end{tabular}&lt;/code&gt;   &lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;the &lt;code&gt;cols&lt;/code&gt; is decided by your need, it can be &lt;code&gt;l c r&lt;/code&gt; or &lt;code&gt;l c c c c r &lt;/code&gt;and &lt;code&gt;l | c | r&lt;/code&gt; means that inserts a vertical line between columns.&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;\hline&lt;/code&gt; Horizontal line between rows. &lt;code&gt;\cline{x-y}&lt;/code&gt; means horizontal line across columns x through y. And x and y are numbers.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;text-and-symbols&quot;&gt;2.  Text and symbols&lt;/h3&gt;
-
-&lt;h4 id=&quot;text&quot;&gt;2.1  Text&lt;/h4&gt;
-
-&lt;hr /&gt;
-&lt;p&gt;&lt;code&gt;{\bf text}&lt;/code&gt; or &lt;code&gt;\textbf{text}&lt;/code&gt;bolden the font. &lt;code&gt;{\it text}&lt;/code&gt; to &lt;em&gt;Italic&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;\href{mailto:website}{text}&lt;/code&gt;,use href in you text:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Ex: &lt;code&gt;\href{mailto:https://www.google.com}{google.com}&lt;/code&gt;   &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;code&gt;\hfill&lt;/code&gt; Horizontal space betwwen the &lt;em&gt;two&lt;/em&gt; blocks   &lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;parabox[position]{length}{text}&lt;/code&gt; to put something into the one kind of box.&lt;/p&gt;
-
-&lt;h4 id=&quot;symbols&quot;&gt;2.2  Symbols&lt;/h4&gt;
-
-&lt;hr /&gt;
-&lt;p&gt;For inline math, use&lt;code&gt;\(..\)&lt;/code&gt; or &lt;code&gt;$ $&lt;/code&gt;.  &lt;br /&gt;
-With the limits of the display in website, more details find at  &lt;a href=&quot;http://www.latex-project.org/&quot;&gt;offical document of LaTeX&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;some-other-important-things-you-should-also-know&quot;&gt;3.  Some other important things you should also know:&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;The test environment in this passage is &lt;a href=&quot;http://tug.org/mactex/morepackages.html&quot;&gt;MacTex&lt;/a&gt;.   &lt;/li&gt;
-  &lt;li&gt;To use LateX in &lt;a href=&quot;www.sublimetext.com/&quot;&gt;Sublime Text&lt;/a&gt;, you can find steps of configuration at &lt;a href=&quot;http://economistry.com/2013/01/installing-and-using-latex-for-mac/&quot;&gt;here&lt;/a&gt;.   &lt;/li&gt;
-  &lt;li&gt;To use Chinese characters in your LaTeX, you can use &lt;strong&gt;xelatex&lt;/strong&gt; Engine. Adding &lt;code&gt;%!TEX program = xelatex&lt;/code&gt; at the beginning of your LaTeX code.   &lt;/li&gt;
-  &lt;li&gt;To install more available package:&lt;code&gt;tlmgr install &amp;lt;package&amp;gt;&lt;/code&gt; in your terminal&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Mon, 22 Sep 2014 06:35:04 +0800</pubDate>
-        <link>http://qianchaoliu.github.io//liuqianchao/update/2014/09/22/LATEX/</link>
-        <guid isPermaLink="true">http://qianchaoliu.github.io//liuqianchao/update/2014/09/22/LATEX/</guid>
         
         
         <category>liuqianchao</category>
