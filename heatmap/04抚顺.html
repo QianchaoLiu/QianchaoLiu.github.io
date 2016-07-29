@@ -1781,9 +1781,81 @@ function initMap() {
 
  //    flightPath.setMap(map);
  //  };
-  
+var yingyeting = new Array(
 
+[41.86333333,123.9047222,'客户服务中心'],
+[41.85416667,123.8958333,'新抚'],
+[41.86361111,123.9222222,'公园'],
+[41.85833501,123.8649993,'新抚商厦'],
+[41.87722222,123.9408333,'城东'],
+[41.87083333,123.8791667,'河北'],
+[41.87972222,123.9055556,'天丰'],
+[41.85222222,123.7991667,'望花'],
+[41.82166667,123.8619444,'古城子'],
+[41.86083333,124.03,'东洲'],
+[41.82916667,123.9127778,'平山'],
+[41.835,123.975,'新屯'],
+[41.83805556,123.9388889,'虎西'],
+[41.85777778,124.0436111,'东洲大街'],
+[41.84472222,124.0030556,'龙凤'],
+[41.83166667,123.7116667,'开发区'],
+[41.8175,123.7247222,'李石'],
+[41.87611111,123.8952778,'抚顺县'],
+[41.70887295,124.2078242,'后安'],
+[41.72555556,123.8977778,'石文'],
+[41.87027778,123.7558333,'高湾'],
+[41.89881477,123.9963955,'河北'],
+[41.91694444,124.0786111,'章党'],
+[41.79444444,123.8680556,'塔峪'],
+[41.97194444,123.8694444,'会元'],
+[41.97607465,124.1443803,'哈达'],
+[41.80093144,123.9413773,'千金'],
+[41.81222222,124.0383333,'碾盘'],
+[41.65777778,124.0705556,'救兵'],
+[41.5766536,123.7786849,'海浪'],
+[41.72490756,123.8083378,'拉古'],
+[41.83226786,124.3380222,'汤图'],
+[41.82416667,123.7102778,'李石'],
+[42.09899099,124.9154491,'清原'],
+[41.99361111,124.5061111,'红透山'],
+[41.98752232,124.6026469,'南口前'],
+[42.03992244,124.703015,'北三家'],
+[41.91868527,124.9560614,'大苏河'],
+[41.95610977,125.1135908,'湾甸子'],
+[42.17398455,125.0876442,'英额门'],
+[42.29977025,125.2229827,'草市'],
+[42.32193847,125.0565818,'土口子'],
+[42.3771194,124.8440563,'大孤家'],
+[42.25944444,124.7058333,'夏家堡'],
+[42.10819544,125.272458,'南山城'],
+[42.0940857,124.9373037,'城郊'],
+[42.09899099,124.9154491,'清原镇'],
+[41.90942713,124.7772636,'敖家堡'],
+[41.72888889,125.0352778,'新宾'],
+[41.72925077,125.0362577,'新宾镇'],
+[41.79083631,125.1719475,'北四平'],
+[41.70377723,125.1399735,'红升'],
+[41.9640033,124.3966531,'南杂木'],
+[41.70943992,124.8279649,'永陵'],
+[41.67943357,125.2938732,'旺清门'],
+[41.77103497,124.6213283,'木奇'],
+[41.85106883,124.4860468,'上夹河'],
+[41.63563881,124.8167315,'榆树'],
+[41.41229591,124.7686513,'平顶山'],
+[41.31548685,124.7126884,'大四平'],
+[41.53717225,125.1411842,'红庙子'],
+[41.60527978,125.3466608,'响水河'],
+[41.43545604,124.5068245,'苇子峪'],
+[41.37925678,124.4320156,'下夹河'],
+[41.43545704,124.5068235,'苇子峪']
 
+ );
+
+ for (var i = yingyeting.length - 1; i >= 0; i--) {
+
+     draw(yingyeting[i][0], yingyeting[i][1], yingyeting[i][2]);
+
+ };
 
  // for (var i = to_draw.length - 1; i >= 0; i--) {
 
@@ -1797,152 +1869,22 @@ function initMap() {
 
 
 
+function draw(a, b, name){
+      var infowindow = new google.maps.InfoWindow({
+      content: name
+    });
 
-
-
-
-function draw(a, b, weight){
-     console.log(a)
-
-
-    a -= (a-35)%heights;
-    b -= (b-118)%heights;   
-
-
-    var points = new Array();
-
-    // var marker = new google.maps.Marker({
-    // position: {lat: a, lng: 131.044},
-    // label:"Hello World!"
-    // });
-    // marker.setMap(map);
-
-// To add the marker to the map, call setMap();
-
-    var center = [a+heights,a,b+heights,b];
-      //绘制中心点
-    // var rectangle = new google.maps.Rectangle({
-    // strokeColor: '#000000',
-    // strokeOpacity: 0.1,
-    // strokeWeight: 1,
-    // fillColor: '#000000',
-    // fillOpacity: 0,
-    // map: map,
-    // bounds: {
-    //   north: center[0],
-    //   south: center[1],
-    //   east: center[2],
-    //   west: center[3]
-    // }
-    // });
-
-
-    //marker
-    // var myLatlng =  new google.maps.LatLng(a, b);
-    // var marker = new google.maps.Marker({
-    //     position: myLatlng,
-    //     label: '5',
-    //     icon:'',
-    //     map: map
-    //   });
-
-    // To add the marker to the map, call setMap();
-    // marker.setMap(map);
-
-
-    var cons = heights;
-    var mark = [a+heights+heights, a+heights, b, b-heights];
-    var count = 1;
-    for (var i = 1; i <= weight/2; i++) {
-      
-      count = (i*2+1);
-      //每行(i*2+1)个，共(i*2+1)行
-
-      for (var x = 1; x <= count; x++) {
-
-          for (var y =1; y <= count ; y++) {
-            //第 i 层
-            
-
-
-
-
-            var n = mark[0]- (x-1)*heights;
-            var s = mark[1]- (x-1)*heights;
-            var e = mark[2]+ (y-1)*heights;
-            var w = mark[3]+ (y-1)*heights;
-            var bian1 = Math.abs((n-center[0])/cons);
-            var bian2 = Math.abs((w-center[3])/cons);
-            var distance = Math.sqrt(bian1*bian1+bian2*bian2);
-            
-            if (i == weight/2){
-                points.push([[n,s,e,w],distance])
-            }
-
-
-            // dis = Math.pow(Math.E,-distance);
-
-            // if (distance == 0){
-            //   distance =1;
-            // }
-
-            // //周围所有点
-            // var rectangle = new google.maps.Rectangle({
-            //   strokeColor: '#000000',
-            //   strokeOpacity: 0,
-            //   strokeWeight: 1,
-            //   fillColor: '#FFDEAD',
-            //   fillOpacity: 0,
-            //   map: map,
-            //   bounds: {
-            //     north: n,
-            //     south: s,
-            //     east: e,
-            //     west: w
-            //   }
-            // });
-
-          };
-
-
-      };
-
-        mark = [mark[0]+heights, mark[0], mark[3] ,mark[3]-heights];
-
-    };
-
-
-    colortree = ['#FFEFD5', '#FFEBCD', '#FFDEAD', '#FFA500', '#FF8C00','#FF7F50']
-
-
-
-    for (var i = points.length - 1; i >= 0; i--) {
-      if (Math.round(points[i][1])<=weight/2){
-        
-
-
-
-      //绘图
-      var rectangle = new google.maps.Rectangle({
-        strokeColor: '#000000',
-        strokeOpacity: 0,
-        strokeWeight: 1,
-        fillColor: colortree.slice(0, weight/2+1)[colortree.slice(0, weight/2+1).length-Math.round(points[i][1])-1],
-        fillOpacity: 0.5,
-        map: map,
-        bounds: {
-          north: points[i][0][0],
-          south: points[i][0][1],
-          east: points[i][0][2],
-          west: points[i][0][3]
-        }
-      });
-      //绘图结束
-      };
-
-      };
-
+    var marker = new google.maps.Marker({
+      position: {lat: a, lng: b},
+      map: map,
+      title: 'Uluru (Ayers Rock)'
+    });
+    marker.addListener('click', function() {
+      infowindow.open(map, marker);
+    });
 }
+
+
 
 
 function toggleHeatmap() {
