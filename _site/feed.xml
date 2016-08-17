@@ -5,8 +5,8 @@
     <description>Welcome to Q.Liu&#39;s Homepage. Here you can find something about my research interests.</description>
     <link>http://qianchaoliu.github.io//</link>
     <atom:link href="http://qianchaoliu.github.io//feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Tue, 16 Aug 2016 23:07:11 +0800</pubDate>
-    <lastBuildDate>Tue, 16 Aug 2016 23:07:11 +0800</lastBuildDate>
+    <pubDate>Wed, 17 Aug 2016 18:07:40 +0800</pubDate>
+    <lastBuildDate>Wed, 17 Aug 2016 18:07:40 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
@@ -85,7 +85,20 @@ n&lt; m %]]&gt;&lt;/script&gt;）,此外SVD分解的方法实现词汇向量化�
 
 &lt;p&gt;    3. Model simplification, start from simplest model to find bugs.&lt;/p&gt;
 
-&lt;p&gt;    4. Parameter Initialization, 假设&lt;script type=&quot;math/tex&quot;&gt;W_{ij} \in [-1,1]&lt;/script&gt;，&lt;script type=&quot;math/tex&quot;&gt;x_{j} \in [-100,100]&lt;/script&gt;，并且&lt;script type=&quot;math/tex&quot;&gt;b_{i} \in [-100,100]&lt;/script&gt;&lt;/p&gt;
+&lt;p&gt;    4. Parameter Initialization, 假设&lt;script type=&quot;math/tex&quot;&gt;W_{ij} \in [-1,1]&lt;/script&gt;，&lt;script type=&quot;math/tex&quot;&gt;x_{j} \in [-100,100]&lt;/script&gt;，并且&lt;script type=&quot;math/tex&quot;&gt;b_{i} \in [-100,100]&lt;/script&gt;，这样，对于&lt;script type=&quot;math/tex&quot;&gt;a_{i}=f(z_{i})=tanh(z_{i})&lt;/script&gt;，&lt;script type=&quot;math/tex&quot;&gt;z_{i}&lt;/script&gt;过大，对导致tanh的梯度接近于0，不利于优化。通常情况下我们将&lt;script type=&quot;math/tex&quot;&gt;b_{i}&lt;/script&gt;初始化为0，&lt;script type=&quot;math/tex&quot;&gt;W_{ij}\~uniform(-r,r)&lt;/script&gt;
+，并且&lt;script type=&quot;math/tex&quot;&gt;r=\sqrt[]{6/(fan.in + fan.out)}&lt;/script&gt;，其中&lt;script type=&quot;math/tex&quot;&gt;fan.in&lt;/script&gt;是上一层layer，units的个数。注意上式是tanh的参考值，对于sigmoid，应该乘上4.&lt;/p&gt;
+
+&lt;p&gt;    5. SGD, 更新参数的频率,对于大的数据集，SGD优于all batch methods。对于小的数据集,L-BFGS 或者Conjugate Gradients方法更合适。比较常用的是mini-batch SGD, 20到1000大小的batch，这样也有利于并行计算。对于参数的更新，除了最基础的learning-rate &lt;script type=&quot;math/tex&quot;&gt;\times&lt;/script&gt; gradient,还有一些延伸： &lt;br /&gt;
+                        1)Momentum,由于SGD的更新完全依赖于当前的batch，这种更新方向可能是十分不稳定的，于是在此处引入momentum，在该次batch的更新中，保留上次更新的影响。&lt;script type=&quot;math/tex&quot;&gt;v=uv-\alpha \delta_{\theta}J_{t}(\theta)&lt;/script&gt;，&lt;script type=&quot;math/tex&quot;&gt;v&lt;/script&gt;的初始值是0，&lt;script type=&quot;math/tex&quot;&gt;u&lt;/script&gt;为0到1的正数，可取0.9。Momentum的收敛速度更快，而且能够跳出局部最优点。除此之外，还可以改变learning rate &lt;script type=&quot;math/tex&quot;&gt;\alpha&lt;/script&gt;：当training validation error不再改变时，&lt;script type=&quot;math/tex&quot;&gt;\alpha&lt;/script&gt;减0.5；此外对于频繁出现的word，可以使用较低的learning rate，对于rare的word，使用较高的learning rate。&lt;/p&gt;
+
+&lt;p&gt;    6. Regularize,当遇到样本小，参数多的情况，可能会有过拟合的现象发生，这里引入解决办法：1，最简单的方法是改变Model Size，减少结点的数目，层的数目。2，Standard L1 or L2 regularization on weights。3，early stop,use parameters that gave best validation error。4，Drop out，1）在training time,随机将50units结点的输入设为0；2)在testing time,将所有的weight除以2(修补1带来的部分影响)&lt;/p&gt;
+
+&lt;h3 id=&quot;language-model&quot;&gt;2.3 Language model&lt;/h3&gt;
+&lt;p&gt;    A language model computes a probability for a sequence of words：&lt;script type=&quot;math/tex&quot;&gt;P(w_{1},w_{2}...w_{T})&lt;/script&gt;,我们知道对于条件概率：&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;$$P(w_{1},w_{2}...w_{m}) = P(w_{1})*P(w_{2}|w_{1})*P(w_{3}|w_{1}w_{2})..P(w_{m}|w_{1}w_{2}..w_{m-1}) = \prod_{i=1}^m P(w_{i}|w_{1}..w_{i-1}) \approx \prod_{i=1}^m P(w_{i}|w_{i-(n-1)}..w_{i-1})$$  &lt;/div&gt;
+
+&lt;p&gt;不同于之前讲过的windows classification，在language model中fixed window 可能不是很合理，前5个/10词汇未必一定能很好地引出下一个词汇，因此，我们在这里引入RNN(Recurrent NN)&lt;/p&gt;
 
 &lt;h4 id=&quot;reference&quot;&gt;Reference&lt;/h4&gt;
 &lt;ol&gt;

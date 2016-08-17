@@ -153,7 +153,20 @@ n< m %]]></script>）,此外SVD分解的方法实现词汇向量化对于新词�
 
 <p>    3. Model simplification, start from simplest model to find bugs.</p>
 
-<p>    4. Parameter Initialization, 假设<script type="math/tex">W_{ij} \in [-1,1]</script>，<script type="math/tex">x_{j} \in [-100,100]</script>，并且<script type="math/tex">b_{i} \in [-100,100]</script></p>
+<p>    4. Parameter Initialization, 假设<script type="math/tex">W_{ij} \in [-1,1]</script>，<script type="math/tex">x_{j} \in [-100,100]</script>，并且<script type="math/tex">b_{i} \in [-100,100]</script>，这样，对于<script type="math/tex">a_{i}=f(z_{i})=tanh(z_{i})</script>，<script type="math/tex">z_{i}</script>过大，对导致tanh的梯度接近于0，不利于优化。通常情况下我们将<script type="math/tex">b_{i}</script>初始化为0，<script type="math/tex">W_{ij}\~uniform(-r,r)</script>
+，并且<script type="math/tex">r=\sqrt[]{6/(fan.in + fan.out)}</script>，其中<script type="math/tex">fan.in</script>是上一层layer，units的个数。注意上式是tanh的参考值，对于sigmoid，应该乘上4.</p>
+
+<p>    5. SGD, 更新参数的频率,对于大的数据集，SGD优于all batch methods。对于小的数据集,L-BFGS 或者Conjugate Gradients方法更合适。比较常用的是mini-batch SGD, 20到1000大小的batch，这样也有利于并行计算。对于参数的更新，除了最基础的learning-rate <script type="math/tex">\times</script> gradient,还有一些延伸： <br />
+                        1)Momentum,由于SGD的更新完全依赖于当前的batch，这种更新方向可能是十分不稳定的，于是在此处引入momentum，在该次batch的更新中，保留上次更新的影响。<script type="math/tex">v=uv-\alpha \delta_{\theta}J_{t}(\theta)</script>，<script type="math/tex">v</script>的初始值是0，<script type="math/tex">u</script>为0到1的正数，可取0.9。Momentum的收敛速度更快，而且能够跳出局部最优点。除此之外，还可以改变learning rate <script type="math/tex">\alpha</script>：当training validation error不再改变时，<script type="math/tex">\alpha</script>减0.5；此外对于频繁出现的word，可以使用较低的learning rate，对于rare的word，使用较高的learning rate。</p>
+
+<p>    6. Regularize,当遇到样本小，参数多的情况，可能会有过拟合的现象发生，这里引入解决办法：1，最简单的方法是改变Model Size，减少结点的数目，层的数目。2，Standard L1 or L2 regularization on weights。3，early stop,use parameters that gave best validation error。4，Drop out，1）在training time,随机将50units结点的输入设为0；2)在testing time,将所有的weight除以2(修补1带来的部分影响)</p>
+
+<h3 id="language-model">2.3 Language model</h3>
+<p>    A language model computes a probability for a sequence of words：<script type="math/tex">P(w_{1},w_{2}...w_{T})</script>,我们知道对于条件概率：</p>
+
+<div align="center">$$P(w_{1},w_{2}...w_{m}) = P(w_{1})*P(w_{2}|w_{1})*P(w_{3}|w_{1}w_{2})..P(w_{m}|w_{1}w_{2}..w_{m-1}) = \prod_{i=1}^m P(w_{i}|w_{1}..w_{i-1}) \approx \prod_{i=1}^m P(w_{i}|w_{i-(n-1)}..w_{i-1})$$  </div>
+
+<p>不同于之前讲过的windows classification，在language model中fixed window 可能不是很合理，前5个/10词汇未必一定能很好地引出下一个词汇，因此，我们在这里引入RNN(Recurrent NN)</p>
 
 <h4 id="reference">Reference</h4>
 <ol>
