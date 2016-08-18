@@ -79,7 +79,11 @@
   </header>
 
   <article class="post-content">
-  <p>    本文是使用神经网络的方法进行自然语言处理的技术路线，以Stanford的CS224d课程为主，仅供参考。</p>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+<p>    本文是使用神经网络的方法进行自然语言处理的技术路线，以Stanford的CS224d课程为主，仅供参考。</p>
 
 <h3 id="section">1.一些必要的知识</h3>
 <p>    1.<strong>线性代数</strong>，包括矩阵的运算，以及模，秩，特征值、特征向量以及和导数求解相关的矩阵知识(比如牛顿法中的Hessian Matrix)等。 <br />
@@ -162,11 +166,25 @@ n< m %]]></script>）,此外SVD分解的方法实现词汇向量化对于新词�
 <p>    6. Regularize,当遇到样本小，参数多的情况，可能会有过拟合的现象发生，这里引入解决办法：1，最简单的方法是改变Model Size，减少结点的数目，层的数目。2，Standard L1 or L2 regularization on weights。3，early stop,use parameters that gave best validation error。4，Drop out，1）在training time,随机将50units结点的输入设为0；2)在testing time,将所有的weight除以2(修补1带来的部分影响)</p>
 
 <h3 id="language-model">2.3 Language model</h3>
-<p>    A language model computes a probability for a sequence of words：<script type="math/tex">P(w_{1},w_{2}...w_{T})</script>,我们知道对于条件概率：</p>
+<p>    A <strong>language model</strong> computes a probability for a sequence of words：<script type="math/tex">P(w_{1},w_{2}...w_{T})</script>,我们知道对于条件概率：</p>
 
 <div align="center">$$P(w_{1},w_{2}...w_{m}) = P(w_{1})*P(w_{2}|w_{1})*P(w_{3}|w_{1}w_{2})..P(w_{m}|w_{1}w_{2}..w_{m-1}) = \prod_{i=1}^m P(w_{i}|w_{1}..w_{i-1}) \approx \prod_{i=1}^m P(w_{i}|w_{i-(n-1)}..w_{i-1})$$  </div>
 
-<p>不同于之前讲过的windows classification，在language model中fixed window 可能不是很合理，前5个/10词汇未必一定能很好地引出下一个词汇，因此，我们在这里引入RNN(Recurrent NN)</p>
+<p>    不同于之前讲过的windows classification，在language model中fixed window 可能不是很合理，前5个/10词汇未必一定能很好地引出下一个词汇，因此，我们在这里引入RNN(Recurrent NN)</p>
+
+<p>    输入是word vectors：<script type="math/tex">x_{1}...x_{t-1},x_{t},x_{t+1}...x_{T}</script>,其中<script type="math/tex">T</script>是whole corpus的大小。对于hidden层的一个unit,<script type="math/tex">h_{t} = \sigma(w^{hh}h_{t-1} + w^{hx}x_{t})</script>，输出为<script type="math/tex">\hat{y}_{t}=softmax(w^{s}h_{t})</script>，其中<script type="math/tex">w^{hh} \in \mathbb{R}^{D_{h} \times D_{h}}</script>，其中<script type="math/tex">D_{h}</script>为hidden layer的数据维度。<script type="math/tex">w^{hx} \in \mathbb{R}^{D_{h} \times d}</script>，<script type="math/tex">d</script>为word vector的维度，<script type="math/tex">w^{s} \in \mathbb{R}^{V \times D_{h}}</script>。因此得到<script type="math/tex">\hat{y} \in \mathbb{R}^{V}</script>,是word vocabulary的概率分布。每个predicting word都对应完成的word vocabulary distribution。因此我们定义目标函数为cross entropy loss:</p>
+
+<div align="center"> $$J(\theta) = -\frac{1}{T} \sum_{t=1}^T \sum_{j=1}^V y_{t,j} \ log_{2} \ \hat{y}_{t,j}$$ </div>
+
+<p>    最后<script type="math/tex">minimal w 2^{J}</script></p>
+
+<p>    <strong>Deep learning public library</strong></p>
+
+<p>    分类：1)通过configuration file文件完成模型：Caffe，DistBelief，CNTK；2）programmatic generation：Torch（Lua），Theano（Python），Tensorflow（Python）。如我们之前Blog提到的，Theano和Tensorflow是非常相似的，这里选择介绍Tensorflow，其一方面有google的背书，另一方面对分布式计算支持较好（一般模型需要在16核GPU上训练1周之久）。</p>
+
+<p>    1. Tensors，用于表示数据，可以看做是n维数组，可以理解为numpy最基础的功能，而TF则在numpy的基础上提供了tensor funciton, 梯度计算，GPU support这些格外的功能。首先介绍了numpy和tensorflow的相似之处，包括metrics的定义，求和以及broadcast性质。然后指出了两者的不同，在numpy中定义metric时，已经在内存中malloc了相应的参数，而在tf中，仅仅是定义了computation graph，直至evaluated(.eval())时才真正create numerical value。</p>
+
+<p>    2. Session,</p>
 
 <h4 id="reference">Reference</h4>
 <ol>

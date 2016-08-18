@@ -5,13 +5,17 @@
     <description>Welcome to Q.Liu&#39;s Homepage. Here you can find something about my research interests.</description>
     <link>http://qianchaoliu.github.io//</link>
     <atom:link href="http://qianchaoliu.github.io//feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 17 Aug 2016 18:07:40 +0800</pubDate>
-    <lastBuildDate>Wed, 17 Aug 2016 18:07:40 +0800</lastBuildDate>
+    <pubDate>Thu, 18 Aug 2016 23:23:57 +0800</pubDate>
+    <lastBuildDate>Thu, 18 Aug 2016 23:23:57 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
         <title>NLP with Neural Network</title>
-        <description>&lt;p&gt;    本文是使用神经网络的方法进行自然语言处理的技术路线，以Stanford的CS224d课程为主，仅供参考。&lt;/p&gt;
+        <description>&lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js&quot;&gt;&lt;/script&gt;
+
+&lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;    本文是使用神经网络的方法进行自然语言处理的技术路线，以Stanford的CS224d课程为主，仅供参考。&lt;/p&gt;
 
 &lt;h3 id=&quot;section&quot;&gt;1.一些必要的知识&lt;/h3&gt;
 &lt;p&gt;    1.&lt;strong&gt;线性代数&lt;/strong&gt;，包括矩阵的运算，以及模，秩，特征值、特征向量以及和导数求解相关的矩阵知识(比如牛顿法中的Hessian Matrix)等。 &lt;br /&gt;
@@ -94,11 +98,25 @@ n&lt; m %]]&gt;&lt;/script&gt;）,此外SVD分解的方法实现词汇向量化�
 &lt;p&gt;    6. Regularize,当遇到样本小，参数多的情况，可能会有过拟合的现象发生，这里引入解决办法：1，最简单的方法是改变Model Size，减少结点的数目，层的数目。2，Standard L1 or L2 regularization on weights。3，early stop,use parameters that gave best validation error。4，Drop out，1）在training time,随机将50units结点的输入设为0；2)在testing time,将所有的weight除以2(修补1带来的部分影响)&lt;/p&gt;
 
 &lt;h3 id=&quot;language-model&quot;&gt;2.3 Language model&lt;/h3&gt;
-&lt;p&gt;    A language model computes a probability for a sequence of words：&lt;script type=&quot;math/tex&quot;&gt;P(w_{1},w_{2}...w_{T})&lt;/script&gt;,我们知道对于条件概率：&lt;/p&gt;
+&lt;p&gt;    A &lt;strong&gt;language model&lt;/strong&gt; computes a probability for a sequence of words：&lt;script type=&quot;math/tex&quot;&gt;P(w_{1},w_{2}...w_{T})&lt;/script&gt;,我们知道对于条件概率：&lt;/p&gt;
 
 &lt;div align=&quot;center&quot;&gt;$$P(w_{1},w_{2}...w_{m}) = P(w_{1})*P(w_{2}|w_{1})*P(w_{3}|w_{1}w_{2})..P(w_{m}|w_{1}w_{2}..w_{m-1}) = \prod_{i=1}^m P(w_{i}|w_{1}..w_{i-1}) \approx \prod_{i=1}^m P(w_{i}|w_{i-(n-1)}..w_{i-1})$$  &lt;/div&gt;
 
-&lt;p&gt;不同于之前讲过的windows classification，在language model中fixed window 可能不是很合理，前5个/10词汇未必一定能很好地引出下一个词汇，因此，我们在这里引入RNN(Recurrent NN)&lt;/p&gt;
+&lt;p&gt;    不同于之前讲过的windows classification，在language model中fixed window 可能不是很合理，前5个/10词汇未必一定能很好地引出下一个词汇，因此，我们在这里引入RNN(Recurrent NN)&lt;/p&gt;
+
+&lt;p&gt;    输入是word vectors：&lt;script type=&quot;math/tex&quot;&gt;x_{1}...x_{t-1},x_{t},x_{t+1}...x_{T}&lt;/script&gt;,其中&lt;script type=&quot;math/tex&quot;&gt;T&lt;/script&gt;是whole corpus的大小。对于hidden层的一个unit,&lt;script type=&quot;math/tex&quot;&gt;h_{t} = \sigma(w^{hh}h_{t-1} + w^{hx}x_{t})&lt;/script&gt;，输出为&lt;script type=&quot;math/tex&quot;&gt;\hat{y}_{t}=softmax(w^{s}h_{t})&lt;/script&gt;，其中&lt;script type=&quot;math/tex&quot;&gt;w^{hh} \in \mathbb{R}^{D_{h} \times D_{h}}&lt;/script&gt;，其中&lt;script type=&quot;math/tex&quot;&gt;D_{h}&lt;/script&gt;为hidden layer的数据维度。&lt;script type=&quot;math/tex&quot;&gt;w^{hx} \in \mathbb{R}^{D_{h} \times d}&lt;/script&gt;，&lt;script type=&quot;math/tex&quot;&gt;d&lt;/script&gt;为word vector的维度，&lt;script type=&quot;math/tex&quot;&gt;w^{s} \in \mathbb{R}^{V \times D_{h}}&lt;/script&gt;。因此得到&lt;script type=&quot;math/tex&quot;&gt;\hat{y} \in \mathbb{R}^{V}&lt;/script&gt;,是word vocabulary的概率分布。每个predicting word都对应完成的word vocabulary distribution。因此我们定义目标函数为cross entropy loss:&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt; $$J(\theta) = -\frac{1}{T} \sum_{t=1}^T \sum_{j=1}^V y_{t,j} \ log_{2} \ \hat{y}_{t,j}$$ &lt;/div&gt;
+
+&lt;p&gt;    最后&lt;script type=&quot;math/tex&quot;&gt;minimal w 2^{J}&lt;/script&gt;&lt;/p&gt;
+
+&lt;p&gt;    &lt;strong&gt;Deep learning public library&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;    分类：1)通过configuration file文件完成模型：Caffe，DistBelief，CNTK；2）programmatic generation：Torch（Lua），Theano（Python），Tensorflow（Python）。如我们之前Blog提到的，Theano和Tensorflow是非常相似的，这里选择介绍Tensorflow，其一方面有google的背书，另一方面对分布式计算支持较好（一般模型需要在16核GPU上训练1周之久）。&lt;/p&gt;
+
+&lt;p&gt;    1. Tensors，用于表示数据，可以看做是n维数组，可以理解为numpy最基础的功能，而TF则在numpy的基础上提供了tensor funciton, 梯度计算，GPU support这些格外的功能。首先介绍了numpy和tensorflow的相似之处，包括metrics的定义，求和以及broadcast性质。然后指出了两者的不同，在numpy中定义metric时，已经在内存中malloc了相应的参数，而在tf中，仅仅是定义了computation graph，直至evaluated(.eval())时才真正create numerical value。&lt;/p&gt;
+
+&lt;p&gt;    2. Session,&lt;/p&gt;
 
 &lt;h4 id=&quot;reference&quot;&gt;Reference&lt;/h4&gt;
 &lt;ol&gt;
