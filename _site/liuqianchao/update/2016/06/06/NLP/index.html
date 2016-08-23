@@ -166,7 +166,7 @@ n< m %]]></script>）,此外SVD分解的方法实现词汇向量化对于新词�
 <p>    6. Regularize,当遇到样本小，参数多的情况，可能会有过拟合的现象发生，这里引入解决办法：1，最简单的方法是改变Model Size，减少结点的数目，层的数目。2，Standard L1 or L2 regularization on weights。3，early stop,use parameters that gave best validation error。4，Drop out，1）在training time,随机将50units结点的输入设为0；2)在testing time,将所有的weight除以2(修补1带来的部分影响)</p>
 
 <h3 id="language-model">2.3 Language model</h3>
-<p>    A <strong>language model</strong> computes a probability for a sequence of words：<script type="math/tex">P(w_{1},w_{2}...w_{T})</script>,我们知道对于条件概率：</p>
+<p>    A <strong>language model</strong> computes a probability for a sequence of words：<script type="math/tex">P(w_{1},w_{2}...w_{T})</script>。有了language model,便可以知道哪些word拼凑起来更像一个句子，比如the cat is small比small the cat is更符合我们对于句子的定义，这些特性在machine translation中帮助我们进行翻译。我们知道对于条件概率：</p>
 
 <div align="center">$$P(w_{1},w_{2}...w_{m}) = P(w_{1})*P(w_{2}|w_{1})*P(w_{3}|w_{1}w_{2})..P(w_{m}|w_{1}w_{2}..w_{m-1}) = \prod_{i=1}^m P(w_{i}|w_{1}..w_{i-1}) \approx \prod_{i=1}^m P(w_{i}|w_{i-(n-1)}..w_{i-1})$$  </div>
 
@@ -178,13 +178,29 @@ n< m %]]></script>）,此外SVD分解的方法实现词汇向量化对于新词�
 
 <p>    最后<script type="math/tex">minimal w 2^{J}</script></p>
 
-<p>    <strong>Deep learning public library</strong></p>
+<p>    这里需要指出rnn的问题，我们知道由于input层(hidden层的time step)比较长(这个长度由corpus的sentence长度决定，可以是5也可以是50,也可以是一本书几万个word)，这就回导致gradient vanishing 和gradient explosion。下面推导gradient vanishing的原因。</p>
+
+<div align="center">
+<img src="http://d3kbpzbmcynnmx.cloudfront.net/wp-content/uploads/2015/10/rnn-bptt1.png" height="200" weight="500" /> </div>
+
+<div align="center"> 
+$$\frac{\Delta E_{3}}{\Delta w} =\sum_{i=1}^{3} \frac{\Delta E_{3}}{\Delta \hat{y}_{3}} \frac{\Delta \hat{y}_{3}}{\Delta s_{3}}  \frac{\Delta s_{3}}{\Delta s_{i}}  \frac{\Delta s_{i}}{\Delta w}$$
+</div>
+<p>    之前提到的简单Feedforward NN中没有weights sharing，在RNN中由于time step间的<script type="math/tex">w_{hh}</script>是一样的，所以在上式中，我们对所有time step关于<script type="math/tex">w_{hh}</script>的梯度取和。其中<script type="math/tex">\frac{\Delta s_{3}}{\Delta s_{i}} = \prod_{j=i+1}^{3} \frac{\Delta s_{j}}{\Delta s_{j-1}}</script>。我们又知道<script type="math/tex">s_{j}=f(w s_{j-1}+b)</script>，故<script type="math/tex">\frac{\Delta s_{j}}{\Delta s_{j-1}} = w f^{'}(w s_{j-1}+b)</script>，易证<script type="math/tex">\frac{\Delta s_{3}}{\Delta s_{i}}</script>将会是非常大，或是非常小的数(Bengio et al 1994)。</p>
+
+<p>    <strong>Deep learning public library:TensorFlow</strong></p>
 
 <p>    分类：1)通过configuration file文件完成模型：Caffe，DistBelief，CNTK；2）programmatic generation：Torch（Lua），Theano（Python），Tensorflow（Python）。如我们之前Blog提到的，Theano和Tensorflow是非常相似的，这里选择介绍Tensorflow，其一方面有google的背书，另一方面对分布式计算支持较好（一般模型需要在16核GPU上训练1周之久）。</p>
 
-<p>    1. Tensors，用于表示数据，可以看做是n维数组，可以理解为numpy最基础的功能，而TF则在numpy的基础上提供了tensor funciton, 梯度计算，GPU support这些格外的功能。首先介绍了numpy和tensorflow的相似之处，包括metrics的定义，求和以及broadcast性质。然后指出了两者的不同，在numpy中定义metric时，已经在内存中malloc了相应的参数，而在tf中，仅仅是定义了computation graph，直至evaluated(.eval())时才真正create numerical value。</p>
+<p>    1. Tensors，用于表示数据，可以看做是n维数组，可以理解为numpy最基础的功能，而TF则在numpy的基础上提供了tensor funciton, 梯度计算，GPU support这些额外的功能。首先介绍了numpy和tensorflow的相似之处，包括metrics的定义，求和以及broadcast性质。然后指出了两者的不同，在numpy中定义metric时，已经在内存中malloc了相应的参数，而在tf中，仅仅是定义了computation graph，直至evaluated(.eval())时才真正create numerical value。</p>
 
-<p>    2. Session,</p>
+<p>    2. Session, 是所有operation的环境，sess.run(y)返回fetch（从global computation graph 从返回的结果），一般将要参与运算的所有tensor定义在同一个session下。tf.InteractiveSession()是在ipython中使用的default session.</p>
+
+<p>    3. Computation Graph, every function(<script type="math/tex">\times \ and \ other \ operation</script>),就是在computation graph上加入新内容。Computation Graph会record这些操作。 </p>
+
+<p>    4. Variables,是boxs that hold states. 与constant tensor的区别是，variable在使用(session.run(v)前必须initialize(tf.initialize_all_variables())。variable为什么需要name：通过name来在computation graph 中进行索引。variable的scope(namespace)问题：，背景：复杂的神经网络模型中可能会有数百个variable，我们需要了解namespace。对于Recurrent NN中的weights sharing，我们使用reuse_varaiables()</p>
+
+<p>    5. Inputting data，定义数据。1）方法一是通过numpy定义metric a，使用tf.convert_to_tensor(a)完成；2）tf.placeholder，dummy nodes （相比于numpy的方法，更符合computation graph的定义）that provide entry points for data to computational graph.通过feed_dict完成从placeholder到numerial data 到映射。</p>
 
 <h4 id="reference">Reference</h4>
 <ol>
