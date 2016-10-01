@@ -11,11 +11,11 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/pygments.css">
-<!--
+
     <script type="text/javascript"
   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
     </script>
--->
+
 <!--
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -390,6 +390,148 @@
   </div>
 </div>
 
+
+
+<div class="daily">
+  <div class="dailytitle">
+  DAY 2016/9/10
+  </div>
+
+  <div class="dailycontent">
+  print item含有中文的list时，中文会被显示成编码，可以print str(list).decode('string_escape')<br><br>
+
+  </div>
+
+  <div class="dailytodo">
+    #todo: 
+  </div>
+</div>
+
+
+
+<div class="daily">
+  <div class="dailytitle">
+  DAY 2016/9/19
+  </div>
+
+  <div class="dailycontent">
+  Evaluate of supervised learning:$$Precision = \frac{truepostive}{truepostive + falsepostive} $$<br><br>
+  $$Recall = \frac{truepostive}{truepostive + falsenegtive} $$  <br><br>
+  $$ F Measure = \frac{2PR}{P+R}$$
+
+
+  </div>
+
+  <div class="dailytodo">
+    #todo: 
+  </div>
+</div>
+
+
+
+
+
+
+
+<div class="daily">
+  <div class="dailytitle">
+  DAY 2016/9/20
+  </div>
+
+  <div class="dailycontent">
+    报了最后一期的实习账单，邮寄了离职文件，AC的实习算是正式结束。<br><br>
+    Python Enhancement Proposals(PEP阅读)开始，这段阅读的目的是:readability counts.<br><br>
+    import os ..先放standard library imports, then third party library and local files are added at the end, each group should be separated by blank line. 
+  </div>
+
+  <div class="dailytodo">
+    #todo: 
+  </div>
+</div>
+
+
+<div class="daily">
+  <div class="dailytitle">
+  DAY 2016/9/21
+  </div>
+
+  <div class="dailycontent">
+    class的static method,一般不指定第一个参数，当调用类的属性和方法是，需要通过类名.属性名，类名.方法名<br><br>
+    class的class method,第一个参数是cls, 用于调用类的属性和类的方法，不用通过类名，而是通过cls参数，避免硬编码。<br><br>
+    PEP8,Naming conventions:<br><br>
+    package or Module name should all-lowercase，全部小写<br><br>
+    class names:Capwords，首字母大写<br><br>
+    function names: all-lowercase，多个word之间用下划线分开<br><br>当function的参数和内建的参数重合时，一般在结尾处加下划线（trailing underscore）<br><br>
+    _name,用在非public的method，和instance variables<br><br>
+    constants变量（固定变量），一般用全大写
+    
+  </div>
+
+  <div class="dailytodo">
+    #todo: 
+  </div>
+</div>
+
+
+
+
+
+
+
+
+<div class="daily">
+  <div class="dailytitle">
+  DAY 2016/9/26
+  </div>
+
+  <div class="dailycontent">
+    Ridge Regularization $$f(X) = WX + b +\lambda ||W||_{2}^{2}$$<br><br>通过引入penality，避免线性模型的参数过大，而引发的过度拟合。<br><br>
+    参数假设检验，总体分布已知，对总体的部分参数进行假设检验。总体方差已知，检验均值是U检验；总体方差未知，检验均值是t检验（要确定两个总体的方差相等）；总体均值已知/总体方差未知，检验方差是卡方检验；两个总体的均值未知，检查两个总体的方差是否相等是F检验（case：当假设总体服从正态分布时，通过F检验判定方差相等时，进一步可以用t检验，验证均值是否相等，如果方差不相等，可以用秩和检验）。<br><br>
+    非参数建设建议，总体分布未知，对总体的分布类型提出假设<br><br>
+  </div>
+
+  <div class="dailytodo">
+    #todo: 
+  </div>
+</div>
+
+
+
+
+<div class="daily">
+  <div class="dailytitle">
+  DAY 2016/9/27
+  </div>
+
+  <div class="dailycontent">
+    conf = ConfigParser.ConfigParser()<br>
+    conf.read('.cfg')<br>
+    conf.get('section1','key1') #conf.getfloat()<br><br>
+    @wrapperfunc<br>
+    def newfunction():<br>
+    newfunction() 调用<br>
+    相当于newfunction = wrapperfunc(newfunction)<br>
+    newfunction()
+  </div>
+
+  <div class="dailytodo">
+    #todo: 
+  </div>
+</div>
+
+<div class="daily">
+  <div class="dailytitle">
+  DAY 2016/10/01
+  </div>
+
+  <div class="dailycontent">
+    file 里的__init__.py的作用：用于引入file里的sample.py文件中的类和方法(__init__.py:from .sample import defname(classname))，在file同级目录下的py只要import file就可以了。
+  </div>
+
+  <div class="dailytodo">
+    #todo: 
+  </div>
+</div>
 
 
 
