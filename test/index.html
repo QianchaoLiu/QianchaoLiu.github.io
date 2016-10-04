@@ -525,7 +525,9 @@
   </div>
 
   <div class="dailycontent">
-    file 里的__init__.py的作用：用于引入file里的sample.py文件中的类和方法(__init__.py:from .sample import defname(classname))，在file同级目录下的py只要import file就可以了。
+    file 里的__init__.py的作用：用于引入file里的sample.py文件中的类和方法(__init__.py:from .sample import defname(classname))，在file同级目录下的py只要import file就可以了。<br><br>
+    在修改或更新dict中的元素时，如果只修改一个可以直接dit['key'] = new vaule<br>
+    但如果是同时更新好多个，且好多个是属于一个newdict，可以dic.update(newdict)
   </div>
 
   <div class="dailytodo">
@@ -533,6 +535,26 @@
   </div>
 </div>
 
+
+
+
+
+<div class="daily">
+  <div class="dailytitle">
+  DAY 2016/10/04
+  </div>
+
+  <div class="dailycontent">
+    pandas索引，按值索引：print(reader[reader['收款机号'] == '00806A'].head())<br><br>
+    pandas,groupby后的对象，可以进行迭代 for name,subreader in reader.groupby(by = [reader['pos']])；  其中name会依次输出pos名称<br><br>
+    最快地的terminal绘制函数图像,import matplotlib.pyplot as plt；plt.plot(np.arange(0,10,0.01), y)；plot.show()
+
+  </div>
+
+  <div class="dailytodo">
+    #todo: 
+  </div>
+</div>
 
 
 </body>
