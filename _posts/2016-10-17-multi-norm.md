@@ -107,7 +107,40 @@ $$P(X_1) = P(X_1 \mid X_2) = \sum_i P(X_1 \mid X_{2i})$$
 
 #### 2.2 多元正态分布的参数估计与假设检验
 
-&emsp; 假设一个多元正态分布的样本$$X_{n,P}$$，即每个样本P个维度，共n个样本。则样本离差矩阵是这样定义的:$$A=\sum_{\alpha=1}^{n}(X_{(\alpha)}-( \bar{X}))(X_{(\alpha)}-( \bar{X}))^T$$，A服从于参数为$$(n-1, \sum)$$的Wishart分布。
+&emsp; 参数估计，即根据样本数据来估计出多元正态分布的分布（均值与协方差矩阵）。$$(\bar{X}, V=\frac{A}{n})$$分别是$$(u, \Sigma)$$的极大似然估计，$$(\bar{X}, S=\frac{A}{n-1})$$分别是$$(u, \Sigma)$$的无偏估计（期望相等），有效估计（无偏估计中方差最小的）。其中V是样本协方差矩阵，A是样本离差矩阵。离差矩阵$$A_{p\times p}$$的计算如下：
+
+$$A = \sum_{\alpha=1}^{n} (X^{(\alpha)}-\bar{X})(X^{(\alpha)}-\bar{X})^T$$
+
+&emsp; 相关系数矩阵的计算是基于离差矩阵A或协方差矩阵的($$a_{ij}、v_{ij}$$是$$A,V$$的元素)：
+
+$$r_{ij} = \frac{a_{ij}}{\sqrt{a_{ii}a_{jj}}}=\frac{v_{ij}}{\sqrt{v_{ii}v_{jj}}}$$
+
+&emsp; 关于离差矩阵$$A$$的三条性质：1）$$A\sim W_p(n-1, \Sigma)$$，其中$$W$$为Wishart分布，Wishart分布是$$\chi^2$$分布的推广，2）$$\bar{X}$$与$$A$$是相互独立的，3)，$$A$$是正定矩阵的充要条件是$$n>p$$。
+
+&emsp; 多元正态分布的假设检验与一元问题的相似，但围绕的重点主要是均值向量的检验（分为与假设值是否相等，两组正态多元分布的均值向量是否相等）。
+
+&emsp; 1.协方差矩阵$$\Sigma$$已知，判断均值向量与假设量是否相等，构造$$\chi^2$$统计量：$$T_0^2 = n(\bar{X}-u_0)^T\Sigma^{-1}(\bar{X}-u_0) \sim \chi^2(p)$$。
+
+&emsp; 2.协方差矩阵$$\Sigma$$未知，判断均值向量与假设量是否相等，需要通过两步来构造统计量，第一步类似于上式:
+
+$$T^2 = (n-1)n(\bar{X}-u_0)^TA^{-1}(\bar{X}-u_0) \sim T(p,n-1)$$
+
+&emsp; 其中$$T^2(p,n-1)$$是Hotelling分布（一般地，对于$$nX^TS^{-1}X \sim T(p,n)$$)；第二步把hotellling 统计量转换为我们熟悉的F分布：
+
+$$\frac{n-p}{(n-1)p}T^2(p,n-1)~F(p,n-p)$$
+
+&emsp; 根据上述hoteling分布，以及转化为F分布的方法可以得出基于$$T^2$$的联合置信区域:
+
+$$a^T\bar{X} - T_{\alpha}\frac{\sqrt{a^TSa}}{\sqrt{n}} < a^Tu < a^T\bar{X} + T_{\alpha}\frac{\sqrt{a^TSa}}{\sqrt{n}}$$
+
+&emsp; 其中a是任意的，取无穷，只有理论意义；除了基于联合T^2的置信区域外，还有一种置信区域精度更严格的方法：邦弗伦尼置信区域：
+
+$$a^T\bar{X} - t_{\frac{\alpha}{2k}}(n-1)\frac{\sqrt{a^TSa}}{\sqrt{n}} < a^Tu < a^T\bar{X} + t_{\frac{\alpha}{2k}}(n-1)\frac{\sqrt{a^TSa}}{\sqrt{n}}$$
+
+&emsp; 其中$$k$$为线性组合的数目，同时也为p
+
+&emsp; 3.判断多组多元正态分布的向量均值是否相等（方差分析：原假设$$u_1 = u_2 =...u_k$$）,我们知道，对于一元变量的方差检验，我们通过由SSE,SSA构造F统计量：$$F=\frac{SSA/{k-1}}{SSE/{n=k}} \sim F(k-1,n-k)$$，对于多元变量，同样有SSE和SS(TR):$$\Lambda = \frac{SSE}{SSE+SS(TR)} \sim \Lambda(p,k-1,n-k) = \Lambda(p,n_1,n_2) $$，其中$$\Lambda$$为Wilks分布。其又能转化为F分布（这种转换取决于$$n_1$$的值）。
+
 
 
 ### 3. Linear Regression
