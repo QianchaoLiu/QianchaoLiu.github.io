@@ -19,6 +19,14 @@ categories: liuqianchao update
 
 5. $$u_1$$与$$u_2$$未知的两个正态母体，检验其方差是否相等：F检验,$$F= \frac{s_{n1}^2}{s_{n2}^2}$$,其中$$s_{n1} = \frac{\sum_i^{n1}((x_i)-\bar{x})^2}{n_1-1}$$
 
+&emsp; 相关系数：
+
+$$\rho(X,Y) = \frac{cov(X,Y)}{\sqrt{D(X)D(Y)}}=\frac{E(X-EX)E(Y-EY)}{\sqrt{D(X)D(Y)}}$$
+
+&emsp; 其中:
+
+$$E(X)=\int_a^b xf(x)dx\\D(X)=E(X^2)-E(X)^2$$
+
 ### 1. What is multivariate normal distribution?   
 
 &emsp; 首先我们知道，标准正态分布的概率密度函数为：
@@ -35,7 +43,9 @@ $$f(x_1,x_2..x_p) = \prod_{i=1}^p \frac{1}{\sqrt{2\pi}}e^{-\frac{x_{i}^2}{2}}$$
 
 &emsp; Z的均值为$$(0,...,0)^T$$，协方差矩阵为$$I$$（非对角线元素因为相互独立，协方差为0），即为$$Z \sim N_p(0,I)$$。
 
-&emsp; 同样，我们进行变换$$X = u + AZ$$，其中$$u$$为p维常数向量，$$A$$为p阶非退化矩阵。由此，得到一般多元正态分布的密度函数、均值、方差；其中均值为u，方差为$$AA^T$$，记作$$\sum$$。
+&emsp; 同样，我们进行变换$$X = u + AZ$$，其中$$u$$为p维常数向量，$$A$$为p阶非退化矩阵。由此，得到一般多元正态分布的密度函数、均值、方差；其中均值为u，方差为$$AA^T$$，记作$$\sum$$。其中多元正态分布的密度函数为：
+
+$$f(x_1...x_p) = (2\pi)^{-\frac{p}{2}} (\mid \Sigma \mid)^{-\frac{1}{2}}exp(-\frac{1}{2}(x-u)^T\Sigma^{-1}(x-u))$$
 
 &emsp; 需要注意，以上的结论的假设，多元变量之间相互独立；对于正态分布，如果相关系数（协方差）为0，则相互独立。
 
@@ -123,17 +133,17 @@ $$r_{ij} = \frac{a_{ij}}{\sqrt{a_{ii}a_{jj}}}=\frac{v_{ij}}{\sqrt{v_{ii}v_{jj}}}
 
 &emsp; 2.协方差矩阵$$\Sigma$$未知，判断均值向量与假设量是否相等，需要通过两步来构造统计量，第一步类似于上式:
 
-$$T^2 = (n-1)n(\bar{X}-u_0)^TA^{-1}(\bar{X}-u_0) \sim T(p,n-1)$$
+$$T^2 = (n-1)n(\bar{X}-u_0)^TA^{-1}(\bar{X}-u_0) \sim T^2(p,n-1)$$
 
 &emsp; 其中$$T^2(p,n-1)$$是Hotelling分布（一般地，对于$$nX^TS^{-1}X \sim T(p,n)$$)；第二步把hotellling 统计量转换为我们熟悉的F分布：
 
-$$\frac{n-p}{(n-1)p}T^2(p,n-1)~F(p,n-p)$$
+$$\frac{n-p}{(n-1)p}T^2(p,n-1)\sim F(p,n-p)$$
 
 &emsp; 根据上述hoteling分布，以及转化为F分布的方法可以得出基于$$T^2$$的联合置信区域:
 
 $$a^T\bar{X} - T_{\alpha}\frac{\sqrt{a^TSa}}{\sqrt{n}} < a^Tu < a^T\bar{X} + T_{\alpha}\frac{\sqrt{a^TSa}}{\sqrt{n}}$$
 
-&emsp; 其中a是任意的，取无穷，只有理论意义；除了基于联合T^2的置信区域外，还有一种置信区域精度更严格的方法：邦弗伦尼置信区域：
+&emsp; 其中a是任意的，取无穷，只有理论意义；除了基于联合$$T^2$$的置信区域外，还有一种置信区域精度更严格的方法：邦弗伦尼置信区域：
 
 $$a^T\bar{X} - t_{\frac{\alpha}{2k}}(n-1)\frac{\sqrt{a^TSa}}{\sqrt{n}} < a^Tu < a^T\bar{X} + t_{\frac{\alpha}{2k}}(n-1)\frac{\sqrt{a^TSa}}{\sqrt{n}}$$
 
