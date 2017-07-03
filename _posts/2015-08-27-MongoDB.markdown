@@ -90,5 +90,31 @@ posts.find_one({"author": "Mike"})
 &nbsp;&nbsp;&nbsp;&nbsp;在查询唯一一行数据时使用上述方法，当查询多会返回多个数据时，我们使用：
 {% highlight python %}
 for item in posts.find({"author": "Mike"}):
-	item
+	print item
 {% endhighlight %}
+
+- Update
+
+{% highlight python %}
+content = collection.find_one({"author": "Mike"})
+content["author"] = "liuqianchao"
+collection.save(content)
+{% endhighlight %}
+
+#### 索引    
+
+&nbsp;&nbsp;&nbsp;&nbsp;下面介绍Mongo常用的索引操作(以在Console里操作为例)：
+
+{% highlight python %}
+db.stats() # 查看数据库存储情况
+use database; # 切换databse
+show collections; # 查看所有tables
+db.collection.getIndexes() # 查看目前存在的索引
+db.collection.ensureIndex({"field":1}) # 添加新的索引, 1表示升序
+db.collection.dropIndex({"filed":1}) # 删除某条索引
+{% endhighlight %}
+
+&nbsp;&nbsp;&nbsp;&nbsp;需要注意，当某条索引为复合索引(Compound Index 同时索引多个字段)时, 单独调用前几个索引是能有效利用索引的，但如果只调用后续索引（比如跳过定义的第一个索引字段）则没能利用索引。
+
+#### Mongo的内存管理
+在使用Mongo，大家可能会发现Mongo进程所占用的内存是比较高的，这是因为Mongo的设计是基于“内存映射存储引擎”的，其会把数据读入内存，从而提高存储和读取的速度。
