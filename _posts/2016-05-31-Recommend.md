@@ -27,9 +27,14 @@ categories: liuqianchao update
 &nbsp;&nbsp;&nbsp;&nbsp;首相我想要介绍一下，什么是协同过滤，维基上给出的解释是: ***collaborative filtering is the process of filtering for information or patterns using techniques involving collaboration among multiple agents, viewpoints, data sources, etc***.   
 &nbsp;&nbsp;&nbsp;&nbsp;这里有一组关键词，collaboration among multiple agents，借助群体的信息，通过别人的对商品的浏览、购买、评价记录来完成对某一个体的推荐，这就是协同过滤的特点。   
 &nbsp;&nbsp;&nbsp;&nbsp;基于协同过滤的推荐(Collaborative Filtering-Based Recommendation)，又可以细分为基于用户的(User-based),基于物品的(Item-based)以及基于模型的(Model-based)。
+&nbsp;&nbsp;&nbsp;&nbsp;在介绍各种Collaborative Filtering方法之前，我们先介绍几个计算相似度的方法：
+
+- 欧式距离：两组向量元素级别的差的平方和。
+- 余弦距离：内积（点乘）/两个向量的Norm 2范数。相比于欧几里得距离，余弦距离不依赖于绝对值，比如两个人分别对于A,B,C产品的打分为(5,5,0)和(3,3,0)，则余弦距离认为两个人极为相似（相似度为1）。
+- 皮尔逊相似度：X，Y分别标准化（减去相应的均值）之后进行余弦距离的计算。皮尔逊相关系数排除了“欧式距离不同维度的数量级对结果影响显著"的问题。
 
 #### 3.1 基于用户的协同过滤   
-&nbsp;&nbsp;&nbsp;&nbsp;**基于用户的协同过滤**，与上文中提到的基于人口统计的推荐不同之处的计算用户相似时用的是用户对于商品的评分或者购买浏览记录，而不是人口统计特征。基于用户的协同过滤维护这样一个$$m × k$$的矩阵$$M$$.其中有$$m$$个用户和$$k$$个商品,通过计算行与行间的  
+&nbsp;&nbsp;&nbsp;&nbsp;**基于用户的协同过滤**，与上文中提到的基于人口统计的推荐不同之处的计算用户相似时用的是用户对于商品的评分或者购买浏览记录，而不是人口统计特征。基于用户的协同过滤维护这样一个$$m × k$$的矩阵$$M$$.其中有$$m$$个用户和$$k$$个商品,通过计算行与行之间（用户之间）的相似度，来推荐和你相似的人浏览过而你没有浏览过的内容。
 
 <div id="content">
 
@@ -43,6 +48,11 @@ categories: liuqianchao update
 
 </div> 
 <div align="center">基于用户的协同过滤</div>
+&nbsp;&nbsp;&nbsp;&nbsp;具体操作步骤如下：    
+
+- 计算用户之间的相似度，得到用户相似度矩阵（是一个对称矩阵）。
+- 补全用户x未打分商品i的得分：W(x与y用户的相似度)*S(y用户对商品i的打分)。其中y是所有对商品i打过分的用户
+- 由高到低向用户x推荐其未打分的商品。
 
 #### 3.2 基于物品的协同过滤   
 
@@ -53,15 +63,19 @@ categories: liuqianchao update
 <div id="content">
 
     <table cellspacing="0">
-    <tr><th></th><td>item1</td><td>item2</td><td>item3</td></tr>
-    <tr><td>item1</td><td></td><td>3</td><td></td></tr>
-    <tr><td>item2</td><td>3</td><td></td><td></td></tr>
-    <tr><td>item3</td><td></td><td></td><td></td></tr>
+    <tr><th></th><td>user1</td><td>user2</td><td>user3</td></tr>
+    <tr><td>item1</td><td>3</td><td>1</td><td></td></tr>
+    <tr><td>item2</td><td>3</td><td>1</td><td></td></tr>
+    <tr><td>item3</td><td></td><td></td><td>5</td></tr>
 
     </table>
 
 </div> 
 <div align="center">基于物品的协同过滤</div>
+
+&nbsp;&nbsp;&nbsp;&nbsp; 基于物品的协同过滤相较于基于用户的具有以下优势，因此目前在亚马逊，被采用的是基于物品的协同过滤方法。
+
+- 相较于用户，物品之间的相似度计算变化相对来说较小，该相似度计算过程可以离线计算、定期更新。
 
 
 #### 3.3 基于模型的协同过滤   
