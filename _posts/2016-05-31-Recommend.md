@@ -89,11 +89,11 @@ categories: liuqianchao update
 
 <div align="center">$$argmin [D_{w}(X,f(UV^{T}))+R(U,V)]$$</div>
 
-&nbsp;&nbsp;&nbsp;&nbsp;其中，$$D_{w}(X,f(UV^{T}))$$是$$U$$,$$V$$对于$$X$$的损失函数,$$R(U,V)$$是正则化因子(regularizaiton loss),用于避免过度拟合。   
+&nbsp;&nbsp;&nbsp;&nbsp;其中，$$D_{w}(X,f(UV^{T}))$$是$$U$$,$$V$$对于$$X$$的损失函数，比如可以定义为平方损失函数。$$R(U,V)$$是正则化因子(regularizaiton loss),用于避免过度拟合，该正则项可以取L2正则函数。   
 
 &nbsp;&nbsp;&nbsp;&nbsp;3、到这里，已经把问题转换为最优值求解问题，常见的方法包括梯度下降等。
 
-
+&nbsp;&nbsp;&nbsp;&nbsp;在完成上述的矩阵分解后，便可以通过$$UV^{T}$$来补全用户对未评价商品的得分。剩余的思路与其他协调过滤的方法一致，只需要将补全的未评价商品得分由高到低排序，推荐给用户即可。
 
 
 
