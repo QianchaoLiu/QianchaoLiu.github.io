@@ -46,7 +46,7 @@ categories: liuqianchao update
 
     </table>
 
-</div> 
+</div>
 <div align="center">基于用户的协同过滤</div>
 &nbsp;&nbsp;&nbsp;&nbsp;具体操作步骤如下：    
 
@@ -70,7 +70,7 @@ categories: liuqianchao update
 
     </table>
 
-</div> 
+</div>
 <div align="center">基于物品的协同过滤</div>
 
 &nbsp;&nbsp;&nbsp;&nbsp; 基于物品的协同过滤相较于基于用户的具有以下优势，因此目前在亚马逊，被采用的是基于物品的协同过滤方法。
@@ -95,9 +95,70 @@ categories: liuqianchao update
 
 &nbsp;&nbsp;&nbsp;&nbsp;在完成上述的矩阵分解后，便可以通过$$UV^{T}$$来补全用户对未评价商品的得分。剩余的思路与其他协调过滤的方法一致，只需要将补全的未评价商品得分由高到低排序，推荐给用户即可。
 
+&nbsp;&nbsp;&nbsp;&nbsp;**下面我们具体化损失函数，并使用Python来实现矩阵分解的主要步骤：**
 
+将原始评分R矩阵分解成P矩阵和Q矩阵
+
+$$R_{m\times n} = P_{m\times k}Q_{k \times n}$$
+
+故如果使用平方差作为损失函数，有：
+
+$$e_{i,j}^2 = (r_{ij}-\hat{r_{ij}})^2= (r_{ij}-\sum_{k=1}^Kp_{ik}q_{kj})^2$$
+
+求损失函数的梯度，故：
+
+$$\frac{\delta e_{ij}^2}{\delta p_{ik}}=-2(r_{ij}-\sum_{k=1}^Kp_{ik}q_{kj})q_{kj} = -2e_{ij}q_{kj}$$
+
+一般会对目标函数加入正则项，防止过度拟合：
+
+$$e_{i,j}^2 = (r_{ij}-\sum_{k=1}^Kp_{ik}q_{kj})^2 + \frac{\beta}{2}\sum_{i=1}^k(p_{ik}^2+q_{kj}^2)$$
+
+相应地求其损失函数的梯度：
+
+$$\frac{\delta e_{ij}^2}{\delta p_{ik}}=-2e_{ij}q_{kj}+\beta p_{ik}$$
+
+因此我们有更新方程为：
+
+$$p_{ik}' = p_{ik} - \alpha \frac{\delta e_{ij}^2}{\delta p_{ik}} = p_{ik} + \alpha(2e_{ij}q_{kj}-\beta p_{ik})$$
+
+
+{% highlight python %}
+def mf(originMatrix, k, alpha, beta, lossThreshold, maxIter):
+	m, n = np.shape(originMatrix)
+	# 初始化p和q
+	p = np.mat(np.random.random((m, k)))
+	q = np.mat(np.random.random((k, n)))
+
+	# 开始训练
+	for step in range(maxIter):
+		for i in range(m):
+			for j in range(n):
+				if originMatrix[i, j] > 0:
+					# 计算e_ij
+					error = originMatrix[i, j]
+					for r in range(k):
+						error = error - p[i, r] * q[r, j]
+					# 更新
+					for r in range(k):
+						p[i, r] = p[i, r] + alpha*(2*error*q[r, j] - beta*p[i, r])
+						q[r, j] = q[r, j] + alpha*(2*error*p[i, r] - beta*q[r, j])
+		loss = 0.0
+		for i in range(m):
+			for j in range(n):
+				if originMatrix[i, j] > 0:
+					error = 0
+					for r in range(k):
+						error = error + p[i, r] * q[r, j]
+					loss = (originMatrix[i, j] - error)**2
+					for r in range(k):
+						loss += 0.5*beta*(p[i, r]**2 + q[r, j]**2)
+		if loss < lossThreshold:
+			break
+		if step % 100 == 0:
+			print step, loss
+	return p, q
+{% endhighlight %}
 
 
 #### Reference
 1. Zhiyuan Liu [Big Data Intelligence](http://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Daps&field-keywords=big+data+intelligence&rh=i%3Aaps%2Ck%3Abig+data+intelligence)
-
