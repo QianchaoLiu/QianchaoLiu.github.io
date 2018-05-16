@@ -4,15 +4,9 @@ title: About
 permalink: /about/
 ---
 
-Liu Qianchao is an undergraduate student, majored in Information Management and Information System, his interests are on NLP,Data mining&Machine learing. And with the help above methods to slove problems in the field of management.
+Liu Qianchao is an master student at Shanghai Jiao Tong University, majored in Information Management and Information System. His interests are on NLP, Recommendation System, Data mining and other fileds of machine learning. And with the help above methods to slove problems in the field of management.
 
-Take a look at my Linkedin profile at [linkedin.com/in/liuqianchao](http://www.linkedin.com/in/liuqianchao).
 
 You can also find the source codes written by me at [github.com/qianchaoliu](https://github.com/qianchaoliu).
 <hr>
 
-<center><h3> <bold>Education Background</bold></h3></center>
-　　　　　　　Tianjin University　　　　　　　　　　　　　　　　　　　　　2012.9-2016.7<br>
-　　　　　　　Bachelor's degree in Information Management and Information System<br>
-　　　　　　　
-<hr>
