@@ -10,7 +10,7 @@ categories: liuqianchao update
 
 ### Spark计算原理
 
-RDD(Resilient Distributed Dataset)弹性分布式数据，其中Resilent使用replicate（冗余备份）。Spark使用sparkcontext.textfile加载本地文件或内存中的数据变成RDD，通过transformation操作定义新的RDD（懒计算，这里只是定义），最终使用action执行计算并存储到外部节点。
+**RDD**(Resilient Distributed Dataset)弹性分布式数据，其中Resilent使用replicate（冗余备份）。Spark使用sparkcontext.textfile加载本地文件或内存中的数据变成RDD，通过transformation操作定义新的RDD（懒计算，这里只是定义），最终使用action执行计算并存储到外部节点。
 
 常见的Transformation包括map, filter, groupby, join等，输入RDD，返回RDD。
 
