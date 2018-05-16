@@ -18,7 +18,10 @@ RDD(Resilient Distributed Dataset)弹性分布式数据，其中Resilent使用re
 
 过程构造DAG计算依赖图，提交给DAGScheduler，DAGScheduler会将任务划分为多个stage，每个stage都是一个任务集。前部分的stages做Map, 后部分的stages做Reduce，中间使用shuffle连接。shuffle将Map的结果通过序列化、反序列化(CPU将对象和二进制之间的转换)、跨节点IO和磁盘IO等操作传递给Reduce。DAGScheduler计算得到各stages之间的依赖关系，并将任务集提交给TaskScheduler,TaskScheduler将认为分发给excutor运行，执行结果先反馈给TaskScheduler，然后反馈给DAGScheduler
 
-### Spark API
+
+**DataFrame** 大部分情况下, RDD还是用来对数据集进行基本的转换, 它的数据是非结构化的(以parallelize存储list集合为例，每个item以java对象的形式存储，不同的item在集群中分布式存储), DataFrame则更适合处理结构化的（以Row对象的形式在集群中分布式存储，并且Spark知道row对象的列名、列数据类型等），关系型数据(table in relational database)。DataFrame支持map, filter, aggregate, average, sum, SQL直接操作。Datafram可以通过调用.rdd直接转换为RDD数据。
+
+### 2.1 RDD Spark API
 
 `Transformation`：
 
@@ -416,4 +419,107 @@ z = x.zip(y)
 [66, 65, 65]
 >>> print(z.collect())
 [('B', 66), ('A', 65), ('A', 65)]
+```
+
+### write: saveAsTextFile
+
+```python
+peopleDF.rdd.saveAsTextFile("file:///usr/local/spark/mycode/newpeople.txt")
+```
+
+
+
+### 2.2 Spark DataFrame API
+
+#### 将RDD转为Dataframe：1. 使用toDF()
+
+这种方法不需要手动指定schema
+
+```python
+def f(x):
+    data = dict()
+    data['name'] = x[0]
+    data['age'] = x[1]
+    return data
+
+peopleDF = sc.textFile("file:///usr/local/spark/people.txt").map(lambda line: line.split(',')).map(lambda x: Row(**f(x))).toDF()
+peopleDF = peopleDF.createOrReplaceTempView("people") # Creates or replaces a local temporary view (session based view) with this DataFrame.
+```
+
+#### 将RDD转为Dataframe：2. 使用spark.createDataFrame(rowRDD, schema)
+
+将RDD转化为`Row(attributes[0], attributes[1])`，即一系列row对象，最后在指定schema
+
+```python
+from pyspark.sql.types import Row
+from pyspark.sql.types import StructType
+from pyspark.sql.types import StructField
+from pyspark.sql.types import StringType
+
+fields = list(map(lambda filedName: StructField(fildName, StringType(), nullable=True), ['name', 'age']))
+schema = StructType(fields)
+
+rowRDD = sc.textFile("file:///usr/local/spark/people.txt").map(lambda line, line.split(',')).map(lambda attributes: Row(attributes[0], attributes[1]))
+
+peopleDF = spark.createDataFrame(rowRDD, schema)
+```
+
+#### df.show(n=20), df.head(n=1), df.take(), df.limit()
+
+show, head, take都是action, limit是transformation
+
+take会将得到的数据返回driver端，
+
+#### df.printScheme()
+
+print out the schema in the tree format
+
+#### df.select()
+
+选择子列
+
+```python
+df.select('*').collect()
+df.select('name', 'age').collect()
+df.select(df.name, (df.age+10).alias('age')).collect()
+```
+
+#### df.col("id"), df.apply("id")
+
+只能获得一个column
+
+#### df.drop()
+
+删除列，每次只能删除一列
+
+#### df.filter()
+
+```python
+df.filter(df.age>20).show()
+```
+
+#### df.groupBy("age").count().show()
+
+#### df.agg()
+
+```python
+df.agg() === df.groupBy.agg().collect()
+df.agg({"age": "max", "salary": "avg"})
+
+from pyspark.sql import functions as F
+df.agg(F.min(df.age)).collect()
+```
+
+
+#### df.sort(df.age.desc(), df.name.asc()).show()
+
+#### df.orderBy(df.age.desc) === df.orderBy(- df.age)
+
+#### load & write
+
+```python
+peopleDF = spark.read.format("json").load("file:///usr/local/spark/examples/src/main/resources/people.json")
+ 
+peopleDF.select("name", "age").write.format("csv").save("file:///usr/local/spark/mycode/newpeople.csv")
+
 ```
