@@ -5,7 +5,6 @@ date: 2018-05-17 00:00:04
 categories: liuqianchao update
 ---
 
-
 ## ElasticSearch Query
 
 #### from, size, 子列约束 
@@ -54,7 +53,6 @@ terms: 多条查询, 通过minimum_match确定至少符合条件的数目
         }
     }
 }
-
 ```
 
 #### match查询
@@ -62,7 +60,7 @@ terms: 多条查询, 通过minimum_match确定至少符合条件的数目
 不同于term的完全匹配，match默认对字符串是分词后部分匹配(对数字、时间、bool或者not_analyzed字段仍是精确匹配），并根据tf-idf值排序后返回结果, 可以使用operator该修改or的逻辑：
 match使用operator来设置匹配模式：and/or
 
-```SQL
+```sql
 {
   "query": {
     "match": {
@@ -77,7 +75,7 @@ match使用operator来设置匹配模式：and/or
 
 使用slop匹配缺失值, slop为缺省内容的数目, 下面的语句会返回所有keyword1 xxx xxx keyword4
 
-```SQL
+```sql
 {
   "query": {
     "match": {
