@@ -8,7 +8,7 @@ categories: liuqianchao update
 ## Spark Tutorial
 
 
-### Spark计算原理
+### 1 Spark计算原理
 
 **RDD**(Resilient Distributed Dataset)弹性分布式数据，其中Resilent使用replicate（冗余备份）。Spark使用sparkcontext.textfile加载本地文件或内存中的数据变成RDD，通过transformation操作定义新的RDD（懒计算，这里只是定义），最终使用action执行计算并存储到外部节点。
 
@@ -21,7 +21,7 @@ categories: liuqianchao update
 
 **DataFrame** 大部分情况下, RDD还是用来对数据集进行基本的转换, 它的数据是非结构化的(以parallelize存储list集合为例，每个item以java对象的形式存储，不同的item在集群中分布式存储), DataFrame则更适合处理结构化的（以Row对象的形式在集群中分布式存储，并且Spark知道row对象的列名、列数据类型等），关系型数据(table in relational database)。DataFrame支持map, filter, aggregate, average, sum, SQL直接操作。Datafram可以通过调用.rdd直接转换为RDD数据。
 
-### 2.1 RDD Spark API
+### 2.1 Spark RDD API
 
 `Transformation`：
 
@@ -482,11 +482,21 @@ print out the schema in the tree format
 df.select('*').collect()
 df.select('name', 'age').collect()
 df.select(df.name, (df.age+10).alias('age')).collect()
+df = df.select(F.monotonically_increasing_id().alias('index'), "*") # add index column
 ```
 
 #### df.col("id"), df.apply("id")
 
 只能获得一个column
+
+#### df.withColumn()
+
+used to adding a column or replacing the existing column that has the same name
+
+```python
+df.withColumn('newColumn', df.oldColumn+2)
+
+```
 
 #### df.drop()
 
@@ -508,7 +518,13 @@ df.agg({"age": "max", "salary": "avg"})
 
 from pyspark.sql import functions as F
 df.agg(F.min(df.age)).collect()
+
+# select
+df.agg(expr('count(distinct DIGITAL_CUSTOMER_ID)').alias('n_item')).collect() 
+df.select(expr('count(distinct DIGITAL_CUSTOMER_ID)').alias('n_item')).collect() 
+
 ```
+
 
 
 #### df.sort(df.age.desc(), df.name.asc()).show()
@@ -522,4 +538,27 @@ peopleDF = spark.read.format("json").load("file:///usr/local/spark/examples/src/
  
 peopleDF.select("name", "age").write.format("csv").save("file:///usr/local/spark/mycode/newpeople.csv")
 
+```
+
+### pyspark dataframe: 一些常用的行为 
+
+#### dataframe column to list
+
+```python
+df.select('column').distinct().rdd.flatMap(lambda x: x).collect()
+```
+
+#### substitude to get_dummies in pandas 
+
+```python
+offers = email_df.select("OFFER_NAME").distinct().rdd.flatMap(lambda x: x).collect()
+offers_expr = [F.when(F.col("OFFER_NAME") == ty, 1).otherwise(0).alias("OFFER_NAME_" + ty) for ty in offers]
+email_df.select("*", *offers_expr).show()
+
+```
+
+#### count_values
+
+```python 
+df.groupby('col').count().sort(F.desc('count')).show(50, truncate=False)
 ```
