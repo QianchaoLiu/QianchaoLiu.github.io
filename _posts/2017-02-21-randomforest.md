@@ -86,8 +86,36 @@ $$
 F_m(x) = F_{m-1}(x) + \sum_{j=1}^{J_m}\gamma_{jm} I(x\in R_{jm})
 $$
 
+
+#### 2.4 XGBoost
+
+
+**模型细节上的变化**，XGBoost是GBDT的基础上，做了一些细节上的修改。这些修改包括：1.加入正则项（包括对叶子结点数目的一次项惩罚和回归树输出值的二次项惩罚）， 2.将泰勒一阶展开修改修改为二阶展开。3. 两个实践操作被加入到模型中防止过拟合: （1）Shrinkage: 给每一步的叶子结点的值乘上一个小于1的值，类似于随机梯度下降中调整学习速率，给未来的子树更多的提升空间。（2）column sampling, 类似于随机森林里的特征采样。
+
+Xgboost在每一颗子树时，当前阶段的损失函数可以由一阶梯度、二阶梯度的值（每个样本有$$g_i = \delta_{\hat{y}^{t-1}}l(y_i, \hat{y}^{t-1}), h_i = \delta^2_{\hat{y}^{t-1}}l(y_i, \hat{y}^{t-1})$$两个值）以及各叶子的值(变量)表示，因此可以列出损失函数是叶子结点值的最优化问题，不同的特征分割方法决定了叶子值的大小，以及损失函数的最优值。因此每一次分割时，可以计算当前的损失函数最优值是多少，作为是否进行分割的依据。下式中$$g_i, h_i$$分别为一阶、二阶梯度，$$T$$为叶子结点的数目, $$q$$为树的结构。
+
+
+$$
+L(q) = -\frac{1}{2}\sum_{j=1}^T \frac{(\sum_{i\in I_j}g_i)^2}{\sum_{i\in I_j}h_i+\lambda} + \lambda T
+$$
+
+树的训练不是最优的，而是基于贪心算法的，每一次分割会增加一个左、右子树，带入上述损失函数的计算公式可以得到一个loss函数值的增加，同时上一个结点消失带来的损失值的消失要减掉。
+
+
+**除此之外，Xgboost还有一些工程上的优化**
+
+Split Finding Algorithm， 传统做法是对所有样本在该特征上进行排序，然后遍历所有可能的分割点，不同的特征在该步骤是可以同时进行的，但该前提是数据能够装入内存。根据该问题Xgboost的做法是：通过计算给特征的百分位数，（或者Weighted Quantile，其中权重为样本的二阶导数$$h_i$$），将该特征上的样本分成几个桶，计算各个桶中的一、二阶梯度，然后计算以各split点下的loss值如何。或者直接构造一、二阶梯度的histograms。这几种划分的方法，Xgboost都是支持的。
+
+Sparsity-aware Split Finding，数据存在missing value，0值，one-hot编码等常常会导致特征是稀疏的。比如对于missing value，决策树会将missing值分别尝试都放在左子树或右子树，然后看具体哪个更好。
+
+Cache-aware Access提高CPU cache的利用率。由于数据的方式是按照某属性的sorted之后的顺序访问的，并不是对raw data在连续内存上的访问，对造成cache miss问题影响速度。对于exact greedy algorithm（不分桶），一种优化方法是是每个线程里申请一块buffer，把gradient信息放进去，在mini-batch level做梯度的accumulation。对于approximate algorithms（分桶）,通过将数据的block size进行调整，来提高cpu cache的命中率，每个block样本太多导致cache miss, 每个block样本太小导致并行计算的效率下降。评估后每个block的样本数量为$$2^16$$时，效果最好。
+
+out-of-core computation减少block从磁盘读写花费的时间。使用的方法包括block列级别的压缩，block的分片（当数据存放在多个磁盘上时，分片的方法提高磁盘的读写）
+
 ### 3 Boosting算法为什么有效
 
+- 间接达到Regularization的目的
+是有多个学习器然后“整合”，而“整合”本身具有Regularization的性质。
 
 ### 4 Staking模型融合
 &emsp; Boosting的思想是通过若干个较弱的学习器通过组合的方法得到模型的最终的预测结果，而Stacking的思想是通过若干学习器（第一层：初级学习器M个）分别学习原始输入，比如一个样本$$(X, y)$$依次输入三个初级学习器，分别得到$$\hat{y_1}, \hat{y_2}, \hat{y_3}$$，将其作为该样本下一层学习器（次级学习器）的输入，这样我们就把该样本数据重构为$$(\hat{Y}, y)$$，其中$$\hat{Y} = \hat{y_1}, \hat{y_2}, \hat{y_3}$$作为次级模型的输入。   
