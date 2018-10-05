@@ -6,8 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Support Vector Machine</title>
     <meta name="viewport" content="width=device-width">
+    <meta name="baidu-site-verification" content="r1z1K1EYR2" />
     <meta name="description" content="Welcome to Q.Liu's Homepage. Here you can find something about my research interests.">
-    <link rel="canonical" href="http://qianchaoliu.github.io//liuqianchao/update/2015/11/29/SVM/">
+    <link rel="canonical" href="http://localhost:4000/liuqianchao/update/2015/11/29/SVM/">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/main.css">
@@ -31,7 +32,21 @@
       ga('send', 'pageview');
 
     </script>
-
+    <!-- baidu spider-->
+    <script>
+    (function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+    })();
+    </script>
 </head>
 
 
@@ -82,14 +97,14 @@
   <article class="post-content">
   <p>Support Vector Machine(<em>SVM</em>), k-Nearest Neighbors algorithm(<em>k-NN</em>), and Naive Bayes classifier(<em>NB</em>) are the most popular and basic approaches for classification. In this article, I will give some mathmetical equations of <em>SVM</em> and approaches to use <em>SVM</em>.</p>
 
-<h3 id="what-is-svm">1. What is <em>SVM</em>?</h3>
-<p>In general, there are two kinds of classificaiton, <strong>non-parametric</strong> and <strong>parametric</strong> approaches. The parametric approach is to assume a simple parametric model for density functions and to estimate the parameters of the model using an available training set.
+<p>###1. What is <em>SVM</em>?
+In general, there are two kinds of classificaiton, <strong>non-parametric</strong> and <strong>parametric</strong> approaches. The parametric approach is to assume a simple parametric model for density functions and to estimate the parameters of the model using an available training set.
 However, for most of cases, we can not assume that the desity of data samples can be characterised by a series of parameters in this irregular world. So we introduce the non-parametric method which includes <em>SVM</em>.</p>
 
-<h3 id="how-it-works">2. How it works?</h3>
+<p>###2. How it works?</p>
 
-<h4 id="maximum-margin-classifier">2.1 Maximum margin classifier</h4>
-<p>The <em>SVM</em> uses a very simple idea which can be conclude in a word: maximum margin.  <br />
+<p>####2.1 Maximum margin classifier
+The <em>SVM</em> uses a very simple idea which can be conclude in a word: maximum margin.  <br />
 Suppose that we have a set of training patterns.{<script type="math/tex">x_{i},i=1,...,m</script>} assigned to one of two classes <script type="math/tex">\omega_{1}</script> and <script type="math/tex">\omega_{2}</script>, with corresponding labels <script type="math/tex">y_{i}=\pm1</script>.   <br />
 Denote the linear discriminant function <script type="math/tex">g(x)</script>, where both <script type="math/tex">x_{i}</script> and <script type="math/tex">w</script> are n-dimension vectors:</p>
 
@@ -97,7 +112,7 @@ Denote the linear discriminant function <script type="math/tex">g(x)</script>, w
 $$g(x_{i})=w^{T}x_{i}+b$$
 </div>
 <p>if <script type="math/tex">% <![CDATA[
-g(x)<0 %]]></script> we see <script type="math/tex">x</script> as label <script type="math/tex">y_{i}=-1</script>, and if <script type="math/tex">g(x)>0</script> we see <script type="math/tex">x</script> as label <script type="math/tex">y_{i}=+1</script>. Here all points are subject to: </p>
+g(x)<0 %]]></script> we see <script type="math/tex">x</script> as label <script type="math/tex">y_{i}=-1</script>, and if <script type="math/tex">g(x)>0</script> we see <script type="math/tex">x</script> as label <script type="math/tex">y_{i}=+1</script>. Here all points are subject to:</p>
 
 <div align="center">
 $$y_{i}(w^{T}x_{i}+b)\geq0$$
@@ -105,7 +120,7 @@ $$y_{i}(w^{T}x_{i}+b)\geq0$$
 <p>The <strong>hyperplane</strong> is :<script type="math/tex">y_{i}(w^{T}x_{i}+b)=0</script>. <br />
 Then we introduce <strong>functional margin</strong> <script type="math/tex">\gamma</script> : <script type="math/tex">y_{i}(w^{T}x_{i}+b)</script>, which is a positive number. <br />
 And the <strong>geometric margin</strong> <script type="math/tex">\tilde{\gamma}</script>: <script type="math/tex">y_{i}(\frac{w^{T}x_{i}}{||w||}+\frac{b}{||w||})</script>. After introducing the geometric margin, we can scale value of <script type="math/tex">w</script> and <script type="math/tex">b</script> arbitrarily and without changing the geometric margin and the position of this hyperplane: <script type="math/tex">y_{i}(w^{T}x_{i}+b)=0</script>.
-For better classify, we should maximize the margin between two groups by some methods about convex optimization which will change the value of <script type="math/tex">w</script> and <script type="math/tex">b</script>.   </p>
+For better classify, we should maximize the margin between two groups by some methods about convex optimization which will change the value of <script type="math/tex">w</script> and <script type="math/tex">b</script>.</p>
 
 <p>To maximize the geometric margin:</p>
 
@@ -121,7 +136,7 @@ For better classify, we should maximize the margin between two groups by some me
 </ul>
 
 <div align="center">$$\min \limits_{w,b} \frac{1}{2}||w||^{2}$$</div>
-<p>Here another constraint has been added: the functional margin <script type="math/tex">\gamma=1</script> which is the same with: <script type="math/tex">\min \limits_{i} y_{i}(w^{T}x_{i}+b)=1 </script>. And this objective function is a quadratic problem.</p>
+<p>Here another constraint has been added: the functional margin <script type="math/tex">\gamma=1</script> which is the same with: <script type="math/tex">\min \limits_{i} y_{i}(w^{T}x_{i}+b)=1</script>. And this objective function is a quadratic problem.</p>
 
 <ul>
   <li>step 3 another kind of convex optimization problem(applied for high or infinite dimensional vector):</li>
@@ -147,8 +162,8 @@ The original objective function: <script type="math/tex">\min \limits_{w,b} \fra
 <div align="center">$$s.t. \alpha_{i}\geq0$$ $$\sum_{i=1}^m \alpha_{i} y_{i} =0$$</div>
 <p>which is also a convex problem, we can get the solution of <script type="math/tex">w</script> and <script type="math/tex">b</script>.</p>
 
-<h4 id="kernel-trick">2.2 kernel trick</h4>
-<p>Then, we will introduce the concept of <strong><em>kernel trick</em></strong>. How can we distinguish ◇ from △ showed below? Obiviously, there are no hyperplane to classify one from the other. </p>
+<p>####2.2 kernel trick
+Then, we will introduce the concept of <strong><em>kernel trick</em></strong>. How can we distinguish ◇ from △ showed below? Obiviously, there are no hyperplane to classify one from the other.</p>
 
 <div align="center">   
 <canvas id="myCanvas" width="250" height="180" style="border:0px solid #c3c3c3;">
@@ -185,12 +200,12 @@ Instead of <script type="math/tex">% <![CDATA[
 
 <div align="center">$$K(x_{i},x)=tanh(kx_{i}^{T}x+\theta)$$</div>
 
-<h3 id="using-svm-in-your-work">3. Using <em>SVM</em> in your work.</h3>
-<p>There is a package named <strong><em>scikit-learn</em></strong> in Python. Find information to install it at <a href="http://scikit-learn.org/stable/index.html">here</a>. We can use the official date sets of <em>scikit-learn</em>, and examine the performance of classification. Here, we use <em>Iris</em> dataset. There are 3 kinds of iris, each sample has 4 properties which include petal length, petal width, sepal length, and sepal width.    </p>
+<p>###3. Using <em>SVM</em> in your work.
+There is a package named <strong><em>scikit-learn</em></strong> in Python. Find information to install it at <a href="http://scikit-learn.org/stable/index.html">here</a>. We can use the official date sets of <em>scikit-learn</em>, and examine the performance of classification. Here, we use <em>Iris</em> dataset. There are 3 kinds of iris, each sample has 4 properties which include petal length, petal width, sepal length, and sepal width.</p>
 
 <p>In this experiment, we will show how to conduct a binary classification task. We removed one kind of iris, and two groups of iris are left. After this process, we have two kinds of iris, and each kind has 50 samples. And in order to draw two-dimensional chart, two properties are left: petal length and sepal length.</p>
 
-<h4 id="handle-the-dataset">3.1 Handle the dataset</h4>
+<p>####3.1 Handle the dataset</p>
 
 <figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c">#acquire and handle dataset.</span>
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span> 
@@ -204,10 +219,10 @@ Instead of <script type="math/tex">% <![CDATA[
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">dateset_property</span><span class="p">)</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">dateset_target</span><span class="p">)</span></code></pre></figure>
 
-<h4 id="train-the-model">3.2 Train the model.</h4>
-<p>In this experiment, I apply 4 kinds of kernel function, including <em>linear</em>,<em>poly</em>,<em>RBF</em> and <em>sigmoid</em>.</p>
+<p>####3.2 Train the model.
+In this experiment, I apply 4 kinds of kernel function, including <em>linear</em>,<em>poly</em>,<em>RBF</em> and <em>sigmoid</em>.</p>
 
-<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">svm</span>
 <span class="kn">from</span> <span class="nn">sklearn.cross_validation</span> <span class="kn">import</span> <span class="n">train_test_split</span>
 
@@ -226,9 +241,9 @@ Instead of <script type="math/tex">% <![CDATA[
 <span class="n">clf_rbf</span>     <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 <span class="n">clf_sigmoid</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s">'sigmoid'</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span></code></pre></figure>
 
-<h4 id="draw-plot">3.3 Draw plot</h4>
+<p>####3.3 Draw plot</p>
 
-<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">clf</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">((</span><span class="n">clf_linear</span><span class="p">,</span> <span class="n">clf_poly</span><span class="p">,</span> <span class="n">clf_rbf</span><span class="p">,</span> <span class="n">clf_sigmoid</span><span class="p">)):</span>
     <span class="c">#result are the predict result of all the meshgrid.</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">xx</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">yy</span><span class="o">.</span><span class="n">ravel</span><span class="p">()])</span>
@@ -252,7 +267,7 @@ Instead of <script type="math/tex">% <![CDATA[
 
 <h4 id="result-of-classification">Result of classification</h4>
 <div align="center">
-<img src="http://qianchaoliu.github.io//assets/screenshot.png" width="550" height="440" />
+<img src="http://localhost:4000/assets/screenshot.png" width="550" height="440" />
 </div>
 <div align="center">
 Figure: result of classification

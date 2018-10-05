@@ -6,8 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Bayes Classification</title>
     <meta name="viewport" content="width=device-width">
+    <meta name="baidu-site-verification" content="r1z1K1EYR2" />
     <meta name="description" content="Welcome to Q.Liu's Homepage. Here you can find something about my research interests.">
-    <link rel="canonical" href="http://qianchaoliu.github.io//liuqianchao/update/2016/04/27/Bayesian/">
+    <link rel="canonical" href="http://localhost:4000/liuqianchao/update/2016/04/27/Bayesian/">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/main.css">
@@ -31,7 +32,21 @@
       ga('send', 'pageview');
 
     </script>
-
+    <!-- baidu spider-->
+    <script>
+    (function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+    })();
+    </script>
 </head>
 
 
@@ -82,7 +97,7 @@
   <article class="post-content">
   <p>    和SVM、神经网络这些分类器一样，贝叶斯分类的基本思想也是通过设定一个“损失函数”，通过最小化损失函数来实现分类结果的最优。</p>
 
-<h3 id="section">1.贝叶斯分类中的损失函数是怎么定义的？</h3>
+<h3 id="1贝叶斯分类中的损失函数是怎么定义的">1.贝叶斯分类中的损失函数是怎么定义的？</h3>
 <p>    首先，定义损失<script type="math/tex">\lambda_{ij}</script>是将本属于<script type="math/tex">c_{j}</script>的样本<script type="math/tex">x</script>错误地分为<script type="math/tex">c_{i}</script>带来的损失，且<script type="math/tex">\lambda_{jj}=0</script>,因此对于N类分类问题，一个样本的期望损失为：</p>
 
 <div align="center">$$R(c_{i} \mid x) = \sum_{i=1}^N \lambda_{ij}P(c_{i} \mid x)$$</div>
@@ -95,12 +110,12 @@
 
 <div align="center">$$arg max P(c_{i} \mid x)$$</div>
 
-<h3 id="section-1">2.朴素贝叶斯</h3>
+<h3 id="2朴素贝叶斯">2.朴素贝叶斯</h3>
 <p>    在我们列出来目标函数后，该谈一谈贝叶斯分类器是如何进行计算的了。</p>
 
 <p>    首先，给出条件概率、贝叶斯公式的定义：</p>
 
-<p>    条件概率<script type="math/tex">P(A \mid B)</script>的含义是在B事件发生的基础上发生A事件的概率,即：   </p>
+<p>    条件概率<script type="math/tex">P(A \mid B)</script>的含义是在B事件发生的基础上发生A事件的概率,即：</p>
 
 <div align="center">$$P(A \mid B) = \frac{P(AB)}{P(B)}$$</div>
 
@@ -123,9 +138,9 @@
     <strong>一方面</strong>一旦属性可选的离散变量较多，样本空间会急遽增大（假设一共有10个属性，每个属性都是二值的，则有<script type="math/tex">2^{10}</script>个样本属性变化范围），需要大量的训练集才能进行有效的分类。一旦某分类下的某一属性值未在样本中出现，即<script type="math/tex">P(a_{i} \mid y_{i})=0</script>，由于我们在计算条件概率时是采用联合概率的乘积形式，于是计算出来的<script type="math/tex">P(x \mid y_{i})=0</script>, 个体属性值的缺少会对抹去其它属性的价值。 <br />
     <strong>另一方面</strong>其适用于属性间相互独立的情景。</p>
 
-<h3 id="section-2">3.贝叶斯分类的改进</h3>
+<h3 id="3贝叶斯分类的改进">3.贝叶斯分类的改进</h3>
 
-<p>    <strong>针对于第一不足</strong>，我们可以引入Laplacian Correction，比如对于辨别某犬是否为阿拉斯加犬时，其中一个属性是眼球颜色，该选项共有3个可能，但在训练集中仅出现了其中两种，则对第三种眼球颜色，在计算其<script type="math/tex">P(a_{i} \mid y_{i})</script>时，假定种类<script type="math/tex">y_{i}=10</script>，则按照以往的计算方式有：   </p>
+<p>    <strong>针对于第一不足</strong>，我们可以引入Laplacian Correction，比如对于辨别某犬是否为阿拉斯加犬时，其中一个属性是眼球颜色，该选项共有3个可能，但在训练集中仅出现了其中两种，则对第三种眼球颜色，在计算其<script type="math/tex">P(a_{i} \mid y_{i})</script>时，假定种类<script type="math/tex">y_{i}=10</script>，则按照以往的计算方式有：</p>
 
 <div align="center">$$P(a_{i} \mid y_{i})=\frac{0}{10}=0$$</div>
 
